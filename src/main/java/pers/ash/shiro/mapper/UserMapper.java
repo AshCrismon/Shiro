@@ -1,8 +1,8 @@
 package pers.ash.shiro.mapper;
 
-import cn.ash.shiro.model.User;
-import cn.ash.shiro.model.UserRole;
-import cn.ash.shiro.vo.UserVo;
+import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.UserRole;
+import pers.ash.shiro.vo.UserVo;
 
 public interface UserMapper extends Mapper<User>{
 	
