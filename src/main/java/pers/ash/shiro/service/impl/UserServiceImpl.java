@@ -1,4 +1,4 @@
-package pes.ash.shiro.service.impl;
+package pers.ash.shiro.service.impl;
 
 import pers.ash.shiro.service.UserService;
 
