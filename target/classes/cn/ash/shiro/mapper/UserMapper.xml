@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ash.shiro.mapper.UserMapper">
+
+  	<!-- ========================== 【 基本增删改查 】  =========================== -->
+	<select id="findById" parameterType="String"
+		resultType="User">
+		SELECT * FROM shiro_user WHERE id=#{id}
+	</select>
+
+	<select id="findAll" resultType="User">
+		SELECT * FROM shiro_user
+	</select>
+
+	<insert id="add" parameterType="User">
+		INSERT INTO
+		shiro_user(id,username,password,createDate,loginCount,email,phone,gender,age,description)
+		VALUES(#{id},#{username},#{password},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description})
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM shiro_user WHERE
+		id=#{id}
+	</delete>
+
+	<update id="update" parameterType="User">
+		UPDATE shiro_user SET
+		username=#{username},password=#{password},loginCount=#{loginCount},
+		email=#{email},phone=#{phone},gender=#{gender},age=#{age},description=#{description}
+		WHERE id=#{id}
+	</update>
+	<!-- ================================================================== -->
+	
+	<!-- ========================= 【 给一个用户分配角色 】  ======================== -->
+	<insert id="assignRoles" parameterType="UserRole">
+		INSERT INTO 
+		shiro_user_role(userId,roleId)
+		VALUES(#{userId},#{roleId})
+	</insert>
+	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
+	<select id="findUserRoles" parameterType="String" resultMap="UserRoles">
+		SELECT
+		u.id as user_id,
+		u.username as user_username,
+		u.password as user_password,
+		u.createDate as user_createDate,
+		u.loginCount as user_loginCount,
+		u.description as user_description,
+		u.email as user_email,
+		u.phone as user_phone,
+		u.gender as user_gender,
+		u.age as user_age,
+		r.id as role_id,
+		r.name as role_name,
+		r.description as role_description
+		FROM
+		shiro_user u
+		LEFT JOIN
+		shiro_user_role ur ON
+		u.id=ur.userId
+		LEFT JOIN
+		shiro_role r ON
+		ur.roleId=r.id
+		WHERE u.id=#{id}
+	</select>
+
+	<resultMap id="UserRoles" type="UserVo">
+		<id property="id" column="user_id" />
+		<result property="username" column="user_username" />
+		<result property="password" column="user_password" />
+		<result property="createDate" column="user_createDate" />
+		<result property="loginCount" column="user_loginCount" />
+		<result property="description" column="user_description" />
+		<result property="email" column="user_email" />
+		<result property="phone" column="user_phone" />
+		<result property="gender" column="user_gender" />
+		<result property="age" column="user_age" />
+		<collection property="roles" ofType="cn.ash.shiro.model.Role">
+			<id property="id" column="role_id"/>
+			<result property="name" column="role_name"/>
+			<result property="description" column="role_description"/>
+		</collection>
+	</resultMap>
+</mapper>
