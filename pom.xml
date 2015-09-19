@@ -33,6 +33,12 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<!-- ===========================【 JPA依赖 】=========================== -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
 		<!-- ==========================【 spring依赖 】========================= -->
 		<dependency>
 			<groupId>org.springframework</groupId>

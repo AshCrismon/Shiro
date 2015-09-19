@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import pers.ash.shiro.abstractTest.AbstractTransactionalTest;
+import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.mapper.UserMapper;
 import pers.ash.shiro.model.Role;
@@ -21,7 +21,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
-public class UserMapperTest extends AbstractTransactionalTest {
+public class UserMapperTest extends AbstractTransactionalConfig {
 
 	@Autowired
 	private UserMapper userMapper;
@@ -40,6 +40,13 @@ public class UserMapperTest extends AbstractTransactionalTest {
 	public void testFindUserById() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		User user = userMapper.findById(id);
+		Assert.assertEquals(true, user != null);
+	}
+	
+	@Test
+	public void testFindByUsername(){
+		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		User user = userMapper.findByUsername("琪琪");
 		Assert.assertEquals(true, user != null);
 	}
 

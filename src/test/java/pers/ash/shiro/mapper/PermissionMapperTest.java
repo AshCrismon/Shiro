@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import pers.ash.shiro.abstractTest.AbstractTransactionalTest;
+import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.PermissionMapper;
 import pers.ash.shiro.model.Permission;
 import pers.ash.shiro.util.UUIDUtils;
@@ -16,7 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
-public class PermissionMapperTest extends AbstractTransactionalTest{
+public class PermissionMapperTest extends AbstractTransactionalConfig{
 
 	@Autowired
 	private PermissionMapper permissionMapper;

@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import pers.ash.shiro.abstractTest.AbstractTransactionalTest;
+import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.model.Role;
 import pers.ash.shiro.util.UUIDUtils;
@@ -16,7 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
-public class RoleMapperTest extends AbstractTransactionalTest{
+public class RoleMapperTest extends AbstractTransactionalConfig{
 	
 	@Autowired
 	private RoleMapper roleMapper;

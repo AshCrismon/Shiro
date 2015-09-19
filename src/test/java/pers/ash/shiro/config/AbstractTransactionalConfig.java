@@ -1,4 +1,4 @@
-package pers.ash.shiro.abstractTest;
+package pers.ash.shiro.config;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations={"classpath:spring/spring-mvc.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback=true, transactionManager="transactionManager")
-public class AbstractTransactionalTest {
+public class AbstractTransactionalConfig {
 
 }

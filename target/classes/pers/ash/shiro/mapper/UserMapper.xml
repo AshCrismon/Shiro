@@ -3,12 +3,17 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.ash.shiro.mapper.UserMapper">
+<mapper namespace="pers.ash.shiro.mapper.UserMapper">
 
   	<!-- ========================== 【 基本增删改查 】  =========================== -->
 	<select id="findById" parameterType="String"
 		resultType="User">
 		SELECT * FROM shiro_user WHERE id=#{id}
+	</select>
+	
+	<select id="findByUsername" parameterType="String"
+		resultType="User">
+		SELECT * FROM shiro_user WHERE username=#{username}
 	</select>
 
 	<select id="findAll" resultType="User">
@@ -78,7 +83,7 @@
 		<result property="phone" column="user_phone" />
 		<result property="gender" column="user_gender" />
 		<result property="age" column="user_age" />
-		<collection property="roles" ofType="cn.ash.shiro.model.Role">
+		<collection property="roles" ofType="pers.ash.shiro.model.Role">
 			<id property="id" column="role_id"/>
 			<result property="name" column="role_name"/>
 			<result property="description" column="role_description"/>

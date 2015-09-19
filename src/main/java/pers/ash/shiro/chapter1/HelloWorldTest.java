@@ -11,7 +11,7 @@ import org.junit.Test;
 public class HelloWorldTest {
 
 	Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory(
-			"classpath:shiro-jdbc-realm.ini");
+			"classpath:shiro/shiro-jdbc-realm.ini");
 	org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
 	
 	@Test

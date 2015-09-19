@@ -14,6 +14,11 @@
     http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
+
+	<!-- ============================【添加对service的扫描 】========================= -->
+	
+	<context:component-scan base-package="pers.ash.shiro.service" />
+	
 	<!-- =============================【 引入数据库配置文件 】=========================== -->
 
 	<context:property-placeholder location="classpath:db.properties" />
@@ -40,7 +45,7 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="cn.ash.shiro.model;cn.ash.shiro.vo"/>
+		<property name="typeAliasesPackage" value="pers.ash.shiro.model;pers.ash.shiro.vo" />
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">
@@ -72,7 +77,7 @@
 	<!-- ============================【 配置mapper的扫描路径 】========================== -->
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="cn.ash.shiro.mapper" />
+		<property name="basePackage" value="pers.ash.shiro.mapper" />
 	</bean>
 
 	<!-- ===============================【 配置视图解析器 】============================= -->
