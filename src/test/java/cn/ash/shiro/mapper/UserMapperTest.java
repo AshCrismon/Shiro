@@ -7,6 +7,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
+import pers.ash.shiro.mapper.RoleMapper;
+import pers.ash.shiro.mapper.UserMapper;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 

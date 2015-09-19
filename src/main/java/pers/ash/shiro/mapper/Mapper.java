@@ -1,4 +1,4 @@
-package cn.ash.shiro.mapper;
+package pers.ash.shiro.mapper;
 
 import java.util.List;
 
