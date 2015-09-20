@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	public void validateUser(User user) throws DuplicateNameException {
+	public void validateUser(User user){
 		if (userMapper.findByUsername(user.getUsername()) != null) {
 			throw new DuplicateNameException("用户名已被使用");
 		}
