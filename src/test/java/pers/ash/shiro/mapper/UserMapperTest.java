@@ -16,6 +16,7 @@ import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.util.UUIDUtils;
 import pers.ash.shiro.vo.UserVo;
 
+import com.github.orderbyhelper.OrderByHelper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -69,16 +70,36 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 		PageHelper.startPage(1, 10);
 		List<User> users = userMapper.findAll();
 		PageInfo<User> pageInfo = new PageInfo<User>(users);
-		System.out.println("total pages : " + pageInfo.getPages());
-		System.out.println("total rows : " + pageInfo.getTotal());
-		System.out.println("current page size : " + pageInfo.getSize());
-		System.out.println("pagination : " + pageInfo.getPageNum());
-		System.out.println("previous pagination : " + pageInfo.getPrePage());
-		System.out.println("next pagination : " + pageInfo.getNextPage());
-		System.out.println("first pagination : " + pageInfo.getFirstPage());
-		System.out.println("last pagination : " + pageInfo.getLastPage());
+		print(pageInfo);
 	}
-
+	
+	@Test
+	public void testFindByOrder(){
+		OrderByHelper.orderBy("CONVERT(username USING gbk) asc");
+		List<User> users = userMapper.findAll();
+		System.out.println("====================order by username asc====================");
+		print(users);
+		System.out.println("=============================================================");
+	}
+	
+	@Test
+	public void testFindByOrder2(){
+		OrderByHelper.orderBy("age asc, phone asc");
+		List<User> users = userMapper.findAll();
+		System.out.println("=================order by age asc, phone asc=================");
+		print(users);
+		System.out.println("=============================================================");
+	}
+	
+	@Test
+	public void testFindPageByOrder(){
+		PageHelper.startPage(1, 10, "CONVERT(username USING gbk) asc");
+		List<User> users = userMapper.findAll();
+		System.out.println("====================order by username asc====================");
+		print(users);
+		System.out.println("=============================================================");
+	}
+	
 	@Test
 	public void testAdd() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
@@ -156,5 +177,24 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 		userMapper.correlationRole(id, role.getId());
 		UserVo userVo = userMapper.findUserRoles(id);
 		Assert.assertEquals(true, !userVo.getRoles().isEmpty());
+	}
+	
+	public void print(List<User> users){
+		for(int i = 0; i < users.size(); i++){
+			System.out.println(users.get(i));
+		}
+	}
+	
+	public <T> void print(PageInfo<T> pageInfo){
+		System.out.println("======================page infomation======================");
+		System.out.println("total pages : " + pageInfo.getPages());
+		System.out.println("total rows : " + pageInfo.getTotal());
+		System.out.println("current page size : " + pageInfo.getSize());
+		System.out.println("pagination : " + pageInfo.getPageNum());
+		System.out.println("previous pagination : " + pageInfo.getPrePage());
+		System.out.println("next pagination : " + pageInfo.getNextPage());
+		System.out.println("first pagination : " + pageInfo.getFirstPage());
+		System.out.println("last pagination : " + pageInfo.getLastPage());
+		System.out.println("===========================================================");
 	}
 }

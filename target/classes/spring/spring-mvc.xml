@@ -14,7 +14,6 @@
     http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-
 	<!-- ============================【添加对service的扫描 】========================= -->
 	
 	<context:component-scan base-package="pers.ash.shiro.service" />
@@ -45,7 +44,7 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="pers.ash.shiro.model;pers.ash.shiro.vo" />
+		<property name="typeAliasesPackage" value="pers.ash.shiro.model,pers.ash.shiro.vo"/>
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">

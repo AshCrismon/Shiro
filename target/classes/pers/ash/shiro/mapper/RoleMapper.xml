@@ -7,16 +7,16 @@
 
 	<!-- ========================== 【 基本增删改查 】  =========================== -->
 	<select id="findById" parameterType="String"
-		resultType="pers.ash.shiro.model.Role">
+		resultType="Role">
 		SELECT * FROM shiro_role WHERE id=#{id}
 	</select>
 
 	<select id="findAll" parameterType="String"
-		resultType="pers.ash.shiro.model.Role">
+		resultType="Role">
 		SELECT * FROM shiro_role
 	</select>
 
-	<insert id="add" parameterType="pers.ash.shiro.model.Role">
+	<insert id="add" parameterType="Role">
 		INSERT INTO
 		shiro_role(id,name,description)
 		VALUES(#{id},#{name},#{description})
@@ -27,7 +27,7 @@
 		id=#{id}
 	</delete>
 
-	<update id="update" parameterType="pers.ash.shiro.model.Role">
+	<update id="update" parameterType="Role">
 		UPDATE shiro_role SET
 		name=#{name},description=#{description}
 		WHERE id=#{id}

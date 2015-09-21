@@ -5,6 +5,7 @@ public class User {
 	private String id;
 	private String username;
 	private String password;
+	private String salt = "";
 	private String createDate;
 	private Integer loginCount;
 	private String description;
@@ -12,6 +13,7 @@ public class User {
 	private String phone;
 	private String gender;
 	private Integer age;
+	private ModelState state = ModelState.NORMAL;
 	
 	public User(){}
 	
@@ -38,6 +40,13 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 	public String getCreateDate() {
 		return createDate;
@@ -80,6 +89,12 @@ public class User {
 	}
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+	public ModelState getState() {
+		return state;
+	}
+	public void setState(ModelState state) {
+		this.state = state;
 	}
 
 	@Override
