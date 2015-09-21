@@ -59,6 +59,10 @@
 		WHERE ur.userId=#{userId} AND r.id=#{roleId}
 	</select>
 	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
+	<select id="findRoles" resultType="Role">
+		SELECT r.* FROM shiro_role r LEFT JOIN shiro_user_role ur ON ur.roleId=r.id WHERE ur.userId=#{userId};
+	</select>
+	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
 	<select id="findUserRoles" parameterType="String" resultMap="UserVo">
 		SELECT
 		u.id as user_id,

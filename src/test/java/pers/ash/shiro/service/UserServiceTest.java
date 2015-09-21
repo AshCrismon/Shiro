@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
+import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.util.UUIDUtils;
@@ -14,6 +15,8 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 	
 	@Test
 	public void testCreateUser(){
@@ -45,6 +48,12 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 	public void testCorrelationRoles(){
 		User user = createUser("克丽丝","123456",23,"女","13434477752","cris@163.com");
 		userService.createUser(user);
+		Role role1 = new Role(UUIDUtils.createUUID(), "普通用户");
+		Role role2 = new Role(UUIDUtils.createUUID(), "系统用户");
+		Role role3 = new Role(UUIDUtils.createUUID(), "VIP用户");
+//		roleService.add(role1);
+//		roleService.add(role2);
+//		roleService.add(role3);
 	}
 	
 	public User createUser(String username, String password, int age,

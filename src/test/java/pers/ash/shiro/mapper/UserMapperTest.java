@@ -160,6 +160,22 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	}
 	
 	@Test
+	public void testFindRoles(){
+		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		Role role1 = new Role(UUIDUtils.createUUID(), "普通用户");
+		Role role2 = new Role(UUIDUtils.createUUID(), "系统用户");
+		Role role3 = new Role(UUIDUtils.createUUID(), "VIP用户");
+		roleMapper.add(role1);
+		roleMapper.add(role2);
+		roleMapper.add(role3);
+		userMapper.correlationRole(id, role1.getId());
+		userMapper.correlationRole(id, role2.getId());
+		userMapper.correlationRole(id, role3.getId());
+		List<Role> roles = userMapper.findRoles(id);
+		Assert.assertEquals(3, roles.size());
+	}
+	
+	@Test
 	public void testFindUserRole() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		Role role = new Role(UUIDUtils.createUUID(), "普通用户");

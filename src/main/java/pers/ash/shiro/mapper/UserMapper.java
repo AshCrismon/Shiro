@@ -1,5 +1,7 @@
 package pers.ash.shiro.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import pers.ash.shiro.model.Role;
@@ -15,6 +17,8 @@ public interface UserMapper extends Mapper<User>{
 	public Role findUserRole(@Param("userId")String userId, @Param("roleId")String roleId);
 
 	public User findByUsername(String username);
+	
+	public List<Role> findRoles(String id);
 	
 	public UserVo findUserRoles(String id);
 	

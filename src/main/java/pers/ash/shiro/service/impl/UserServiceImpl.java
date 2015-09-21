@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pers.ash.shiro.exception.DuplicationException;
+import pers.ash.shiro.helper.ModelHelper;
+import pers.ash.shiro.helper.PasswordHelper;
 import pers.ash.shiro.mapper.UserMapper;
 import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
 import pers.ash.shiro.service.UserService;
+import pers.ash.shiro.vo.UserVo;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,14 +25,29 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User createUser(User user) throws DuplicationException {
 		validate(user);
+		PasswordHelper.encrypt(user);
 		userMapper.add(user);
 		return user;
+	}
+	
+	@Override
+	public void deleteUser(String id) {
+		switch(ModelHelper.getState()){
+		
+		}
+	}
+
+	@Override
+	public void updateUser(User user) {
+		validate(user.getId());
+		userMapper.update(user);
 	}
 
 	@Override
 	public void changePassword(String userId, String newPassword) {
 		User user = validate(userId);
 		user.setPassword(newPassword);
+		PasswordHelper.encrypt(user);
 		userMapper.update(user);
 	}
 
@@ -46,17 +63,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void unCorrelationRoles(String userId, String... roleIds) {
-
+		for(int i = 0; i < roleIds.length; i++){
+			userMapper.unCorrelationRole(userId, roleIds[i]);
+		}
 	}
 
 	@Override
 	public User findByUsername(String username) {
-		return null;
+		return userMapper.findByUsername(username);
 	}
 
 	@Override
-	public List<Role> findRoles(String username) {
-		return null;
+	public UserVo findUserRoles(String id) {
+		return userMapper.findUserRoles(id);
 	}
 
 	@Override
