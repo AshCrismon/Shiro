@@ -43,6 +43,13 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 		User user = userMapper.findById(id);
 		Assert.assertEquals(true, user != null);
 	}
+	
+	@Test
+	public void testFindByUsername(){
+		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		User user = userMapper.findByUsername("琪琪");
+		Assert.assertEquals(true, user != null);
+	}
 
 	@Test
 //	@Rollback(false)
@@ -140,13 +147,6 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
 		roleMapper.add(role);
 		UserRole userRole = new UserRole(id, role.getId());
-		int affectedRows = userMapper.assignRole(userRole);
-		Assert.assertEquals(true, affectedRows == 1);
-	}
-	
-	@Test
-	public void test(){
-		UserRole userRole = new UserRole("a1391f4ebd854707be50570fab470727", "de3e46d404c446cd9b1ff2a7ac8e5d6d");
 		int affectedRows = userMapper.assignRole(userRole);
 		Assert.assertEquals(true, affectedRows == 1);
 	}

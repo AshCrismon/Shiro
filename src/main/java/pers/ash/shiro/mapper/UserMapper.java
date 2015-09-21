@@ -8,6 +8,8 @@ public interface UserMapper extends Mapper<User>{
 	
 	public int assignRole(UserRole userRole);
 	
+	public User findByUsername(String username);
+	
 	public UserVo findUserRoles(String id);
 	
 }

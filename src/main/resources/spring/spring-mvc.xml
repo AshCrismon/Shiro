@@ -14,6 +14,10 @@
     http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
+	<!-- ============================【添加对service的扫描 】========================= -->
+	
+	<context:component-scan base-package="pers.ash.shiro.service" />
+	
 	<!-- =============================【 引入数据库配置文件 】=========================== -->
 
 	<context:property-placeholder location="classpath:db.properties" />

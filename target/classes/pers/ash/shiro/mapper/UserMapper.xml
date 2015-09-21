@@ -10,6 +10,11 @@
 		resultType="User">
 		SELECT * FROM shiro_user WHERE id=#{id}
 	</select>
+	
+	<select id="findByUsername" parameterType="String"
+		resultType="User">
+		SELECT * FROM shiro_user WHERE username=#{username}
+	</select>
 
 	<select id="findAll" resultType="User">
 		SELECT * FROM shiro_user
