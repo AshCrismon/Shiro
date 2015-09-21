@@ -12,7 +12,6 @@ import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.mapper.UserMapper;
 import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
-import pers.ash.shiro.model.UserRole;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.util.UUIDUtils;
 import pers.ash.shiro.vo.UserVo;
@@ -121,22 +120,40 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	}
 
 	@Test
-	public void testAssignUserRoles() {
+	public void testCorrelationRole() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
 		roleMapper.add(role);
-		UserRole userRole = new UserRole(id, role.getId());
-		int affectedRows = userMapper.assignRoles(userRole);
+		int affectedRows = userMapper.correlationRole(id, role.getId());
 		Assert.assertEquals(true, affectedRows == 1);
 	}
 
+	@Test
+	public void testUnCorrelationRole() {
+		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
+		roleMapper.add(role);
+		userMapper.correlationRole(id, role.getId());
+		int affectedRows = userMapper.unCorrelationRole(id, role.getId());
+		Assert.assertEquals(true, affectedRows == 1);
+	}
+	
+	@Test
+	public void testFindUserRole() {
+		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
+		roleMapper.add(role);
+		userMapper.correlationRole(id, role.getId());
+		Role r = userMapper.findUserRole(id, role.getId());
+		Assert.assertEquals(true, r != null);
+	}
+	
 	@Test
 	public void testFindUserRoles() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
 		roleMapper.add(role);
-		UserRole userRole = new UserRole(id, role.getId());
-		userMapper.assignRoles(userRole);
+		userMapper.correlationRole(id, role.getId());
 		UserVo userVo = userMapper.findUserRoles(id);
 		Assert.assertEquals(true, !userVo.getRoles().isEmpty());
 	}

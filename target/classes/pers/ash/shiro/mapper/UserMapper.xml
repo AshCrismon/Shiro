@@ -40,13 +40,26 @@
 	<!-- ================================================================== -->
 	
 	<!-- ========================= 【 给一个用户分配角色 】  ======================== -->
-	<insert id="assignRoles" parameterType="UserRole">
+	<insert id="correlationRole">
 		INSERT INTO 
 		shiro_user_role(userId,roleId)
 		VALUES(#{userId},#{roleId})
 	</insert>
+	<!-- ========================= 【 给一个用户删除角色 】  ======================== -->
+	<delete id="unCorrelationRole">
+		DELETE FROM shiro_user_role WHERE 
+		userid=#{userId} AND roleId=#{roleId}
+	</delete>
+	<!-- ======================== 【 查询一个用户的某个角色 】  ======================= -->
+	<select id="findUserRole" resultType="Role">
+		SELECT * 
+		FROM shiro_role r 
+		LEFT JOIN shiro_user_role ur 
+		ON ur.roleId=r.id 
+		WHERE ur.userId=#{userId} AND r.id=#{roleId}
+	</select>
 	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
-	<select id="findUserRoles" parameterType="String" resultMap="UserRoles">
+	<select id="findUserRoles" parameterType="String" resultMap="UserVo">
 		SELECT
 		u.id as user_id,
 		u.username as user_username,
@@ -72,7 +85,7 @@
 		WHERE u.id=#{id}
 	</select>
 
-	<resultMap id="UserRoles" type="UserVo">
+	<resultMap id="UserVo" type="UserVo">
 		<id property="id" column="user_id" />
 		<result property="username" column="user_username" />
 		<result property="password" column="user_password" />
@@ -83,7 +96,7 @@
 		<result property="phone" column="user_phone" />
 		<result property="gender" column="user_gender" />
 		<result property="age" column="user_age" />
-		<collection property="roles" ofType="pers.ash.shiro.model.Role">
+		<collection property="roles" ofType="Role">
 			<id property="id" column="role_id"/>
 			<result property="name" column="role_name"/>
 			<result property="description" column="role_description"/>
