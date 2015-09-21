@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.ash.shiro.mapper.RoleMapper">
+
+	<!-- ========================== 【 基本增删改查 】  =========================== -->
+	<select id="findById" parameterType="String"
+		resultType="Role">
+		SELECT * FROM shiro_role WHERE id=#{id}
+	</select>
+
+	<select id="findAll" parameterType="String"
+		resultType="Role">
+		SELECT * FROM shiro_role
+	</select>
+
+	<insert id="add" parameterType="Role">
+		INSERT INTO
+		shiro_role(id,name,description)
+		VALUES(#{id},#{name},#{description})
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM shiro_role WHERE
+		id=#{id}
+	</delete>
+
+	<update id="update" parameterType="Role">
+		UPDATE shiro_role SET
+		name=#{name},description=#{description}
+		WHERE id=#{id}
+	</update>
+	<!-- ================================================================== -->
+</mapper>
