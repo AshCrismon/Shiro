@@ -1,5 +1,7 @@
 package pers.ash.shiro.service;
 
+import java.text.ParseException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +38,17 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 	}
 	
 	@Test
-	public void testDeleteUser(){
+	public void testDeleteUser() throws ParseException{
 		User user = createUser("克丽丝","123456",23,"女","13434477752","cris@163.com");
 		userService.createUser(user);
 		
 		//锁定用户
 		ModelHelper.setState(ModelState.LOCKED);
 		userService.deleteUser(user.getId());
-		Assert.assertEquals(ModelState.LOCKED, userService.findByUserId(user.getId()).getState());
+		user = userService.findByUserId(user.getId());
+		Assert.assertEquals(ModelState.LOCKED, user.getState());
 		
-	/*	//移入回收站
+		//移入回收站
 		ModelHelper.setState(ModelState.REMOVE);
 		userService.deleteUser(user.getId());
 		Assert.assertEquals(ModelState.REMOVE, userService.findByUserId(user.getId()).getState());
@@ -53,7 +56,26 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 		//彻底删除
 		ModelHelper.setState(ModelState.DELETE);
 		userService.deleteUser(user.getId());
-		Assert.assertNull(userService.findByUserId(user.getId()));*/
+		Assert.assertNull(userService.findByUserId(user.getId()));
+	}
+	
+	@Test
+	public void testUpdateUser(){
+		User user = createUser("克丽丝","123456",23,"女","13434477752","cris@163.com");
+		userService.createUser(user);
+		
+		user = userService.findByUserId(user.getId());
+		user.setUsername("七七");
+		user.setAge(24);
+		user.setEmail("qiqi@sina.com");
+		user.setPhone("15487456214");
+		userService.updateUser(user);
+		
+		user = userService.findByUserId(user.getId());
+		Assert.assertEquals("七七", user.getUsername());
+		Assert.assertEquals(24, user.getAge().intValue());
+		Assert.assertEquals("qiqi@sina.com", user.getEmail());
+		Assert.assertEquals("15487456214", user.getPhone());
 	}
 	
 	@Test

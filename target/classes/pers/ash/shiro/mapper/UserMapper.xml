@@ -22,8 +22,8 @@
 
 	<insert id="add" parameterType="User">
 		INSERT INTO
-		shiro_user(id,username,password,createDate,loginCount,email,phone,gender,age,description)
-		VALUES(#{id},#{username},#{password},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description})
+		shiro_user(id,username,password,createDate,loginCount,email,phone,gender,age,description,state)
+		VALUES(#{id},#{username},#{password},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -34,7 +34,7 @@
 	<update id="update" parameterType="User">
 		UPDATE shiro_user SET
 		username=#{username},password=#{password},loginCount=#{loginCount},
-		email=#{email},phone=#{phone},gender=#{gender},age=#{age},description=#{description}
+		email=#{email},phone=#{phone},gender=#{gender},age=#{age},description=#{description},state=#{state}
 		WHERE id=#{id}
 	</update>
 	<!-- ================================================================== -->
@@ -60,7 +60,7 @@
 	</select>
 	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
 	<select id="findRoles" resultType="Role">
-		SELECT r.* FROM shiro_role r LEFT JOIN shiro_user_role ur ON ur.roleId=r.id WHERE ur.userId=#{userId};
+		SELECT r.* FROM shiro_user_role ur LEFT JOIN shiro_role r ON ur.roleId=r.id WHERE ur.userId=#{userId}
 	</select>
 	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
 	<select id="findUserRoles" parameterType="String" resultMap="UserVo">
@@ -86,7 +86,7 @@
 		LEFT JOIN
 		shiro_role r ON
 		ur.roleId=r.id
-		WHERE u.id=#{id}
+		WHERE u.id=#{userId}
 	</select>
 
 	<resultMap id="UserVo" type="UserVo">

@@ -73,6 +73,13 @@ public interface UserService {
 	public UserVo findUserRoles(String username);
 	
 	/**
+	 * 根据主键查找用户的所有角色
+	 * @param id
+	 * @return
+	 */
+	public List<Role> findRoles(String id);
+	
+	/**
 	 * 查找用户的权限
 	 * @param username
 	 * @return

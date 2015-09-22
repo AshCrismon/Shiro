@@ -13,6 +13,7 @@ import pers.ash.shiro.helper.PasswordHelper;
 import pers.ash.shiro.mapper.UserMapper;
 import pers.ash.shiro.model.ModelState;
 import pers.ash.shiro.model.Permission;
+import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
 import pers.ash.shiro.service.UserService;
 import pers.ash.shiro.vo.UserVo;
@@ -32,10 +33,10 @@ public class UserServiceImpl implements UserService {
 		userMapper.add(user);
 		return user;
 	}
-
+	
 	@Override
-	public void deleteUser(String id) {
-		User user = validate(id);
+	public void deleteUser(String userId) {
+		User user = validate(userId);
 		switch (ModelHelper.getState()) {
 		case LOCKED:
 			user.setState(ModelState.LOCKED);
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
 			userMapper.update(user);
 			break;
 		case DELETE:
-			userMapper.delete(id);
+			userMapper.delete(userId);
 			break;
 		}
 	}
@@ -81,20 +82,27 @@ public class UserServiceImpl implements UserService {
 			userMapper.unCorrelationRole(userId, roleIds[i]);
 		}
 	}
-
-	@Override
-	public User findByUserId(String id) {
-		return userMapper.findById(id);
-	}
 	
+	@Override
+	public User findByUserId(String userId) {
+		return userMapper.findById(userId);
+	}
+
 	@Override
 	public User findByUsername(String username) {
 		return userMapper.findByUsername(username);
 	}
 
 	@Override
-	public UserVo findUserRoles(String id) {
-		return userMapper.findUserRoles(id);
+	public UserVo findUserRoles(String userId) {
+		return userMapper.findUserRoles(userId);
+	}
+	
+	@Override
+	public List<Role> findRoles(String userId) {
+		validate(userId);
+		List<Role> roles = userMapper.findRoles(userId);
+		return roles == null ? ;
 	}
 
 	@Override
