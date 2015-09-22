@@ -1,15 +1,18 @@
 package pers.ash.shiro.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
+import pers.ash.shiro.model.ModelState;
 import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.util.UUIDUtils;
 import pers.ash.shiro.exception.*;
+import pers.ash.shiro.helper.ModelHelper;
 
 public class UserServiceTest extends AbstractTransactionalConfig{
 	
@@ -22,6 +25,7 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 	public void testCreateUser(){
 		User user = createUser("克丽丝","123456",23,"女","13434477752","cris@163.com");
 		userService.createUser(user);
+		Assert.assertNotNull(userService.findByUserId(user.getId()));
 	}
 	
 	@Test(expected = DuplicationException.class)
@@ -29,6 +33,27 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 		User user = createUser("克丽丝","123456",23,"女","13434477752","cris@163.com");
 		userService.createUser(user);
 		userService.createUser(user);
+	}
+	
+	@Test
+	public void testDeleteUser(){
+		User user = createUser("克丽丝","123456",23,"女","13434477752","cris@163.com");
+		userService.createUser(user);
+		
+		//锁定用户
+		ModelHelper.setState(ModelState.LOCKED);
+		userService.deleteUser(user.getId());
+		Assert.assertEquals(ModelState.LOCKED, userService.findByUserId(user.getId()).getState());
+		
+	/*	//移入回收站
+		ModelHelper.setState(ModelState.REMOVE);
+		userService.deleteUser(user.getId());
+		Assert.assertEquals(ModelState.REMOVE, userService.findByUserId(user.getId()).getState());
+		
+		//彻底删除
+		ModelHelper.setState(ModelState.DELETE);
+		userService.deleteUser(user.getId());
+		Assert.assertNull(userService.findByUserId(user.getId()));*/
 	}
 	
 	@Test

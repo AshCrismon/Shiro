@@ -52,6 +52,13 @@ public interface UserService {
 	public void unCorrelationRoles(String userId, String... roleIds);
 	
 	/**
+	 * 根据用户主键查找用户
+	 * @param id
+	 * @return
+	 */
+	public User findByUserId(String id);
+	
+	/**
 	 * 根据用户名查找用户
 	 * @param username
 	 * @return
