@@ -45,7 +45,7 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 		userService.deleteUser(user.getId());
 		Assert.assertEquals(ModelState.LOCKED, userService.findByUserId(user.getId()).getState());
 		
-	/*	//移入回收站
+		//移入回收站
 		ModelHelper.setState(ModelState.REMOVE);
 		userService.deleteUser(user.getId());
 		Assert.assertEquals(ModelState.REMOVE, userService.findByUserId(user.getId()).getState());
@@ -53,7 +53,7 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 		//彻底删除
 		ModelHelper.setState(ModelState.DELETE);
 		userService.deleteUser(user.getId());
-		Assert.assertNull(userService.findByUserId(user.getId()));*/
+		Assert.assertNull(userService.findByUserId(user.getId()));
 	}
 	
 	@Test
