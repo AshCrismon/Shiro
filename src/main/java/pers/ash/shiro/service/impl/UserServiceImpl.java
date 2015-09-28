@@ -1,20 +1,28 @@
 package pers.ash.shiro.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.druid.util.StringUtils;
 
 import pers.ash.shiro.exception.DuplicationException;
+import pers.ash.shiro.exception.EntityNotAvailableException;
+import pers.ash.shiro.exception.EntityNotFoundException;
 import pers.ash.shiro.helper.ModelHelper;
 import pers.ash.shiro.helper.PasswordHelper;
+import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.mapper.UserMapper;
 import pers.ash.shiro.model.ModelState;
 import pers.ash.shiro.model.Permission;
+import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
 import pers.ash.shiro.service.UserService;
+import pers.ash.shiro.util.UUIDUtils;
 import pers.ash.shiro.vo.UserVo;
 
 @Service
@@ -22,20 +30,35 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
-
+	@Autowired
+	private RoleMapper roleMapper;
+	
+	private static final Logger logger = LoggerFactory.getLogger("UserServiceImpl");
+	
 	/* ========================business methods========================= */
-
 	@Override
+	public List<User> findAllUsers(){
+		return userMapper.findAll();
+	}
+	
+	@Override
+	public void createUser(User... users) throws DuplicationException {
+		validate(users);
+		for(int i = 0; i < users.length; i++){
+			createUser(users[i]);
+		}
+	}
+	
 	public User createUser(User user) throws DuplicationException {
 		validate(user);
 		PasswordHelper.encrypt(user);
 		userMapper.add(user);
 		return user;
 	}
-
+	
 	@Override
-	public void deleteUser(String id) {
-		User user = validate(id);
+	public void deleteUser(String userId) {
+		User user = validate(userId);
 		switch (ModelHelper.getState()) {
 		case LOCKED:
 			user.setState(ModelState.LOCKED);
@@ -46,7 +69,7 @@ public class UserServiceImpl implements UserService {
 			userMapper.update(user);
 			break;
 		case DELETE:
-			userMapper.delete(id);
+			userMapper.delete(userId);
 			break;
 		}
 	}
@@ -67,7 +90,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void correlationRoles(String userId, String... roleIds) {
-		validate(userId);
 		for (int i = 0; i < roleIds.length; i++) {
 			if (validate(userId, roleIds[i])) {
 				userMapper.correlationRole(userId, roleIds[i]);
@@ -76,30 +98,39 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void unCorrelationRoles(String userId, String... roleIds) {
+	public void uncorrelationRoles(String userId, String... roleIds) {
 		for (int i = 0; i < roleIds.length; i++) {
 			userMapper.unCorrelationRole(userId, roleIds[i]);
 		}
 	}
-
-	@Override
-	public User findByUserId(String id) {
-		return userMapper.findById(id);
-	}
 	
+	@Override
+	public User findByUserId(String userId) {
+		return userMapper.findById(userId);
+	}
+
 	@Override
 	public User findByUsername(String username) {
 		return userMapper.findByUsername(username);
 	}
 
 	@Override
-	public UserVo findUserRoles(String id) {
-		return userMapper.findUserRoles(id);
+	public UserVo findUserRoles(String userId) {
+		return userMapper.findUserRoles(userId);
+	}
+	
+	@Override
+	public List<Role> findRoles(String userId) {
+		validate(userId);
+		List<Role> roles = userMapper.findRoles(userId);
+		return roles == null ? Collections.<Role>emptyList() : roles;
 	}
 
 	@Override
-	public List<Permission> findPermissions(String username) {
-		return null;
+	public List<Permission> findPermissions(String userId) {
+		validate(userId);
+		List<Permission> permissions = userMapper.findPermissions(userId);
+		return permissions == null ? Collections.<Permission>emptyList() : permissions;
 	}
 
 	/* =============================validate============================ */
@@ -110,8 +141,23 @@ public class UserServiceImpl implements UserService {
 	 * @param user
 	 */
 	public void validate(User user) {
+		if(StringUtils.isEmpty(user.getUsername())){
+			logger.error("------------>用户名不能为空");
+			throw new IllegalArgumentException("用户名不能为空");
+		}
 		if (userMapper.findByUsername(user.getUsername()) != null) {
+			logger.error("------------>用户名已被使用");
 			throw new DuplicationException("用户名已被使用");
+		}
+		if(StringUtils.isEmpty(user.getId())){
+			user.setId(UUIDUtils.createUUID());
+		}
+	}
+	
+	public void validate(User... users){
+		if(null == users){
+			logger.error("------------>创建的用户不能为null");
+			throw new NullPointerException("创建的用户不能为null");
 		}
 	}
 
@@ -121,13 +167,11 @@ public class UserServiceImpl implements UserService {
 	 * @param userId
 	 * @return
 	 */
-	public User validate(String userId) {
-		if (StringUtils.isEmpty(userId)) {
-			throw new NullPointerException("用户id不能为空");
-		}
+	public User validate(String userId){
 		User user = userMapper.findById(userId);
-		if (user == null) {
-			throw new NullPointerException("用户不存在");
+		if(null == user){
+			logger.error("------------>用户不存在或已经被删除");
+			throw new EntityNotFoundException("用户不存在或已经被删除");
 		}
 		return user;
 	}
@@ -141,9 +185,43 @@ public class UserServiceImpl implements UserService {
 	 */
 	private boolean validate(String userId, String roleId) {
 		if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(roleId)) {
+			logger.error("------------>用户或角色id不能为空");
 			throw new NullPointerException("用户或角色id不能为空");
 		}
+		if(!userIsAvailable(userId) || !roleIsAvailable(roleId)){
+			logger.error("------------>用户或角色不可用");
+			throw new EntityNotAvailableException("用户或角色不可用");
+		}
 		return userMapper.findUserRole(userId, roleId) == null;
+	}
+	
+	
+	/**
+	 * 某个用户是否有效
+	 * @param userId
+	 * @return
+	 */
+	public boolean userIsAvailable(String userId) {
+		User user = userMapper.findById(userId);
+		if(null == user){
+			return false;
+		}else{
+			return user.getState() == ModelState.NORMAL;
+		}
+	}
+	
+	/**
+	 * 某个角色是否有效
+	 * @param userId
+	 * @return
+	 */
+	public boolean roleIsAvailable(String roleId){
+		Role role = roleMapper.findById(roleId);
+		if(null == role){
+			return false;
+		}else{
+			return role.getState() == ModelState.NORMAL;
+		}
 	}
 
 	/* =======================setters and getters======================= */
@@ -154,6 +232,14 @@ public class UserServiceImpl implements UserService {
 
 	public void setUserMapper(UserMapper userMapper) {
 		this.userMapper = userMapper;
+	}
+
+	public RoleMapper getRoleMapper() {
+		return roleMapper;
+	}
+
+	public void setRoleMapper(RoleMapper roleMapper) {
+		this.roleMapper = roleMapper;
 	}
 
 }

@@ -1,22 +1,17 @@
 package pers.ash.shiro.model;
 
-public class Permission {
+public class Permission extends BaseModel{
 	
-	private String id;
 	private String name;
 	private String description;
 	
-	public Permission(){}
-	public Permission(String id, String name) {
+	public Permission(){
 		super();
-		this.id = id;
+	}
+	public Permission(String name, String description) {
+		super();
 		this.name = name;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+		this.description = description;
 	}
 	public String getName() {
 		return name;
@@ -30,6 +25,4 @@ public class Permission {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 }

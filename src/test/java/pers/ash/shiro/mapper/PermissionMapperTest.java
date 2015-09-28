@@ -10,7 +10,6 @@ import org.springframework.test.annotation.Rollback;
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.PermissionMapper;
 import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.util.UUIDUtils;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -47,7 +46,7 @@ public class PermissionMapperTest extends AbstractTransactionalConfig{
 	public void testFindPage() {
 		PageHelper.startPage(0, 10);
 		List<Permission> permissions = permissionMapper.findAll();
-		Assert.assertEquals(true, permissions.size() <= 10);
+		Assert.assertTrue(permissions.size() <= 10);
 	}
 	
 	@Test
@@ -67,8 +66,8 @@ public class PermissionMapperTest extends AbstractTransactionalConfig{
 	
 	@Test
 	public void testAdd(){
-		String id = add("获取用户角色", "权限描述信息");
-		Assert.assertEquals(true, id != null);
+		String id = add("权限1", "测试用例-权限1");
+		Assert.assertNotNull(id);
 	}
 	
 	@Test
@@ -90,11 +89,9 @@ public class PermissionMapperTest extends AbstractTransactionalConfig{
 	
 	public String add(String name, String description){
 		Permission permission = new Permission();
-		permission.setId(UUIDUtils.createUUID());
 		permission.setName(name);
 		permission.setDescription(description);
 		int affectedRows = permissionMapper.add(permission);
 		return affectedRows == 1 ? permission.getId() : null;
 	}
-	
 }

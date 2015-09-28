@@ -9,8 +9,8 @@ import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.RoleMapper;
+import pers.ash.shiro.model.Permission;
 import pers.ash.shiro.model.Role;
-import pers.ash.shiro.util.UUIDUtils;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,6 +20,8 @@ public class RoleMapperTest extends AbstractTransactionalConfig{
 	
 	@Autowired
 	private RoleMapper roleMapper;
+	@Autowired
+	private PermissionMapper permissionMapper;
 	
 	public void init(){
 		add("root", "超级用户");
@@ -30,10 +32,17 @@ public class RoleMapperTest extends AbstractTransactionalConfig{
 	}
 	
 	@Test
-	public void testFindRoleById(){
+	public void testFindByRoleId(){
 		String id = add("Rose", "普通用户");
 		Role role = roleMapper.findById(id);
-		Assert.assertEquals(true, role != null);
+		Assert.assertNotNull(role);
+	}
+	
+	@Test
+	public void testFindByRoleName(){
+		add("Rose", "普通用户");
+		Role role = roleMapper.findByRoleName("Rose");
+		Assert.assertNotNull(role);
 	}
 	
 	@Test
@@ -69,7 +78,7 @@ public class RoleMapperTest extends AbstractTransactionalConfig{
 	@Test
 	public void testAdd(){
 		String id = add("Rose", "普通用户");
-		Assert.assertEquals(true, id != null);
+		Assert.assertNotNull(id);
 	}
 	
 	@Test
@@ -89,9 +98,51 @@ public class RoleMapperTest extends AbstractTransactionalConfig{
 		Assert.assertEquals(true, affectedRows == 1);
 	}
 	
+	@Test
+	public void testCorrelationPermissions(){
+		String roleId = add("Rose", "普通用户");
+		Permission permission = new Permission("权限一", "测试用例-权限一");
+		permissionMapper.add(permission);
+		int affectedRows = roleMapper.correlationPermission(roleId, permission.getId());
+		Assert.assertEquals(1, affectedRows);
+	}
+	
+	@Test
+	public void testUncorrelationPermissions(){
+		String roleId = add("Rose", "普通用户");
+		Permission permission = new Permission("权限一", "测试用例-权限一");
+		permissionMapper.add(permission);
+		roleMapper.correlationPermission(roleId, permission.getId());
+		int affectedRows = roleMapper.uncorrelationPermission(roleId, permission.getId());
+		Assert.assertEquals(1, affectedRows);
+	}
+	
+	@Test
+	public void testFindRolePermission(){
+		String roleId = add("Rose", "普通用户");
+		Permission permission = new Permission("权限一", "测试用例-权限一");
+		permissionMapper.add(permission);
+		roleMapper.correlationPermission(roleId, permission.getId());
+		Assert.assertNotNull(roleMapper.findRolePermission(roleId, permission.getId()));
+	}
+	
+	@Test
+	public void testFindPermissions(){
+		String roleId = add("Rose", "普通用户");
+		Permission permission = new Permission("权限一", "测试用例-权限一");
+		Permission permission2 = new Permission("权限二", "测试用例-权限二");
+		Permission permission3 = new Permission("权限三", "测试用例-权限三");
+		permissionMapper.add(permission);
+		permissionMapper.add(permission2);
+		permissionMapper.add(permission3);
+		roleMapper.correlationPermission(roleId, permission.getId());
+		roleMapper.correlationPermission(roleId, permission2.getId());
+		roleMapper.correlationPermission(roleId, permission3.getId());
+		Assert.assertEquals(3, roleMapper.findPermissions(roleId).size());
+	}
+	
 	public String add(String name, String description){
 		Role role = new Role();
-		role.setId(UUIDUtils.createUUID());
 		role.setName(name);
 		role.setDescription(description);
 		int affectedRows = roleMapper.add(role);

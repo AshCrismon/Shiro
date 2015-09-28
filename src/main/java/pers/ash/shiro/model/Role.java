@@ -1,22 +1,18 @@
 package pers.ash.shiro.model;
 
-public class Role {
+public class Role extends BaseModel{
 	
-	private String id;
 	private String name;
 	private String description;
 	
-	public Role(){}
-	public Role(String id, String name) {
+	public Role(){
 		super();
-		this.id = id;
+	}
+
+	public Role(String name, String description) {
+		super();
 		this.name = name;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+		this.description = description;
 	}
 	public String getName() {
 		return name;

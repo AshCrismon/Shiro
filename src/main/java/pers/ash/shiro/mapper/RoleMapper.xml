@@ -10,6 +10,11 @@
 		resultType="Role">
 		SELECT * FROM shiro_role WHERE id=#{id}
 	</select>
+	
+	<select id="findByRoleName" parameterType="String"
+		resultType="Role">
+		SELECT * FROM shiro_role r WHERE r.name=#{roleName}	
+	</select>
 
 	<select id="findAll" parameterType="String"
 		resultType="Role">
@@ -18,8 +23,8 @@
 
 	<insert id="add" parameterType="Role">
 		INSERT INTO
-		shiro_role(id,name,description)
-		VALUES(#{id},#{name},#{description})
+		shiro_role(id,name,description,state)
+		VALUES(#{id},#{name},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -29,8 +34,36 @@
 
 	<update id="update" parameterType="Role">
 		UPDATE shiro_role SET
-		name=#{name},description=#{description}
+		name=#{name},description=#{description},state=#{state}
 		WHERE id=#{id}
 	</update>
 	<!-- ================================================================== -->
+
+	<!-- ========================= 【 给一个角色分配权限 】 ======================== -->
+	<insert id="correlationPermission">
+		INSERT INTO
+		shiro_role_permission(roleId,permissionId)
+		VALUES(#{roleId},#{permissionId})
+	</insert>
+	<!-- ========================= 【 给一个角色取消权限 】 ======================== -->
+	<delete id="uncorrelationPermission">
+		DELETE FROM
+		shiro_role_permission
+		WHERE
+		roleId=#{roleId} AND permissionId=#{permissionId}
+	</delete>
+	<!-- ======================== 【 查询一个角色的某个权限 】 ======================= -->
+	<select id="findRolePermission" resultType="Permission">
+		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
+		rp.roleId=#{roleId} AND p.id=#{permissionId}
+	</select>
+	<!-- ======================== 【 查询一个角色的所有权限 】 ======================= -->
+	<select id="findPermissions" resultType="Permission">
+		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
+		rp.roleId=#{roleId}
+	</select>
 </mapper>

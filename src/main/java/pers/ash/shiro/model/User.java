@@ -1,8 +1,6 @@
 package pers.ash.shiro.model;
 
-public class User {
-	
-	private String id;
+public class User extends BaseModel{
 	private String username;
 	private String password;
 	private String salt = "";
@@ -13,22 +11,18 @@ public class User {
 	private String phone;
 	private String gender;
 	private Integer age;
-	private ModelState state = ModelState.NORMAL;
 	
-	public User(){}
-	
-	public User(String id, String username, String password) {
+	public User(){
 		super();
-		this.id = id;
+	}
+	
+	public User(String username, String password) {
+		super();
 		this.username = username;
 		this.password = password;
+		this.loginCount = 0;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -41,7 +35,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	public String getSalt() {
 		return salt;
 	}
@@ -90,19 +83,13 @@ public class User {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	public ModelState getState() {
-		return state;
-	}
-	public void setState(ModelState state) {
-		this.state = state;
-	}
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password
-				+ ", createDate=" + createDate + ", loginCount=" + loginCount
-				+ ", description=" + description + ", email=" + email
-				+ ", phone=" + phone + ", gender=" + gender + ", age=" + age
-				+ "]";
+		return "User [username=" + username + ", createDate=" + createDate
+				+ ", loginCount=" + loginCount + ", description=" + description
+				+ ", email=" + email + ", phone=" + phone + ", gender="
+				+ gender + ", age=" + age + ", state=" + state + "]";
 	}
+
 }

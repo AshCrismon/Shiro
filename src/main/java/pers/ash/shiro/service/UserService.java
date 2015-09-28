@@ -11,12 +11,18 @@ import pers.ash.shiro.vo.UserVo;
 public interface UserService {
 	
 	/**
+	 * 获取所有用户
+	 * @return
+	 */
+	public List<User> findAllUsers();
+	
+	/**
 	 * 添加用户
 	 * @param user
 	 * @return
 	 * @throws DuplicationException
 	 */
-	public User createUser(User user) throws DuplicationException;
+	public void createUser(User... users) throws DuplicationException;
 	
 	/**
 	 * 删除用户
@@ -49,7 +55,7 @@ public interface UserService {
 	 * @param userId
 	 * @param roleIds
 	 */
-	public void unCorrelationRoles(String userId, String... roleIds);
+	public void uncorrelationRoles(String userId, String... roleIds);
 	
 	/**
 	 * 根据用户主键查找用户
@@ -73,9 +79,16 @@ public interface UserService {
 	public UserVo findUserRoles(String username);
 	
 	/**
+	 * 根据主键查找用户的所有角色
+	 * @param id
+	 * @return
+	 */
+	public List<Role> findRoles(String id);
+	
+	/**
 	 * 查找用户的权限
 	 * @param username
 	 * @return
 	 */
-	public List<Permission> findPermissions(String username);
+	public List<Permission> findPermissions(String userId);
 }

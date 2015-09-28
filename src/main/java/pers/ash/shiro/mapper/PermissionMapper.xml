@@ -5,21 +5,26 @@
 
 <mapper namespace="pers.ash.shiro.mapper.PermissionMapper">
 
-	<!-- ========================== 【 基本增删改查 】  =========================== -->
-	<select id="findById" parameterType="String"
-		resultType="Permission">
-		SELECT * FROM shiro_permission WHERE id=#{id}
+	<!-- ========================== 【 基本增删改查 】 =========================== -->
+	<select id="findById" parameterType="String" resultType="Permission">
+		SELECT *
+		FROM shiro_permission WHERE id=#{id}
 	</select>
 
-	<select id="findAll" parameterType="String"
+	<select id="findByPermissionName" parameterType="String"
 		resultType="Permission">
-		SELECT * FROM shiro_permission
+		SELECT * FROM shiro_permission WHERE name=#{permissionName}
+	</select>
+
+	<select id="findAll" parameterType="String" resultType="Permission">
+		SELECT *
+		FROM shiro_permission
 	</select>
 
 	<insert id="add" parameterType="Permission">
 		INSERT INTO
-		shiro_permission(id,name,description)
-		VALUES(#{id},#{name},#{description})
+		shiro_permission(id,name,description,state)
+		VALUES(#{id},#{name},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -30,7 +35,7 @@
 
 	<update id="update" parameterType="Permission">
 		UPDATE shiro_permission SET
-		name=#{name},description=#{description}
+		name=#{name},description=#{description},state=#{state}
 		WHERE
 		id=#{id}
 	</update>

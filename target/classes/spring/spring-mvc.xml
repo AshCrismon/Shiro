@@ -15,14 +15,15 @@
     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<!-- ============================【添加对service的扫描 】========================= -->
-	
-	<context:component-scan base-package="pers.ash.shiro.service" />
-	
+
+	<context:component-scan
+		base-package="pers.ash.shiro.service,pers.ash.shiro.controller" />
+
 	<!-- =============================【 引入数据库配置文件 】=========================== -->
 
 	<context:property-placeholder location="classpath:db.properties" />
 
-	<!-- ================================【 配置数据源 】============================== -->
+	<!-- ================================【 配置数据源 】============================= -->
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
@@ -33,18 +34,18 @@
 		<property name="maxActive" value="${jdbc.maxActive}" />
 	</bean>
 
-	<!-- ===============================【 配置事务管理 】============================== -->
+	<!-- ===============================【 配置事务管理 】============================= -->
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- ===========================【 配置sessionFactory 】========================= -->
+	<!-- ==========================【 配置sessionFactory 】======================== -->
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="pers.ash.shiro.model,pers.ash.shiro.vo"/>
+		<property name="typeAliasesPackage" value="pers.ash.shiro.model,pers.ash.shiro.vo" />
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">
@@ -59,33 +60,35 @@
 		</property>
 	</bean>
 
-	<!-- =============================【 配置事务的注解驱动 】============================ -->
+	<!-- =============================【 配置事务的注解驱动 】=========================== -->
 
 	<tx:annotation-driven />
 
-	<!-- =============================【 shiro安全管理器 】=========================== -->
-
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
-
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-	</bean>
-
-	<!-- ============================【 配置mapper的扫描路径 】========================== -->
+	<!-- ============================【 配置mapper的扫描路径 】========================= -->
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="pers.ash.shiro.mapper" />
 	</bean>
 
-	<!-- ===============================【 配置视图解析器 】============================= -->
+	<!-- =============================【 shiro安全管理器 】=========================== -->
+
+	<!-- <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> 
+		<property name="securityManager" ref="securityManager" /> </bean> <bean id="securityManager" 
+		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"> </bean> -->
+
+	<!-- ========================【 HttpMessage-converter 】====================== -->
+
+	<mvc:annotation-driven />
+
+	<!-- =========================【 content-negotiation 】======================= -->
+
+	<!-- ==============================【 配置视图解析器 】============================= -->
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 自动给路径添加前缀和后缀 -->
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
 
 </beans>

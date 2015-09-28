@@ -22,8 +22,8 @@
 
 	<insert id="add" parameterType="User">
 		INSERT INTO
-		shiro_user(id,username,password,createDate,loginCount,email,phone,gender,age,description)
-		VALUES(#{id},#{username},#{password},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description})
+		shiro_user(id,username,password,createDate,loginCount,email,phone,gender,age,description,state)
+		VALUES(#{id},#{username},#{password},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -34,7 +34,7 @@
 	<update id="update" parameterType="User">
 		UPDATE shiro_user SET
 		username=#{username},password=#{password},loginCount=#{loginCount},
-		email=#{email},phone=#{phone},gender=#{gender},age=#{age},description=#{description}
+		email=#{email},phone=#{phone},gender=#{gender},age=#{age},description=#{description},state=#{state}
 		WHERE id=#{id}
 	</update>
 	<!-- ================================================================== -->
@@ -52,15 +52,27 @@
 	</delete>
 	<!-- ======================== 【 查询一个用户的某个角色 】  ======================= -->
 	<select id="findUserRole" resultType="Role">
-		SELECT * 
+		SELECT r.* 
 		FROM shiro_role r 
 		LEFT JOIN shiro_user_role ur 
 		ON ur.roleId=r.id 
 		WHERE ur.userId=#{userId} AND r.id=#{roleId}
 	</select>
-	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
+	<!-- ========================= 【 查询用户拥有的角色 】 ========================= -->
 	<select id="findRoles" resultType="Role">
-		SELECT r.* FROM shiro_role r LEFT JOIN shiro_user_role ur ON ur.roleId=r.id WHERE ur.userId=#{userId};
+		SELECT r.* FROM
+		shiro_user_role ur LEFT JOIN shiro_role r ON ur.roleId=r.id
+		WHERE
+		ur.userId=#{userId}
+	</select>
+	<!-- ========================= 【 查询用户拥有的权限 】 ========================= -->
+	<select id="findPermissions" resultType="Permission">
+		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId
+		LEFT JOIN shiro_role r ON r.id=rp.roleId
+		LEFT JOIN shiro_user_role ur ON ur.roleId=r.id
+		WHERE ur.userId=#{userId}
 	</select>
 	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
 	<select id="findUserRoles" parameterType="String" resultMap="UserVo">
@@ -86,8 +98,10 @@
 		LEFT JOIN
 		shiro_role r ON
 		ur.roleId=r.id
-		WHERE u.id=#{id}
+		WHERE u.id=#{userId}
 	</select>
+
+
 
 	<resultMap id="UserVo" type="UserVo">
 		<id property="id" column="user_id" />

@@ -10,10 +10,10 @@ import org.springframework.test.annotation.Rollback;
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.mapper.UserMapper;
+import pers.ash.shiro.model.Permission;
 import pers.ash.shiro.model.Role;
 import pers.ash.shiro.model.User;
 import pers.ash.shiro.util.DateUtils;
-import pers.ash.shiro.util.UUIDUtils;
 import pers.ash.shiro.vo.UserVo;
 
 import com.github.orderbyhelper.OrderByHelper;
@@ -25,8 +25,9 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 
 	@Autowired
 	private UserMapper userMapper;
-	@Autowired
 	private RoleMapper roleMapper;
+	@Autowired
+	private PermissionMapper permissionMapper;
 
 	public void init(){
 		add("张三","123456",23,"男","13434488752","zhangsan@163.com");
@@ -37,17 +38,17 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	}
 	
 	@Test
-	public void testFindUserById() {
+	public void testFindByUserId() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		User user = userMapper.findById(id);
-		Assert.assertEquals(true, user != null);
+		Assert.assertNotNull(user);
 	}
 	
 	@Test
 	public void testFindByUsername(){
-		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		User user = userMapper.findByUsername("琪琪");
-		Assert.assertEquals(true, user != null);
+		Assert.assertNotNull(user);
 	}
 
 	@Test
@@ -55,14 +56,14 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	public void testFindAllUsers() {
 		init();
 		List<User> users = userMapper.findAll();
-		Assert.assertEquals(true, !users.isEmpty());
+		Assert.assertTrue(!users.isEmpty());
 	}
 
 	@Test
 	public void testFindPage() {
 		PageHelper.startPage(0, 10);
 		List<User> users = userMapper.findAll();
-		Assert.assertEquals(true, users.size() <= 10);
+		Assert.assertTrue(users.size() <= 10);
 	}
 
 	@Test
@@ -103,14 +104,14 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	@Test
 	public void testAdd() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
-		Assert.assertEquals(true, id != null);
+		Assert.assertNotNull(id);
 	}
 
 	@Test
 	public void testDelete() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
 		int affectedRows = userMapper.delete(id);
-		Assert.assertEquals(true, affectedRows == 1);
+		Assert.assertEquals(1, affectedRows);
 	}
 
 	@Test
@@ -122,13 +123,12 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 		user.setPassword("987456");
 		user.setEmail("qiqi123@yeah.net");
 		int affectedRows = userMapper.update(user);
-		Assert.assertEquals(true, affectedRows == 1);
+		Assert.assertEquals(1, affectedRows);
 	}
 
 	public String add(String username, String password, int age,
 			String gender, String phone, String email) {
 		User user = new User();
-		user.setId(UUIDUtils.createUUID());
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setAge(age);
@@ -142,29 +142,29 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 
 	@Test
 	public void testCorrelationRole() {
-		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
-		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
+		String userId = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		Role role = new Role("普通用户", "测试用例-普通用户");
 		roleMapper.add(role);
-		int affectedRows = userMapper.correlationRole(id, role.getId());
-		Assert.assertEquals(true, affectedRows == 1);
+		int affectedRows = userMapper.correlationRole(userId, role.getId());
+		Assert.assertEquals(1, affectedRows);
 	}
 
 	@Test
-	public void testUnCorrelationRole() {
-		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
-		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
+	public void testUncorrelationRole() {
+		String userId = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		Role role = new Role("普通用户", "测试用例-普通用户");
 		roleMapper.add(role);
-		userMapper.correlationRole(id, role.getId());
-		int affectedRows = userMapper.unCorrelationRole(id, role.getId());
-		Assert.assertEquals(true, affectedRows == 1);
+		userMapper.correlationRole(userId, role.getId());
+		int affectedRows = userMapper.unCorrelationRole(userId, role.getId());
+		Assert.assertEquals(1, affectedRows);
 	}
 	
 	@Test
 	public void testFindRoles(){
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
-		Role role1 = new Role(UUIDUtils.createUUID(), "普通用户");
-		Role role2 = new Role(UUIDUtils.createUUID(), "系统用户");
-		Role role3 = new Role(UUIDUtils.createUUID(), "VIP用户");
+		Role role1 = new Role("测试用户1", "测试用例-普通用户");
+		Role role2 = new Role("测试用户2", "测试用例-系统用户");
+		Role role3 = new Role("测试用户3", "测试用例-VIP用户");
 		roleMapper.add(role1);
 		roleMapper.add(role2);
 		roleMapper.add(role3);
@@ -176,23 +176,51 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	}
 	
 	@Test
+	public void testFindPermissions(){
+		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
+		Role role1 = new Role("测试用户1", "测试用例-普通用户");
+		Role role2 = new Role("测试用户2", "测试用例-系统用户");
+		Role role3 = new Role("测试用户3", "测试用例-VIP用户");
+		roleMapper.add(role1);
+		roleMapper.add(role2);
+		roleMapper.add(role3);
+		userMapper.correlationRole(id, role1.getId());
+		userMapper.correlationRole(id, role2.getId());
+		userMapper.correlationRole(id, role3.getId());
+		
+		Permission permission1 = new Permission("权限-1","测试用例-权限1");
+		Permission permission2 = new Permission("权限-2","测试用例-权限2");
+		Permission permission3 = new Permission("权限-3","测试用例-权限3");
+		permissionMapper.add(permission1);
+		permissionMapper.add(permission2);
+		permissionMapper.add(permission3);
+		
+		roleMapper.correlationPermission(role1.getId(), permission1.getId());
+		roleMapper.correlationPermission(role2.getId(), permission2.getId());
+		roleMapper.correlationPermission(role3.getId(), permission3.getId());
+		
+		List<Permission> permissions = userMapper.findPermissions(id);
+		Assert.assertEquals(3, permissions.size());
+	}
+	
+	@Test
 	public void testFindUserRole() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
-		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
+		Role role = new Role("普通用户", "测试用例-普通用户");
 		roleMapper.add(role);
 		userMapper.correlationRole(id, role.getId());
 		Role r = userMapper.findUserRole(id, role.getId());
-		Assert.assertEquals(true, r != null);
+		Assert.assertNotNull(r);
 	}
 	
 	@Test
 	public void testFindUserRoles() {
 		String id = add("琪琪","123456",23,"女","13434477752","qiqi@163.com");
-		Role role = new Role(UUIDUtils.createUUID(), "普通用户");
+		Role role = new Role("普通用户", "测试用例-普通用户");
 		roleMapper.add(role);
 		userMapper.correlationRole(id, role.getId());
 		UserVo userVo = userMapper.findUserRoles(id);
-		Assert.assertEquals(true, !userVo.getRoles().isEmpty());
+		Assert.assertTrue(!userVo.getRoles().isEmpty());
 	}
 	
 	public void print(List<User> users){
