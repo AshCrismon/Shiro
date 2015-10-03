@@ -41,14 +41,14 @@ public class RoleServiceImpl implements RoleService {
 	}
 	
 	public Role createRole(Role role) {
-		validate(role);
+		testValidity(role);
 		roleMapper.add(role);
 		return role;
 	}
 
 	@Override
 	public void deleteRole(String roleId) {
-		Role role = validate(roleId);
+		Role role = testValidity(roleId);
 		switch (ModelHelper.getState()) {
 		case LOCKED:
 			role.setState(ModelState.LOCKED);
@@ -67,7 +67,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public void correlationPermissions(String roleId, String... permissionIds) {
 		for(int i = 0; i < permissionIds.length; i++){
-			if(validate(roleId, permissionIds[i])){
+			if(testValidity(roleId, permissionIds[i])){
 				roleMapper.correlationPermission(roleId, permissionIds[i]);
 			}
 		}
@@ -90,13 +90,13 @@ public class RoleServiceImpl implements RoleService {
 		return roleMapper.findByRoleName(roleName);
 	}
 
-	/* =============================validate============================ */
+	/* =============================testValidity============================ */
 
 	/**
 	 * 验证角色名是否已经存在
 	 * @param role
 	 */
-	public void validate(Role role){
+	public void testValidity(Role role){
 		if(null == role){
 			throw new NullPointerException("创建的角色不能为null");
 		}
@@ -116,7 +116,7 @@ public class RoleServiceImpl implements RoleService {
 	 * @param roleId
 	 * @return
 	 */
-	public Role validate(String roleId){
+	public Role testValidity(String roleId){
 		Role role = roleMapper.findById(roleId);
 		if(null == role){
 			throw new EntityNotFoundException("角色不存在或已经被删除");
@@ -130,7 +130,7 @@ public class RoleServiceImpl implements RoleService {
 	 * @param permissionId
 	 * @return
 	 */
-	public boolean validate(String roleId, String permissionId){
+	public boolean testValidity(String roleId, String permissionId){
 		if (StringUtils.isEmpty(roleId) || StringUtils.isEmpty(permissionId)) {
 			throw new NullPointerException("角色或权限id不能为空");
 		}

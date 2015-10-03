@@ -21,4 +21,6 @@ public interface RoleMapper extends Mapper<Role> {
 			@Param("permissionId") String permissionId);
 	
 	public List<Permission> findPermissions(String roleId);
+	
+	public List<String> findStringPermissions(String roleId);
 }

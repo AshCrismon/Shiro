@@ -15,9 +15,13 @@ public class PasswordHelper {
 	public static void encrypt(User user){
 		String password = user.getPassword();
 		String salt = rng.nextBytes().toHex();
-		String hashedPassword = new SimpleHash(ENCRYPT_ALGORITHM, password, salt, HASH_TIMES).toHex();
+		String hashedPassword = encrypt(password, salt);
 		user.setSalt(salt);
 		user.setPassword(hashedPassword);
+	}
+	
+	public static String encrypt(String password, String salt){
+		return new SimpleHash(ENCRYPT_ALGORITHM, password, salt, HASH_TIMES).toHex();
 	}
 	
 	public static String getEncryptAlgorithm() {

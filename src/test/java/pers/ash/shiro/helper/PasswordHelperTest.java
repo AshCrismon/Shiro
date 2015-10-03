@@ -1,5 +1,6 @@
 package pers.ash.shiro.helper;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
@@ -11,6 +12,23 @@ public class PasswordHelperTest extends AbstractTransactionalConfig{
 	public void testEncrypt(){
 		User user = new User("zhaosi", "123456");
 		PasswordHelper.encrypt(user);
-		System.out.println("密码(md5+salt)：" + user.getPassword());
+		
+		String password = "123456";
+		String hashedPassword = PasswordHelper.encrypt(password, user.getSalt());
+		
+		Assert.assertEquals(user.getPassword(), hashedPassword);
 	}
+	
+	@Test
+	public void testEncrypt2(){
+		User user = new User("zhaosi", "123456");
+		PasswordHelper.encrypt(user);
+		
+		char[] chs = {'1','2','3','4','5','6'};
+		Object obj = chs;
+		String password = String.valueOf((char[])obj);
+		String hashedPassword = PasswordHelper.encrypt(password, user.getSalt());
+		Assert.assertEquals(user.getPassword(), hashedPassword);
+	}
+	
 }

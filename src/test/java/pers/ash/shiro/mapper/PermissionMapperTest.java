@@ -1,8 +1,10 @@
 package pers.ash.shiro.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -14,43 +16,71 @@ import pers.ash.shiro.model.Permission;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-
-public class PermissionMapperTest extends AbstractTransactionalConfig{
+public class PermissionMapperTest extends AbstractTransactionalConfig {
 
 	@Autowired
 	private PermissionMapper permissionMapper;
-	
-	public void init(){
-		add("获取系统用户列表", "权限描述信息");
-		add("获取普通用户列表", "权限描述信息");
-		add("获取所有用户列表", "权限描述信息");
-		add("获取vip用户列表", "权限描述信息");
+
+	private List<Permission> permissions = new ArrayList<Permission>();
+
+	@Before
+	public void init() {
+		clear();
+		addPermissions();
 	}
-	
+
 	@Test
-	public void testFindPermissionById(){
-		String id = add("获取用户角色", "权限描述信息");
-		Permission permission = permissionMapper.findById(id);
-		Assert.assertEquals(true, permission != null);
+	public void testAdd() {
+		Permission permission = new Permission("权限-1", "测试用例-权限1");
+		int affectedRows = permissionMapper.add(permission);
+		Assert.assertEquals(1, affectedRows);
 	}
-	
+
 	@Test
-//	@Rollback(false)
-	public void testFindAllPermissions(){
-		init();
+	public void testDelete() {
+		for (int i = 0; i < permissions.size(); i++) {
+			int affectedRows = permissionMapper.delete(permissions.get(i)
+					.getId());
+			Assert.assertEquals(1, affectedRows);
+		}
+	}
+
+	@Test
+	public void testUpdate() {
+		for (int i = 0; i < permissions.size(); i++) {
+			Permission permission = permissions.get(i);
+			permission.setName("新权限名");
+			permission.setDescription("权限描述信息");
+			int affectedRows = permissionMapper.update(permission);
+			Assert.assertEquals(1, affectedRows);
+		}
+	}
+
+	@Test
+	public void testFindPermissionById() {
+		for (int i = 0; i < permissions.size(); i++) {
+			Permission permission = permissionMapper.findById(permissions
+					.get(i).getId());
+			Assert.assertNotNull(permission);
+		}
+	}
+
+	@Test
+	// @Rollback(false)
+	public void testFindAllPermissions() {
 		List<Permission> permissions = permissionMapper.findAll();
-		Assert.assertEquals(true, !permissions.isEmpty());
+		Assert.assertEquals(5, permissions.size());
 	}
-	
+
 	@Test
 	public void testFindPage() {
 		PageHelper.startPage(0, 10);
 		List<Permission> permissions = permissionMapper.findAll();
 		Assert.assertTrue(permissions.size() <= 10);
 	}
-	
+
 	@Test
-	public void testFindPageInfo(){
+	public void testFindPageInfo() {
 		PageHelper.startPage(1, 10);
 		List<Permission> permissions = permissionMapper.findAll();
 		PageInfo<Permission> pageInfo = new PageInfo<Permission>(permissions);
@@ -63,35 +93,24 @@ public class PermissionMapperTest extends AbstractTransactionalConfig{
 		System.out.println("first pagination : " + pageInfo.getFirstPage());
 		System.out.println("last pagination : " + pageInfo.getLastPage());
 	}
-	
-	@Test
-	public void testAdd(){
-		String id = add("权限1", "测试用例-权限1");
-		Assert.assertNotNull(id);
+
+	public void clear() {
+		permissionMapper.deleteAll();
 	}
-	
-	@Test
-	public void testDelete(){
-		String id = add("获取用户角色", "权限描述信息");
-		int affectedRows = permissionMapper.delete(id);
-		Assert.assertEquals(true, affectedRows == 1);
+
+	public void addPermissions() {
+		addPermission("测试权限-1", "测试用例-权限1");
+		addPermission("测试权限-2", "测试用例-权限2");
+		addPermission("测试权限-3", "测试用例-权限3");
+		addPermission("测试权限-4", "测试用例-权限4");
+		addPermission("测试权限-5", "测试用例-权限5");
 	}
-	
-	@Test
-	public void testUpdate(){
-		String id = add("获取用户角色", "权限描述信息");
-		Permission permission = permissionMapper.findById(id);
-		permission.setName("获取用户角色123");
-		permission.setDescription("权限描述信息123");
-		int affectedRows = permissionMapper.update(permission);
-		Assert.assertEquals(true, affectedRows == 1);
-	}
-	
-	public String add(String name, String description){
+
+	public void addPermission(String name, String description) {
 		Permission permission = new Permission();
 		permission.setName(name);
 		permission.setDescription(description);
-		int affectedRows = permissionMapper.add(permission);
-		return affectedRows == 1 ? permission.getId() : null;
+		permissionMapper.add(permission);
+		permissions.add(permission);
 	}
 }

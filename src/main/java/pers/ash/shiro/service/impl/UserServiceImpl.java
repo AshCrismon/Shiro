@@ -43,14 +43,14 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void createUser(User... users) throws DuplicationException {
-		validate(users);
+		testValidity(users);
 		for(int i = 0; i < users.length; i++){
 			createUser(users[i]);
 		}
 	}
 	
 	public User createUser(User user) throws DuplicationException {
-		validate(user);
+		testValidity(user);
 		PasswordHelper.encrypt(user);
 		userMapper.add(user);
 		return user;
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void deleteUser(String userId) {
-		User user = validate(userId);
+		User user = testValidity(userId);
 		switch (ModelHelper.getState()) {
 		case LOCKED:
 			user.setState(ModelState.LOCKED);
@@ -76,13 +76,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(User user) {
-		validate(user.getId());
+		testValidity(user.getId());
 		userMapper.update(user);
 	}
 
 	@Override
 	public void changePassword(String userId, String newPassword) {
-		User user = validate(userId);
+		User user = testValidity(userId);
 		user.setPassword(newPassword);
 		PasswordHelper.encrypt(user);
 		userMapper.update(user);
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void correlationRoles(String userId, String... roleIds) {
 		for (int i = 0; i < roleIds.length; i++) {
-			if (validate(userId, roleIds[i])) {
+			if (testValidity(userId, roleIds[i])) {
 				userMapper.correlationRole(userId, roleIds[i]);
 			}
 		}
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void uncorrelationRoles(String userId, String... roleIds) {
 		for (int i = 0; i < roleIds.length; i++) {
-			userMapper.unCorrelationRole(userId, roleIds[i]);
+			userMapper.uncorrelationRole(userId, roleIds[i]);
 		}
 	}
 	
@@ -121,26 +121,40 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<Role> findRoles(String userId) {
-		validate(userId);
+		testValidity(userId);
 		List<Role> roles = userMapper.findRoles(userId);
 		return roles == null ? Collections.<Role>emptyList() : roles;
+	}
+	
+	@Override
+	public List<String> findStringRoles(String userId) {
+		testValidity(userId);
+		List<String> roles = userMapper.findStringRoles(userId);
+		return roles == null ? Collections.<String>emptyList() : roles;
 	}
 
 	@Override
 	public List<Permission> findPermissions(String userId) {
-		validate(userId);
+		testValidity(userId);
 		List<Permission> permissions = userMapper.findPermissions(userId);
 		return permissions == null ? Collections.<Permission>emptyList() : permissions;
 	}
+	
+	@Override
+	public List<String> findStringPermissions(String userId) {
+		testValidity(userId);
+		List<String> permissions = userMapper.findStringPermissions(userId);
+		return permissions == null ? Collections.<String>emptyList() : permissions;
+	}
 
-	/* =============================validate============================ */
+	/* =============================testValidity============================ */
 
 	/**
 	 * 验证用户名是否被占用
 	 * 
 	 * @param user
 	 */
-	public void validate(User user) {
+	public void testValidity(User user) {
 		if(StringUtils.isEmpty(user.getUsername())){
 			logger.error("------------>用户名不能为空");
 			throw new IllegalArgumentException("用户名不能为空");
@@ -154,7 +168,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	public void validate(User... users){
+	public void testValidity(User... users){
 		if(null == users){
 			logger.error("------------>创建的用户不能为null");
 			throw new NullPointerException("创建的用户不能为null");
@@ -167,7 +181,7 @@ public class UserServiceImpl implements UserService {
 	 * @param userId
 	 * @return
 	 */
-	public User validate(String userId){
+	public User testValidity(String userId){
 		User user = userMapper.findById(userId);
 		if(null == user){
 			logger.error("------------>用户不存在或已经被删除");
@@ -183,7 +197,7 @@ public class UserServiceImpl implements UserService {
 	 * @param roleId
 	 * @return
 	 */
-	private boolean validate(String userId, String roleId) {
+	private boolean testValidity(String userId, String roleId) {
 		if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(roleId)) {
 			logger.error("------------>用户或角色id不能为空");
 			throw new NullPointerException("用户或角色id不能为空");

@@ -1,8 +1,10 @@
 package pers.ash.shiro.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -15,53 +17,81 @@ import pers.ash.shiro.model.Role;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+public class RoleMapperTest extends AbstractTransactionalConfig {
 
-public class RoleMapperTest extends AbstractTransactionalConfig{
-	
 	@Autowired
 	private RoleMapper roleMapper;
 	@Autowired
 	private PermissionMapper permissionMapper;
-	
-	public void init(){
-		add("root", "超级用户");
-		add("admin", "管理员");
-		add("Jack", "普通用户");
-		add("sys_user", "系统用户");
-		add("vip_user", "vip用户");
+
+	private List<Role> roles = new ArrayList<Role>();
+	private List<Permission> permissions = new ArrayList<Permission>();
+
+	@Before
+	public void init() {
+		clear();
+		addRoles();
+		addPermissions();
 	}
-	
+
 	@Test
-	public void testFindByRoleId(){
-		String id = add("Rose", "普通用户");
-		Role role = roleMapper.findById(id);
-		Assert.assertNotNull(role);
+	public void testAdd() {
+		Role role = new Role("Rose", "普通用户");
+		int affectedRows = roleMapper.add(role);
+		Assert.assertEquals(1, affectedRows);
 	}
-	
+
 	@Test
-	public void testFindByRoleName(){
-		add("Rose", "普通用户");
-		Role role = roleMapper.findByRoleName("Rose");
-		Assert.assertNotNull(role);
+	public void testDelete() {
+		for (int i = 0; i < roles.size(); i++) {
+			int affectedRows = roleMapper.delete(roles.get(i).getId());
+			Assert.assertEquals(1, affectedRows);
+		}
 	}
-	
+
 	@Test
-//	@Rollback(false)
-	public void testFindAllRoles(){
-		init();
+	public void testUpdate() {
+		for (int i = 0; i < roles.size(); i++) {
+			Role role = roleMapper.findById(roles.get(i).getId());
+			role.setName("新角色名");
+			role.setDescription("vip用户");
+			int affectedRows = roleMapper.update(role);
+			Assert.assertEquals(true, affectedRows == 1);
+		}
+	}
+
+	@Test
+	public void testFindByRoleId() {
+		for (int i = 0; i < roles.size(); i++) {
+			Role role = roleMapper.findById(roles.get(i).getId());
+			Assert.assertNotNull(role);
+		}
+	}
+
+	@Test
+	public void testFindByRoleName() {
+		for (int i = 0; i < roles.size(); i++) {
+			Role role = roleMapper.findByRoleName(roles.get(i).getName());
+			Assert.assertNotNull(role);
+		}
+	}
+
+	@Test
+	// @Rollback(false)
+	public void testFindAllRoles() {
 		List<Role> roles = roleMapper.findAll();
-		Assert.assertEquals(true, !roles.isEmpty());
+		Assert.assertEquals(5, roles.size());
 	}
-	
+
 	@Test
 	public void testFindPage() {
-		PageHelper.startPage(0, 10);
+		PageHelper.startPage(1, 10);
 		List<Role> roles = roleMapper.findAll();
-		Assert.assertEquals(true, roles.size() <= 10);
+		Assert.assertTrue(roles.size() <= 10);
 	}
-	
+
 	@Test
-	public void testFindPageInfo(){
+	public void testFindPageInfo() {
 		PageHelper.startPage(1, 10);
 		List<Role> roles = roleMapper.findAll();
 		PageInfo<Role> pageInfo = new PageInfo<Role>(roles);
@@ -76,76 +106,102 @@ public class RoleMapperTest extends AbstractTransactionalConfig{
 	}
 
 	@Test
-	public void testAdd(){
-		String id = add("Rose", "普通用户");
-		Assert.assertNotNull(id);
+	public void testCorrelationPermissions() {
+		correlationPermissions();
+	}
+
+	@Test
+	public void testUncorrelationPermissions() {
+		correlationPermissions();
+		uncorrelationPermissions();
+	}
+
+	@Test
+	public void testFindRolePermission() {
+		correlationPermissions();
+		for (int i = 0; i < roles.size(); i++) {
+			for (int j = 0; j < permissions.size(); j++) {
+				Permission permission = roleMapper.findRolePermission(roles
+						.get(i).getId(), permissions.get(j).getId());
+				Assert.assertNotNull(permission);
+			}
+		}
+	}
+
+	@Test
+	public void testFindPermissions() {
+		correlationPermissions();
+		for (int i = 0; i < roles.size(); i++) {
+			List<Permission> permissions = roleMapper.findPermissions(roles
+					.get(i).getId());
+			Assert.assertEquals(5, permissions.size());
+		}
 	}
 	
 	@Test
-	public void testDelete(){
-		String id = add("Rose", "普通用户");
-		int affectedRows = roleMapper.delete(id);
-		Assert.assertEquals(true, affectedRows == 1);
+	public void testFindStringPermissions() {
+		correlationPermissions();
+		for (int i = 0; i < roles.size(); i++) {
+			List<String> permissions = roleMapper.findStringPermissions(roles
+					.get(i).getId());
+			Assert.assertEquals(5, permissions.size());
+		}
 	}
-	
-	@Test
-	public void testUpdate(){
-		String id = add("Rose", "普通用户");
-		Role role = roleMapper.findById(id);
-		role.setName("Role123");
-		role.setDescription("vip用户");
-		int affectedRows = roleMapper.update(role);
-		Assert.assertEquals(true, affectedRows == 1);
+
+	public void clear() {
+		roleMapper.deleteAll();
+		permissionMapper.deleteAll();
 	}
-	
-	@Test
-	public void testCorrelationPermissions(){
-		String roleId = add("Rose", "普通用户");
-		Permission permission = new Permission("权限一", "测试用例-权限一");
-		permissionMapper.add(permission);
-		int affectedRows = roleMapper.correlationPermission(roleId, permission.getId());
-		Assert.assertEquals(1, affectedRows);
+
+	public void addRoles() {
+		addRole("测试角色-1", "超级用户");
+		addRole("测试角色-2", "管理员");
+		addRole("测试角色-3", "普通用户");
+		addRole("测试角色-4", "系统用户");
+		addRole("测试角色-5", "vip用户");
 	}
-	
-	@Test
-	public void testUncorrelationPermissions(){
-		String roleId = add("Rose", "普通用户");
-		Permission permission = new Permission("权限一", "测试用例-权限一");
-		permissionMapper.add(permission);
-		roleMapper.correlationPermission(roleId, permission.getId());
-		int affectedRows = roleMapper.uncorrelationPermission(roleId, permission.getId());
-		Assert.assertEquals(1, affectedRows);
+
+	public void addPermissions() {
+		addPermission("测试权限-1", "测试用例-权限1");
+		addPermission("测试权限-2", "测试用例-权限2");
+		addPermission("测试权限-3", "测试用例-权限3");
+		addPermission("测试权限-4", "测试用例-权限4");
+		addPermission("测试权限-5", "测试用例-权限5");
 	}
-	
-	@Test
-	public void testFindRolePermission(){
-		String roleId = add("Rose", "普通用户");
-		Permission permission = new Permission("权限一", "测试用例-权限一");
-		permissionMapper.add(permission);
-		roleMapper.correlationPermission(roleId, permission.getId());
-		Assert.assertNotNull(roleMapper.findRolePermission(roleId, permission.getId()));
+
+	public void correlationPermissions() {
+		for (int i = 0; i < roles.size(); i++) {
+			for (int j = 0; j < permissions.size(); j++) {
+				int affectedRows = roleMapper.correlationPermission(roles
+						.get(i).getId(), permissions.get(j).getId());
+				Assert.assertEquals(1, affectedRows);
+			}
+		}
 	}
-	
-	@Test
-	public void testFindPermissions(){
-		String roleId = add("Rose", "普通用户");
-		Permission permission = new Permission("权限一", "测试用例-权限一");
-		Permission permission2 = new Permission("权限二", "测试用例-权限二");
-		Permission permission3 = new Permission("权限三", "测试用例-权限三");
-		permissionMapper.add(permission);
-		permissionMapper.add(permission2);
-		permissionMapper.add(permission3);
-		roleMapper.correlationPermission(roleId, permission.getId());
-		roleMapper.correlationPermission(roleId, permission2.getId());
-		roleMapper.correlationPermission(roleId, permission3.getId());
-		Assert.assertEquals(3, roleMapper.findPermissions(roleId).size());
+
+	public void uncorrelationPermissions() {
+		for (int i = 0; i < roles.size(); i++) {
+			for (int j = 0; j < permissions.size(); j++) {
+				int affectedRows = roleMapper.uncorrelationPermission(roles
+						.get(i).getId(), permissions.get(j).getId());
+				Assert.assertEquals(1, affectedRows);
+			}
+		}
 	}
-	
-	public String add(String name, String description){
+
+	public void addRole(String name, String description) {
 		Role role = new Role();
 		role.setName(name);
 		role.setDescription(description);
-		int affectedRows = roleMapper.add(role);
-		return affectedRows == 1 ? role.getId() : null;
+		roleMapper.add(role);
+		roles.add(role);
+	}
+
+	public void addPermission(String name, String description) {
+		Permission permission = new Permission();
+		permission.setName(name);
+		permission.setDescription(description);
+		permissionMapper.add(permission);
+		permissions.add(permission);
 	}
 }

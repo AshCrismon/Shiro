@@ -32,6 +32,10 @@
 		WHERE
 		id=#{id}
 	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM shiro_permission
+	</delete>
 
 	<update id="update" parameterType="Permission">
 		UPDATE shiro_permission SET

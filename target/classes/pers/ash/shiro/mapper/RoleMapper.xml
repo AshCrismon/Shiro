@@ -31,6 +31,10 @@
 		DELETE FROM shiro_role WHERE
 		id=#{id}
 	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM shiro_role
+	</delete>
 
 	<update id="update" parameterType="Role">
 		UPDATE shiro_role SET
@@ -62,6 +66,12 @@
 	<!-- ======================== 【 查询一个角色的所有权限 】 ======================= -->
 	<select id="findPermissions" resultType="Permission">
 		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
+		rp.roleId=#{roleId}
+	</select>
+	<select id="findStringPermissions" resultType="String">
+		SELECT p.id FROM
 		shiro_permission p
 		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
 		rp.roleId=#{roleId}

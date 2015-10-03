@@ -85,10 +85,14 @@ public interface UserService {
 	 */
 	public List<Role> findRoles(String id);
 	
+	public List<String> findStringRoles(String id);
+	
 	/**
 	 * 查找用户的权限
 	 * @param username
 	 * @return
 	 */
 	public List<Permission> findPermissions(String userId);
+	
+	public List<String> findStringPermissions(String userId);
 }

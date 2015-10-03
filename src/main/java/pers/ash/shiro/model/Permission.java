@@ -25,4 +25,10 @@ public class Permission extends BaseModel{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@Override
+	public String toString() {
+		return "Permission [name=" + name + ", description=" + description
+				+ ", id=" + id + ", state=" + state + "]";
+	}
+	
 }

@@ -13,4 +13,6 @@ public interface Mapper<T> {
 	public int delete(String id);
 	
 	public int update(T t);
+	
+	public int deleteAll();
 }

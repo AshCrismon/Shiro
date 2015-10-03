@@ -7,7 +7,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:spring/spring-mvc.xml"})
+@ContextConfiguration(locations={"classpath:spring/spring-mvc.xml","classpath:shiro/spring-shiro-web.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback=true, transactionManager="transactionManager")
 public class AbstractTransactionalConfig {

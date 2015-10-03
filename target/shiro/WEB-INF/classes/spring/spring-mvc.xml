@@ -4,26 +4,26 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 	http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	http://www.springframework.org/schema/context 
-	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd 
 	http://www.springframework.org/schema/tx 
-	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd  
     http://www.springframework.org/schema/task
-    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
-
+    http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+    
 	<!-- ============================【添加对service的扫描 】========================= -->
 
 	<context:component-scan
-		base-package="pers.ash.shiro.service,pers.ash.shiro.controller" />
+		base-package="pers.ash.shiro.service,pers.ash.shiro.controller,pers.ash.shiro.base" />
 
 	<!-- =============================【 引入数据库配置文件 】=========================== -->
 
 	<context:property-placeholder location="classpath:db.properties" />
 
-	<!-- ================================【 配置数据源 】============================== -->
+	<!-- ================================【 配置数据源 】============================= -->
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
@@ -34,14 +34,14 @@
 		<property name="maxActive" value="${jdbc.maxActive}" />
 	</bean>
 
-	<!-- ===============================【 配置事务管理 】============================== -->
+	<!-- ===============================【 配置事务管理 】============================= -->
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- ===========================【 配置sessionFactory 】========================= -->
+	<!-- ==========================【 配置sessionFactory 】======================== -->
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -60,70 +60,68 @@
 		</property>
 	</bean>
 
-	<!-- =============================【 配置事务的注解驱动 】============================ -->
+	<!-- =============================【 配置事务的注解驱动 】=========================== -->
 
 	<tx:annotation-driven />
 
-	<!-- ============================【 配置mapper的扫描路径 】========================== -->
+	<!-- ============================【 配置mapper的扫描路径 】========================= -->
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="pers.ash.shiro.mapper" />
 	</bean>
 
-	<!-- =============================【 shiro安全管理器 】=========================== -->
+	<!-- ========================【 HttpMessage-converter 】====================== -->
 
-	<!-- <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> 
-		<property name="securityManager" ref="securityManager" /> </bean> <bean id="securityManager" 
-		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"> </bean> -->
+	<mvc:annotation-driven validator="validator">
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="utf-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
-	<!-- ===============================【 json转换器 】============================= -->
-
-	<mvc:annotation-driven />
-
-	<!-- ==========================【 content-negotiation 】======================== -->
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order" value="1" />
-		<property name="mediaTypes">
-			<map>
-				<entry key="json" value="application/json" />
-				<entry key="xml" value="application/xml" />
-				<entry key="pdf" value="application/pdf" />
-
-			</map>
-		</property>
-
-		<property name="defaultViews">
-			<list>
-				<!-- JSON View -->
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-				</bean>
-				<!-- XML view -->
-				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-					<constructor-arg>
-						<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-							<property name="classesToBeBound">
-								<list>
-									<value>pers.ash.shiro.model.User</value>
-								</list>
-							</property>
-						</bean>
-					</constructor-arg>
-				</bean>
-			</list>
-		</property>
-		<property name="ignoreAcceptHeader" value="true" />
-
+	<!-- ==============================【 validator 】============================ -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
 
-	<!-- ===============================【 配置视图解析器 】============================= -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:validationMsg</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="cacheSeconds" value="120" />
+	</bean>
 
+	<bean class="org.json.JSONObject" />
+	<!-- ===============================【 静态资源访问 】============================= -->
+	
+	<mvc:resources mapping="js/**" location="/js/" />
+	<mvc:resources mapping="images/**" location="/images/" />
+	<mvc:resources mapping="css/**" location="/css/" />
+	<mvc:resources mapping="assets/**" location="/assets/" />
+	<mvc:resources mapping="front/**" location="/front/" />
+	<mvc:resources mapping="menu/**" location="/menu/" />
+	<mvc:resources mapping="node/**" location="/node/" />
+	<mvc:resources mapping="role/**" location="/role/" />
+	<mvc:resources mapping="user/**" location="/user/" />
+	
+	<!-- ================================【 配置主页 】=============================== -->
+	
+	<mvc:default-servlet-handler/>
+	<mvc:view-controller path="/" view-name="admin/login.html"/> 
+
+	<!-- ==============================【 配置视图解析器 】============================= -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 自动给路径添加前缀和后缀 -->
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="" />
+		<property name="suffix" value="" />
 	</bean>
 
 </beans>

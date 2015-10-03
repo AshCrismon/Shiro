@@ -22,18 +22,22 @@
 
 	<insert id="add" parameterType="User">
 		INSERT INTO
-		shiro_user(id,username,password,createDate,loginCount,email,phone,gender,age,description,state)
-		VALUES(#{id},#{username},#{password},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description},#{state})
+		shiro_user(id,username,password,salt,createDate,loginCount,email,phone,gender,age,description,state)
+		VALUES(#{id},#{username},#{password},#{salt},#{createDate},#{loginCount},#{email},#{phone},#{gender},#{age},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">
 		DELETE FROM shiro_user WHERE
 		id=#{id}
 	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM shiro_user
+	</delete>
 
 	<update id="update" parameterType="User">
 		UPDATE shiro_user SET
-		username=#{username},password=#{password},loginCount=#{loginCount},
+		username=#{username},password=#{password},salt=#{salt},loginCount=#{loginCount},
 		email=#{email},phone=#{phone},gender=#{gender},age=#{age},description=#{description},state=#{state}
 		WHERE id=#{id}
 	</update>
@@ -46,7 +50,7 @@
 		VALUES(#{userId},#{roleId})
 	</insert>
 	<!-- ========================= 【 给一个用户删除角色 】  ======================== -->
-	<delete id="unCorrelationRole">
+	<delete id="uncorrelationRole">
 		DELETE FROM shiro_user_role WHERE 
 		userid=#{userId} AND roleId=#{roleId}
 	</delete>
@@ -65,9 +69,23 @@
 		WHERE
 		ur.userId=#{userId}
 	</select>
+	<select id="findStringRoles" resultType="String">
+		SELECT r.id FROM
+		shiro_user_role ur LEFT JOIN shiro_role r ON ur.roleId=r.id
+		WHERE
+		ur.userId=#{userId}
+	</select>
 	<!-- ========================= 【 查询用户拥有的权限 】 ========================= -->
 	<select id="findPermissions" resultType="Permission">
 		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId
+		LEFT JOIN shiro_role r ON r.id=rp.roleId
+		LEFT JOIN shiro_user_role ur ON ur.roleId=r.id
+		WHERE ur.userId=#{userId}
+	</select>
+	<select id="findStringPermissions" resultType="String">
+		SELECT p.id FROM
 		shiro_permission p
 		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId
 		LEFT JOIN shiro_role r ON r.id=rp.roleId
@@ -100,8 +118,6 @@
 		ur.roleId=r.id
 		WHERE u.id=#{userId}
 	</select>
-
-
 
 	<resultMap id="UserVo" type="UserVo">
 		<id property="id" column="user_id" />

@@ -37,14 +37,14 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 	
 	public Permission createPermission(Permission permission) {
-		validate(permission);
+		testValidity(permission);
 		permissionMapper.add(permission);
 		return permission;
 	}
 
 	@Override
 	public void deletePermission(String permissionId) {
-		Permission permission = validate(permissionId);
+		Permission permission = testValidity(permissionId);
 		switch (ModelHelper.getState()) {
 		case LOCKED:
 			permission.setState(ModelState.LOCKED);
@@ -70,12 +70,12 @@ public class PermissionServiceImpl implements PermissionService {
 		return permissionMapper.findByPermissionName(permissionName);
 	}
 
-	/* =============================validate============================ */
+	/* =============================testValidity============================ */
 	/**
 	 * 验证权限名是否已经存在
 	 * @param permission
 	 */
-	public void validate(Permission permission) {
+	public void testValidity(Permission permission) {
 		if (null == permission) {
 			throw new NullPointerException("创建的权限不能为null");
 		}
@@ -95,7 +95,7 @@ public class PermissionServiceImpl implements PermissionService {
 	 * @param permissionId
 	 * @return
 	 */
-	public Permission validate(String permissionId){
+	public Permission testValidity(String permissionId){
 		Permission permission = permissionMapper.findById(permissionId);
 		if(null == permission){
 			throw new EntityNotFoundException("权限不存在或已经被删除");
