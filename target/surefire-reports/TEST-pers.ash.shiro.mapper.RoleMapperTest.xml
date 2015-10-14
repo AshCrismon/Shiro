@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.904" errors="0" skipped="0" tests="13" name="pers.ash.shiro.mapper.RoleMapperTest">
+<testsuite failures="0" time="2.326" errors="0" skipped="0" tests="13" name="pers.ash.shiro.mapper.RoleMapperTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="D:\Softwares\dev\env\java\jdk1.7.0_51\jre\bin"/>
@@ -20,7 +20,7 @@
     <property name="basedir" value="D:\Documents\Git\shiro"/>
     <property name="java.endorsed.dirs" value="D:\Softwares\dev\env\java\jdk1.7.0_51\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="D:\Documents\Git\shiro\target\surefire\surefirebooter8586804323614208989.jar"/>
+    <property name="surefire.real.class.path" value="D:\Documents\Git\shiro\target\surefire\surefirebooter11815700361183154.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Ash\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="D:\Softwares\dev\env\java\jdk1.7.0_51\jre"/>
-    <property name="sun.java.command" value="D:\Documents\Git\shiro\target\surefire\surefirebooter8586804323614208989.jar D:\Documents\Git\shiro\target\surefire\surefire5704076196087190926tmp D:\Documents\Git\shiro\target\surefire\surefire1251191274963122211tmp"/>
+    <property name="sun.java.command" value="D:\Documents\Git\shiro\target\surefire\surefirebooter11815700361183154.jar D:\Documents\Git\shiro\target\surefire\surefire2935476653402630946tmp D:\Documents\Git\shiro\target\surefire\surefire4902820841005142816tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="zh"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,17 +61,17 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.318" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindPermissions"/>
-  <testcase time="0.131" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindByRoleId"/>
-  <testcase time="0.111" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testAdd"/>
-  <testcase time="0.086" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindAllRoles"/>
-  <testcase time="0.123" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testCorrelationPermissions"/>
-  <testcase time="0.087" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindPage"/>
-  <testcase time="0.088" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindByRoleName"/>
-  <testcase time="0.211" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testUncorrelationPermissions"/>
-  <testcase time="0.3" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindRolePermission"/>
-  <testcase time="0.077" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testDelete"/>
-  <testcase time="0.11" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testUpdate"/>
-  <testcase time="0.144" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindStringPermissions"/>
-  <testcase time="0.101" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindPageInfo"/>
+  <testcase time="0.36" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindPermissions"/>
+  <testcase time="0.144" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindByRoleId"/>
+  <testcase time="0.131" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testAdd"/>
+  <testcase time="0.101" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindAllRoles"/>
+  <testcase time="0.253" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testCorrelationPermissions"/>
+  <testcase time="0.25" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindPage"/>
+  <testcase time="0.131" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindByRoleName"/>
+  <testcase time="0.241" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testUncorrelationPermissions"/>
+  <testcase time="0.222" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindRolePermission"/>
+  <testcase time="0.088" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testDelete"/>
+  <testcase time="0.12" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testUpdate"/>
+  <testcase time="0.177" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindStringPermissions"/>
+  <testcase time="0.088" classname="pers.ash.shiro.mapper.RoleMapperTest" name="testFindPageInfo"/>
 </testsuite>

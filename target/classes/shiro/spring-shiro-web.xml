@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
 	<!-- ========================================【 会话管理器 】========================================== -->
-	<bean id="sessionManager"
+	<!-- <bean id="sessionManager"
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<property name="globalSessionTimeout" value="1800000" />
 		<property name="deleteInvalidSessions" value="true" />
@@ -27,11 +27,11 @@
         <property name="maxAge" value="180000"/>
     </bean>
 	
-	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/> -->
 
 	<!-- ======================================【 Shiro安全管理器 】======================================= -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="sessionManager" ref="sessionManager" />
+		<!-- <property name="sessionManager" ref="sessionManager" /> -->
 		<property name="realm" ref="userRealm" />
 	</bean>
 
@@ -45,11 +45,11 @@
 
 	<!-- ======================================【 Shiro realm】======================================== -->
 	<bean id="userRealm" class="pers.ash.shiro.realm.UserRealm">
-		<property name="cachingEnabled" value="true" />
+		<!-- <property name="cachingEnabled" value="true" />
 		<property name="authenticationCachingEnabled" value="true" />
 		<property name="authenticationCacheName" value="authenticationCache" />
 		<property name="authorizationCachingEnabled" value="true" />
-		<property name="authorizationCacheName" value="authorizationCache" />
+		<property name="authorizationCacheName" value="authorizationCache" /> -->
 	</bean>
 
 	<!-- =================================【基于Form表单的身份验证过滤器】==================================== -->
@@ -72,13 +72,12 @@
 		<property name="unauthorizedUrl" value="/unauthorized.html" />
 		<property name="filters">
 			<util:map>
-				<entry key="formAuthenticationFilter" value-ref="formAuthenticationFilter" />
+				<entry key="loginFilter" value-ref="loginFilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
-				/index.html = anon
-				/view/** = authc
+				/** = loginFilter
 				/logout = logout
 			</value>
 		</property>

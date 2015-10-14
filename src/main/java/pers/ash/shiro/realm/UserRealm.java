@@ -28,7 +28,7 @@ public class UserRealm extends AuthorizingRealm {
 
 	@Autowired
 	private UserService userService;
-	
+
 	private Logger logger = LoggerFactory.getLogger(UserRealm.class);
 
 	/**
@@ -57,14 +57,15 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal(); // =>等价于token.getUsername()
-		String password = String.valueOf((char[])token.getCredentials());
+		String password = String.valueOf((char[]) token.getCredentials());
 		User user = userService.findByUsername(username);
 		if (user == null) {
 			logger.error("用户名[" + username + "]没找到");
 			throw new UnknownAccountException();// 没找到帐号
 		}
-		String hashedPassword = PasswordHelper.encrypt(password, user.getSalt());
-		if(!user.getPassword().equals(hashedPassword)){
+		String hashedPassword = PasswordHelper
+				.encrypt(password, user.getSalt());
+		if (!user.getPassword().equals(hashedPassword)) {
 			logger.error("用户名和密码不匹配");
 			throw new IncorrectCredentialsException();
 		}

@@ -1,48 +1,40 @@
-2015-10-03 09:13:30  [ main:7043 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 09:13:30  [ main:7053 ] - [ ERROR ]  ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 11:35:37  [ main:6542 ] - [ ERROR ]  ------------>ç”¨æˆ·åä¸èƒ½ä¸ºç©º
-2015-10-03 11:35:37  [ main:6554 ] - [ ERROR ]  ç”¨æˆ·åä¸èƒ½ä¸ºç©º
-2015-10-03 11:57:52  [ main:4446 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2aeac421] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@7baccabf]
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'pers.ash.shiro.controller.UserControllerTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.SecurityManager pers.ash.shiro.controller.UserControllerTest.securityManager; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [java.lang.SecurityManager] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:298)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1148)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:376)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.SecurityManager pers.ash.shiro.controller.UserControllerTest.securityManager; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [java.lang.SecurityManager] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:531)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:295)
-	... 26 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [java.lang.SecurityManager] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:997)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:867)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:779)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:503)
-	... 28 more
-2015-10-03 12:00:17  [ main:1155 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@6069be37] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@3e473e54]
+2015-10-04 09:03:20  [ main:10613 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:03:20  [ main:10619 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:03:37  [ main:26845 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 09:03:37  [ main:27123 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 09:05:07  [ main:9040 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:05:07  [ main:9046 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:05:24  [ main:25415 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 09:05:24  [ main:25705 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 09:13:12  [ main:7167 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:13:12  [ main:7171 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:13:23  [ main:17714 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 09:13:24  [ main:18460 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 09:21:34  [ main:7204 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:21:34  [ main:7209 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:21:45  [ main:18585 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 09:21:45  [ main:19009 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 09:22:38  [ main:7206 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:22:38  [ main:7209 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:22:48  [ main:17090 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 09:22:49  [ main:17755 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 09:50:35  [ main:7364 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:50:35  [ main:7368 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 09:50:47  [ main:19573 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 09:50:48  [ main:20053 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 10:11:55  [ main:6647 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 10:11:55  [ main:6651 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 10:12:04  [ main:15760 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 10:12:05  [ main:16717 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 10:22:16  [ main:8170 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 10:22:16  [ main:8174 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 10:22:25  [ main:17173 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 10:22:25  [ main:17816 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:13:40  [ main:7238 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:13:40  [ main:7241 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:13:50  [ main:17509 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:13:51  [ main:18060 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:20:55  [ main:1296 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@2345c47f] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@39677ff0]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:103)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -70,8 +62,9 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: IOException parsing XML document from class path resource [shirp/spring-shiro-web.xml]; nested exception is java.io.FileNotFoundException: class path resource [shirp/spring-shiro-web.xml] cannot be opened because it does not exist
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:342)
+Caused by: org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 49 in XML document from class path resource [shiro/spring-shiro-web.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 49; columnNumber: 3; å…ƒç´ ç±»åž‹ "property" å¿…é¡»åŽè·Ÿå±žæ€§è§„èŒƒ ">" æˆ– "/>"ã€‚
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:397)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:335)
 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:303)
 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:174)
 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:209)
@@ -85,506 +78,55 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: IOExc
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:69)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:95)
 	... 25 more
-Caused by: java.io.FileNotFoundException: class path resource [shirp/spring-shiro-web.xml] cannot be opened because it does not exist
-	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:171)
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:329)
-	... 37 more
-2015-10-03 12:00:57  [ main:4852 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1eb19ec7] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@13f2749c]
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'pers.ash.shiro.controller.UserControllerTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.SecurityManager pers.ash.shiro.controller.UserControllerTest.securityManager; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [java.lang.SecurityManager] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:298)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1148)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:376)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.SecurityManager pers.ash.shiro.controller.UserControllerTest.securityManager; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [java.lang.SecurityManager] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:531)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:295)
-	... 26 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [java.lang.SecurityManager] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:997)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:867)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:779)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:503)
-	... 28 more
-2015-10-03 12:13:39  [ main:6004 ] - [ ERROR ]  ç”¨æˆ·åå’Œå¯†ç ä¸åŒ¹é…
-2015-10-03 12:14:56  [ main:6482 ] - [ ERROR ]  ç”¨æˆ·åå’Œå¯†ç ä¸åŒ¹é…
-2015-10-03 15:44:40  [ main:5922 ] - [ ERROR ]  ç”¨æˆ·åå’Œå¯†ç ä¸åŒ¹é…
-2015-10-03 16:42:59  [ main:247673 ] - [ ERROR ]  ç”¨æˆ·åå’Œå¯†ç ä¸åŒ¹é…
-2015-10-03 16:45:30  [ main:100478 ] - [ ERROR ]  ç”¨æˆ·åå’Œå¯†ç ä¸åŒ¹é…
-2015-10-03 16:54:08  [ main:38302 ] - [ ERROR ]  ç”¨æˆ·åå’Œå¯†ç ä¸åŒ¹é…
-2015-10-03 17:38:29  [ main:2099 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@7b4286a2] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@4c9534e6]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:103)
-	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:160)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:101)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
-	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:755)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:128)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:102)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:246)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:69)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:95)
-	... 25 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 42 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 52 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:575)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1111)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:276)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 62 more
-2015-10-03 17:39:53  [ main:2022 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@1da404f9] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@7b4286a2]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:103)
-	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:160)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:101)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
-	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:755)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:128)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:102)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:246)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:69)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:95)
-	... 25 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 42 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 52 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionValidationScheduler' is defined
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:575)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1111)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:276)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 62 more
-2015-10-03 17:40:59  [ main:2035 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@1e1ad146] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@72a15a1a]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:103)
-	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:160)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:101)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] for bean with name 'sessionValidationScheduler' defined in class path resource [shiro/spring-shiro-web.xml]; nested exception is java.lang.ClassNotFoundException: org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
-	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:755)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:128)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:102)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:246)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:69)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:95)
-	... 25 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] for bean with name 'sessionValidationScheduler' defined in class path resource [shiro/spring-shiro-web.xml]; nested exception is java.lang.ClassNotFoundException: org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 42 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionValidationScheduler' while setting bean property 'sessionValidationScheduler'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] for bean with name 'sessionValidationScheduler' defined in class path resource [shiro/spring-shiro-web.xml]; nested exception is java.lang.ClassNotFoundException: org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 52 more
-Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler] for bean with name 'sessionValidationScheduler' defined in class path resource [shiro/spring-shiro-web.xml]; nested exception is java.lang.ClassNotFoundException: org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1278)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:435)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 62 more
-Caused by: java.lang.ClassNotFoundException: org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler
-	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
-	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
-	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
-	at org.springframework.util.ClassUtils.forName(ClassUtils.java:265)
-	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:419)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1270)
-	... 68 more
-2015-10-03 17:44:21  [ main:2177 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4d50c50b] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@71b87cd4]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:103)
-	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:160)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:101)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionDAO' while setting bean property 'sessionDAO'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionDAO' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdGenerator' while setting bean property 'sessionIdGenerator'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdGenerator' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
-	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:755)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:128)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:102)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:246)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:69)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:95)
-	... 25 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionDAO' while setting bean property 'sessionDAO'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionDAO' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdGenerator' while setting bean property 'sessionIdGenerator'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdGenerator' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 42 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionDAO' while setting bean property 'sessionDAO'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionDAO' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdGenerator' while setting bean property 'sessionIdGenerator'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdGenerator' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 52 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionDAO' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdGenerator' while setting bean property 'sessionIdGenerator'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdGenerator' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 62 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdGenerator' is defined
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:575)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1111)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:276)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 72 more
-2015-10-03 17:45:54  [ main:2169 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@156ade20] to prepare test instance [pers.ash.shiro.controller.UserControllerTest@1b1d11dc]
-java.lang.IllegalStateException: Failed to load ApplicationContext
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:103)
-	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:160)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:101)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:321)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:211)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:288)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:284)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
-	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdCookie' while setting bean property 'sessionIdCookie'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdCookie' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
-	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:755)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:464)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:128)
-	at org.springframework.test.context.web.AbstractGenericWebContextLoader.loadContext(AbstractGenericWebContextLoader.java:60)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:102)
-	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:246)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:69)
-	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:95)
-	... 25 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionManager' while setting bean property 'sessionManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdCookie' while setting bean property 'sessionIdCookie'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdCookie' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 42 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionManager' defined in class path resource [shiro/spring-shiro-web.xml]: Cannot resolve reference to bean 'sessionIdCookie' while setting bean property 'sessionIdCookie'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdCookie' is defined
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:334)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1160)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:519)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:293)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:290)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 52 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'sessionIdCookie' is defined
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:575)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1111)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:276)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:191)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
-	... 62 more
-2015-10-03 18:01:02  [ main:5992 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:06:52  [ main:122317 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:09:19  [ main:103419 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:09:48  [ main:14089 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:10:25  [ main:6224 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:12:08  [ main:78184 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:12:34  [ main:10848 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 18:13:48  [ main:62267 ] - [ ERROR ]  ------------>ç”¨æˆ·ä¸å­˜åœ¨æˆ–å·²ç»è¢«åˆ é™¤
-2015-10-03 20:43:38  [ main:5828 ] - [ ERROR ]  Invalid bound statement (not found): pers.ash.shiro.mapper.UserMapper.findAll
-2015-10-03 20:43:38  [ main:6229 ] - [ ERROR ]  Invalid bound statement (not found): pers.ash.shiro.mapper.UserMapper.findById
-2015-10-03 20:43:38  [ main:6305 ] - [ ERROR ]  Invalid bound statement (not found): pers.ash.shiro.mapper.UserMapper.findById
-2015-10-03 20:43:38  [ main:6448 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
-2015-10-03 20:43:38  [ main:6450 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
-2015-10-03 20:43:38  [ main:6502 ] - [ ERROR ]  Invalid bound statement (not found): pers.ash.shiro.mapper.UserMapper.findById
-2015-10-03 20:43:38  [ main:6542 ] - [ ERROR ]  Invalid bound statement (not found): pers.ash.shiro.mapper.UserMapper.findById
-2015-10-03 20:44:40  [ main:6313 ] - [ ERROR ]  Invalid bound statement (not found): pers.ash.shiro.mapper.UserMapper.findAll
-2015-10-03 20:48:11  [ main:6929 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
-2015-10-03 20:48:11  [ main:6932 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
-2015-10-03 20:48:22  [ main:17742 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
-2015-10-03 20:48:23  [ main:18657 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+Caused by: org.xml.sax.SAXParseException; lineNumber: 49; columnNumber: 3; å…ƒç´ ç±»åž‹ "property" å¿…é¡»åŽè·Ÿå±žæ€§è§„èŒƒ ">" æˆ– "/>"ã€‚
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:198)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:441)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:368)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1436)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.seekCloseOfStartTag(XMLDocumentFragmentScannerImpl.java:1395)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:264)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2786)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:117)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:347)
+	at org.springframework.beans.factory.xml.DefaultDocumentLoader.loadDocument(DefaultDocumentLoader.java:75)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:389)
+	... 38 more
+2015-10-04 11:22:20  [ main:7165 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:22:20  [ main:7170 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:22:29  [ main:15740 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:22:29  [ main:16011 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:29:09  [ main:6874 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:29:09  [ main:6880 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:29:18  [ main:15599 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:29:19  [ main:16076 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:33:54  [ main:6559 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:33:54  [ main:6563 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:34:02  [ main:14940 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:34:02  [ main:15202 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:35:29  [ main:6696 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:35:29  [ main:6700 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:35:38  [ main:15584 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:35:38  [ main:15821 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:37:02  [ main:6600 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:37:02  [ main:6604 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:37:11  [ main:15685 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:37:12  [ main:16256 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 11:38:43  [ main:6834 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:38:43  [ main:6838 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 11:38:51  [ main:14935 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 11:38:51  [ main:15241 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 12:03:53  [ main:6865 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 12:03:53  [ main:6873 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 12:04:04  [ main:17475 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 12:04:04  [ main:17728 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý
+2015-10-04 12:13:33  [ main:7190 ] - [ ERROR ]  ------------>ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 12:13:33  [ main:7195 ] - [ ERROR ]  ÓÃ»§Ãû²»ÄÜÎª¿Õ
+2015-10-04 12:13:43  [ main:17106 ] - [ ERROR ]  ------------>ÓÃ»§ÃûÒÑ±»Ê¹ÓÃ
+2015-10-04 12:13:43  [ main:17700 ] - [ ERROR ]  ------------>ÓÃ»§²»´æÔÚ»òÒÑ¾­±»É¾³ý

@@ -72,13 +72,12 @@
 		<property name="unauthorizedUrl" value="/unauthorized.html" />
 		<property name="filters">
 			<util:map>
-				<entry key="formAuthenticationFilter" value-ref="formAuthenticationFilter" />
+				<entry key="loginFilter" value-ref="loginFilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
-				/index.html = anon
-				/view/** = authc
+				/** = loginFilter
 				/logout = logout
 			</value>
 		</property>

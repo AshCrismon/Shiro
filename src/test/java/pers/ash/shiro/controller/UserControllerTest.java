@@ -28,7 +28,7 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	@Autowired
 	private WebApplicationContext wac;
 	private MockMvc mockMvc;
-	
+
 	@Autowired
 	private org.apache.shiro.mgt.SecurityManager securityManager;
 	private Subject subject;
@@ -88,7 +88,7 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(print());
 	}
-	
+
 	@Test
 	public void testFindUser() throws Exception {
 		mockMvc.perform(
@@ -96,43 +96,59 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(print());
 	}
-	
+
 	@Before
-	public void init(){
+	public void init() {
 		SecurityUtils.setSecurityManager(securityManager);
 		subject = SecurityUtils.getSubject();
 	}
+
 	@Test
-	public void testLogin() throws Exception{
+	public void testLogin() throws Exception {
 		String username = "测试用户-1";
 		String password = "123456";
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-		try{
+		UsernamePasswordToken token = new UsernamePasswordToken(username,
+				password);
+		try {
 			subject.login(token);
-		}catch(UnknownAccountException ex){
+		} catch (UnknownAccountException ex) {
 			System.out.println(ex.getMessage());
-		}catch(IncorrectCredentialsException ex){
+		} catch (IncorrectCredentialsException ex) {
 			System.out.println(ex.getMessage());
-		}catch(LockedAccountException ex){
+		} catch (LockedAccountException ex) {
 			System.out.println(ex.getMessage());
 		}
 		Assert.assertTrue(subject.isAuthenticated());
 	}
-	
-	@Test
-	public void testPermissionFilter(){
+
+//	@Test
+	public void testLogin2() throws Exception {
 		String username = "测试用户-1";
 		String password = "123456";
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		mockMvc.perform(
+				post("/user/admin/login.html").param("username", username)
+						.param("password", password)
+						.accept(MediaType.APPLICATION_JSON))
+				.andExpect(redirectedUrl("/user/admin/index.html"))
+				.andDo(print());
+		Assert.assertTrue(subject.isAuthenticated());
+	}
+
+	@Test
+	public void testPermissionFilter() {
+		String username = "测试用户-1";
+		String password = "123456";
+		UsernamePasswordToken token = new UsernamePasswordToken(username,
+				password);
 		subject.login(token);
 		Assert.assertTrue(subject.isAuthenticated());
-		
+
 		String testPermission1 = "12a523b34db644e990a26410e6583382";
 		String testPermission2 = "7a41cde8ad224832aa4d3c0bf4052ea0";
 		String testPermission3 = "28dc0f19adac4451be22b76a457e721b";
 		String testPermission4 = "bc70c65dfa9e4e31adc2db08364b15f0";
 		String testPermission5 = "54a4d999420148c6a57b5a49e2a92686";
-		
+
 		Assert.assertTrue(subject.isPermitted(testPermission1));
 		Assert.assertTrue(subject.isPermitted(testPermission2));
 		Assert.assertFalse(subject.isPermitted(testPermission3));

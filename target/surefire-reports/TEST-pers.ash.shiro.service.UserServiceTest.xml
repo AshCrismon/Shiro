@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="2.441" errors="0" skipped="0" tests="7" name="pers.ash.shiro.service.UserServiceTest">
+<testsuite failures="0" time="1.473" errors="0" skipped="0" tests="7" name="pers.ash.shiro.service.UserServiceTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="D:\Softwares\dev\env\java\jdk1.7.0_51\jre\bin"/>
@@ -20,7 +20,7 @@
     <property name="basedir" value="D:\Documents\Git\shiro"/>
     <property name="java.endorsed.dirs" value="D:\Softwares\dev\env\java\jdk1.7.0_51\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="D:\Documents\Git\shiro\target\surefire\surefirebooter8586804323614208989.jar"/>
+    <property name="surefire.real.class.path" value="D:\Documents\Git\shiro\target\surefire\surefirebooter11815700361183154.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Ash\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="D:\Softwares\dev\env\java\jdk1.7.0_51\jre"/>
-    <property name="sun.java.command" value="D:\Documents\Git\shiro\target\surefire\surefirebooter8586804323614208989.jar D:\Documents\Git\shiro\target\surefire\surefire5704076196087190926tmp D:\Documents\Git\shiro\target\surefire\surefire1251191274963122211tmp"/>
+    <property name="sun.java.command" value="D:\Documents\Git\shiro\target\surefire\surefirebooter11815700361183154.jar D:\Documents\Git\shiro\target\surefire\surefire2935476653402630946tmp D:\Documents\Git\shiro\target\surefire\surefire4902820841005142816tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="zh"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,11 +61,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="1.328" classname="pers.ash.shiro.service.UserServiceTest" name="testCorrelationRoles"/>
-  <testcase time="0.214" classname="pers.ash.shiro.service.UserServiceTest" name="testCreateUser2"/>
-  <testcase time="0.272" classname="pers.ash.shiro.service.UserServiceTest" name="testUpdateUser"/>
-  <testcase time="0.403" classname="pers.ash.shiro.service.UserServiceTest" name="testChangePassword"/>
-  <testcase time="0.082" classname="pers.ash.shiro.service.UserServiceTest" name="testCreateUser"/>
-  <testcase time="0.012" classname="pers.ash.shiro.service.UserServiceTest" name="testChangePasswordException"/>
-  <testcase time="0.122" classname="pers.ash.shiro.service.UserServiceTest" name="testDeleteUser"/>
+  <testcase time="0.536" classname="pers.ash.shiro.service.UserServiceTest" name="testCorrelationRoles"/>
+  <testcase time="0.451" classname="pers.ash.shiro.service.UserServiceTest" name="testCreateUser2"/>
+  <testcase time="0.154" classname="pers.ash.shiro.service.UserServiceTest" name="testUpdateUser"/>
+  <testcase time="0.166" classname="pers.ash.shiro.service.UserServiceTest" name="testChangePassword"/>
+  <testcase time="0.056" classname="pers.ash.shiro.service.UserServiceTest" name="testCreateUser"/>
+  <testcase time="0.014" classname="pers.ash.shiro.service.UserServiceTest" name="testChangePasswordException"/>
+  <testcase time="0.085" classname="pers.ash.shiro.service.UserServiceTest" name="testDeleteUser"/>
 </testsuite>

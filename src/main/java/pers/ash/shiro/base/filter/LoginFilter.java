@@ -13,8 +13,9 @@ import java.io.IOException;
 
 public class LoginFilter extends PathMatchingFilter {
 
-	private String loginUrl = "/login";
-	private String successUrl = "/";
+	private String loginRequest = "/admin/login.do";
+	private String loginUrl = "/admin/login.html";
+	private String successUrl = "/admin/index.html";
 
 	@Override
 	protected boolean onPreHandle(ServletRequest request,
@@ -24,7 +25,7 @@ public class LoginFilter extends PathMatchingFilter {
 		}
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		if (isLoginRequest(req)) {
+		if (isLoginUrl(req) || isLoginRequest(req)) {
 			if ("post".equalsIgnoreCase(req.getMethod())) {// form表单提交
 				boolean loginSuccess = login(req); // 登录
 				if (loginSuccess) {
@@ -64,6 +65,10 @@ public class LoginFilter extends PathMatchingFilter {
 	}
 
 	private boolean isLoginRequest(HttpServletRequest req) {
+		return pathsMatch(loginRequest, WebUtils.getPathWithinApplication(req));
+	}
+
+	private boolean isLoginUrl(HttpServletRequest req) {
 		return pathsMatch(loginUrl, WebUtils.getPathWithinApplication(req));
 	}
 }
