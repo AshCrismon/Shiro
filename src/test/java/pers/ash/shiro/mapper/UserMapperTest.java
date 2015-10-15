@@ -252,30 +252,30 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	}
 
 	public void addUsers() {
-		addUser("测试用户-1", "123456", 23, "男", "13434488752", "testuser1@163.com");
+		addUser("测试用户-1", "000000", 23, "男", "13434488752", "testuser1@163.com");
 		addUser("测试用户-2", "000000", 25, "女", "13434486635",
 				"testuser2@sina.com");
-		addUser("测试用户-3", "456789", 22, "女", "13434487412", "testuser3@qq.com");
-		addUser("测试用户-4", "123789", 26, "男", "13434488562",
+		addUser("测试用户-3", "000000", 22, "女", "13434487412", "testuser3@qq.com");
+		addUser("测试用户-4", "000000", 26, "男", "13434488562",
 				"testuser4@gmail.com");
-		addUser("测试用户-5", "456123", 33, "女", "13434484265",
+		addUser("测试用户-5", "000000", 33, "女", "13434484265",
 				"testuser5@sohu.com");
 	}
 
 	public void addRoles() {
-		addRole("测试角色-1", "超级用户");
-		addRole("测试角色-2", "管理员");
-		addRole("测试角色-3", "普通用户");
-		addRole("测试角色-4", "系统用户");
-		addRole("测试角色-5", "vip用户");
+		addRole("测试角色-1", "测试用例-角色1");
+		addRole("测试角色-2", "测试用例-角色2");
+		addRole("测试角色-3", "测试用例-角色3");
+		addRole("测试角色-4", "测试用例-角色4");
+		addRole("测试角色-5", "测试用例-角色5");
 	}
 
 	public void addPermissions() {
-		addPermission("测试权限-1", "测试用例-权限1");
-		addPermission("测试权限-2", "测试用例-权限2");
-		addPermission("测试权限-3", "测试用例-权限3");
-		addPermission("测试权限-4", "测试用例-权限4");
-		addPermission("测试权限-5", "测试用例-权限5");
+		addPermission("测试权限-1", "/controller/user/test-1.do", "测试用例-权限1");
+		addPermission("测试权限-2", "/controller/user/test-2.do", "测试用例-权限2");
+		addPermission("测试权限-3", "/controller/user/test-3.do", "测试用例-权限3");
+		addPermission("测试权限-4", "/controller/user/test-4.do", "测试用例-权限4");
+		addPermission("测试权限-5", "/controller/user/test-5.do", "测试用例-权限5");
 	}
 
 	public void correlationRoles() {
@@ -341,9 +341,10 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 		roles.add(role);
 	}
 
-	public void addPermission(String name, String description) {
+	public void addPermission(String name, String permissionUri, String description) {
 		Permission permission = new Permission();
 		permission.setName(name);
+		permission.setPermissionUri(permissionUri);
 		permission.setDescription(description);
 		permissionMapper.add(permission);
 		permissions.add(permission);

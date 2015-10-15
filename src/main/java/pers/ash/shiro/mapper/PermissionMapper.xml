@@ -23,8 +23,8 @@
 
 	<insert id="add" parameterType="Permission">
 		INSERT INTO
-		shiro_permission(id,name,description,state)
-		VALUES(#{id},#{name},#{description},#{state})
+		shiro_permission(id,name,permissionUri,description,state)
+		VALUES(#{id},#{name},#{permissionUri},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">

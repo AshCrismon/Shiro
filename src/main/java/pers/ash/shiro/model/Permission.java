@@ -9,9 +9,10 @@ public class Permission extends BaseModel{
 	public Permission(){
 		super();
 	}
-	public Permission(String name, String description) {
+	public Permission(String name, String permissionUri, String description) {
 		super();
 		this.name = name;
+		this.permissionUri = permissionUri;
 		this.description = description;
 	}
 	public String getName() {

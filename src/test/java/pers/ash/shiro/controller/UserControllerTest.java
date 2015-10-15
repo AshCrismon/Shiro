@@ -43,29 +43,32 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	@Test
 	public void testFindAllUsers() throws Exception {
 		String username = "测试用户-1";
-		String password = "123456";
+		String password = "000000";
 		login(username, password);
 		mockMvc.perform(
-				get("/controller/user/findAllUsers").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andDo(print());
+				get("/controller/user/findAllUsers").accept(
+						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andDo(print());
 	}
-	
-//	@Test
+
+	// @Test
 	public void testRolesAuthorization() throws Exception {
 		String username = "测试用户-2";
 		String password = "000000";
 		login(username, password);
 		mockMvc.perform(
-				get("/controller/user/findAllUsers").accept(MediaType.APPLICATION_JSON))
+				get("/controller/user/findAllUsers").accept(
+						MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized()).andDo(print());
 	}
 
 	// @Test
 	public void testFindRoles() throws Exception {
 		mockMvc.perform(
-				get("/controller/user/findRoles/5ae2baf4f2dd436b9395309a16a40816").accept(
-						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andDo(print());
+				get(
+						"/controller/user/findRoles/5ae2baf4f2dd436b9395309a16a40816")
+						.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andDo(print());
 	}
 
 	@Test
@@ -99,23 +102,23 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	// @Test
 	public void testDeleteUser() throws Exception {
 		mockMvc.perform(
-				delete("/controller/user/5ae2baf4f2dd436b9395309a16a40816").accept(
-						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andDo(print());
+				delete("/controller/user/5ae2baf4f2dd436b9395309a16a40816")
+						.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andDo(print());
 	}
 
-	@Test
+	// @Test
 	public void testFindUser() throws Exception {
 		mockMvc.perform(
-				get("/controller/user/5ae2baf4f2dd436b9395309a16a40816").accept(
-						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andDo(print());
+				get("/controller/user/5ae2baf4f2dd436b9395309a16a40816")
+						.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andDo(print());
 	}
 
 	@Test
 	public void testLogin() throws Exception {
 		String username = "测试用户-1";
-		String password = "123456";
+		String password = "000000";
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
 		try {
@@ -135,7 +138,8 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		String username = "测试用户-1";
 		String password = "123456";
 		mockMvc.perform(
-				post("/controller/user/admin/login.html").param("username", username)
+				post("/controller/user/admin/login.html")
+						.param("username", username)
 						.param("password", password)
 						.accept(MediaType.APPLICATION_JSON))
 				.andExpect(redirectedUrl("/user/admin/index.html"))
@@ -146,26 +150,18 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	// @Test
 	public void testPermissionFilter() {
 		String username = "测试用户-1";
-		String password = "123456";
+		String password = "000000";
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
 		subject.login(token);
 		Assert.assertTrue(subject.isAuthenticated());
 
-		String testPermission1 = "12a523b34db644e990a26410e6583382";
-		String testPermission2 = "7a41cde8ad224832aa4d3c0bf4052ea0";
-		String testPermission3 = "28dc0f19adac4451be22b76a457e721b";
-		String testPermission4 = "bc70c65dfa9e4e31adc2db08364b15f0";
-		String testPermission5 = "54a4d999420148c6a57b5a49e2a92686";
-
-		Assert.assertTrue(subject.isPermitted(testPermission1));
-		Assert.assertTrue(subject.isPermitted(testPermission2));
-		Assert.assertFalse(subject.isPermitted(testPermission3));
-		Assert.assertTrue(subject.isPermitted(testPermission4));
-		Assert.assertTrue(subject.isPermitted(testPermission5));
+		Assert.assertTrue(subject.isPermitted("/controller/user/findAllUsers"));
+		Assert.assertTrue(subject
+				.isPermitted("/controller/user/findRoles/4605b7597d4e41a0a6e90b8d6322ebb4"));
 	}
-	
-	public void login(String username, String password){
+
+	public void login(String username, String password) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
 		subject.login(token);

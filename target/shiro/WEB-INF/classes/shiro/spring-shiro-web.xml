@@ -54,7 +54,6 @@
 			<util:map>
 				<entry key="login" value-ref="loginFilter" />
 				<entry key="logout" value-ref="logoutFilter" />
-				<entry key="roles" value-ref="RolesAuthorizationFilter" />
 				<entry key="permissions" value-ref="PermissionsAuthorizationFilter" />
 			</util:map>
 		</property>
@@ -62,7 +61,7 @@
 			<value>
 				/admin/** = login
 				/logout.do = logout
-				/controller/** = login,roles[admin],permissions
+				/controller/** = login,permissions
 			</value>
 		</property>
 	</bean>
@@ -72,9 +71,6 @@
 
 	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 		<property name="redirectUrl" value="/admin/login.html" />
-	</bean>
-
-	<bean id="RolesAuthorizationFilter" class="pers.ash.shiro.base.filter.RolesAuthorizationFilter">
 	</bean>
 
 	<bean id="PermissionsAuthorizationFilter"

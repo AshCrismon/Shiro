@@ -3,6 +3,7 @@ package pers.ash.shiro.service;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.helper.ModelHelper;
@@ -16,14 +17,14 @@ public class PermissionServiceTest extends AbstractTransactionalConfig{
 	
 	@Test
 	public void testCreatePermission(){
-		Permission permission = new Permission("权限一", "测试用例-权限一");
+		Permission permission = new Permission("权限一", "/controller/user/test-x.do", "测试用例-权限一");
 		permissionService.createPermission(permission);
 		Assert.assertNotNull(permissionService.findByPermissionId(permission.getId()));
 	}
 	
 	@Test
 	public void testDeletePermission(){
-		Permission permission = new Permission("权限一", "测试用例-权限一");
+		Permission permission = new Permission("权限一", "/controller/user/test-x.do", "测试用例-权限一");
 		permissionService.createPermission(permission);
 		//锁定权限
 		ModelHelper.setState(ModelState.LOCKED);
@@ -44,14 +45,14 @@ public class PermissionServiceTest extends AbstractTransactionalConfig{
 	
 	@Test
 	public void testFindByPermissionId(){
-		Permission permission = new Permission("权限一", "测试用例-权限一");
+		Permission permission = new Permission("权限一", "/controller/user/test-x.do", "测试用例-权限一");
 		permissionService.createPermission(permission);
 		Assert.assertNotNull(permissionService.findByPermissionId(permission.getId()));
 	}
 	
 	@Test
 	public void testFindByPermissionName(){
-		Permission permission = new Permission("权限一", "测试用例-权限一");
+		Permission permission = new Permission("权限一", "/controller/user/test-x.do", "测试用例-权限一");
 		permissionService.createPermission(permission);
 		Assert.assertNotNull(permissionService.findByPermissionName(permission.getName()));
 	}

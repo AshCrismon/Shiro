@@ -27,8 +27,12 @@ public class PermissionsAuthorizationFilter extends AccessControlFilter {
 
 		String requestUri = request.getRequestURI();
 		String permissionUri = requestUri.substring(requestUri.indexOf("/", 1));
-
+		
 		boolean isPermitted = true;
+		if (subject.hasRole("admin")) { // 如果是超级管理员,直接通过,否则验证角色权限
+			return true;
+		}
+
 		if (permissionUri != null) {
 			if (!subject.isPermitted(permissionUri)) {
 				isPermitted = false;
@@ -46,7 +50,7 @@ public class PermissionsAuthorizationFilter extends AccessControlFilter {
 		renderMessage(response, "您不具有访问权限");
 		return false;
 	}
-
+	
 	private void renderMessage(HttpServletResponse response, String msg)
 			throws IOException {
 		response.setHeader("Content-type", "text/html;charset=UTF-8");

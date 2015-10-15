@@ -162,11 +162,11 @@ public class RoleMapperTest extends AbstractTransactionalConfig {
 	}
 
 	public void addPermissions() {
-		addPermission("测试权限-1", "测试用例-权限1");
-		addPermission("测试权限-2", "测试用例-权限2");
-		addPermission("测试权限-3", "测试用例-权限3");
-		addPermission("测试权限-4", "测试用例-权限4");
-		addPermission("测试权限-5", "测试用例-权限5");
+		addPermission("测试权限-1", "/controller/user/test-1.do", "测试用例-权限1");
+		addPermission("测试权限-2", "/controller/user/test-2.do", "测试用例-权限2");
+		addPermission("测试权限-3", "/controller/user/test-3.do", "测试用例-权限3");
+		addPermission("测试权限-4", "/controller/user/test-4.do", "测试用例-权限4");
+		addPermission("测试权限-5", "/controller/user/test-5.do", "测试用例-权限5");
 	}
 
 	public void correlationPermissions() {
@@ -197,9 +197,10 @@ public class RoleMapperTest extends AbstractTransactionalConfig {
 		roles.add(role);
 	}
 
-	public void addPermission(String name, String description) {
+	public void addPermission(String name, String permissionUri, String description) {
 		Permission permission = new Permission();
 		permission.setName(name);
+		permission.setPermissionUri(permissionUri);
 		permission.setDescription(description);
 		permissionMapper.add(permission);
 		permissions.add(permission);
