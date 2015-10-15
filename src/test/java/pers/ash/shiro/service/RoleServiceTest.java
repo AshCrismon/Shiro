@@ -3,6 +3,7 @@ package pers.ash.shiro.service;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.exception.DuplicationException;
@@ -14,6 +15,7 @@ public class RoleServiceTest extends AbstractTransactionalConfig{
 	private RoleService roleService;
 	
 	@Test
+//	@Rollback(false)
 	public void testCreateRole(){
 		Role role = new Role("角色1", "测试用例-角色1");
 		roleService.createRole(role);

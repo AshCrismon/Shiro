@@ -31,6 +31,8 @@ public interface UserMapper extends Mapper<User> {
 	
 	public List<String> findStringPermissions(String userId);
 	
+	public List<String> findPermissionUris(String userId);
+	
 	public UserVo findUserRoles(String userId);
 
 }

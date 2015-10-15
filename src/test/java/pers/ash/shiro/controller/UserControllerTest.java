@@ -36,19 +36,34 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	@Before
 	public void setup() throws Exception {
 		this.mockMvc = webAppContextSetup(wac).build();
+		SecurityUtils.setSecurityManager(securityManager);
+		subject = SecurityUtils.getSubject();
 	}
 
 	@Test
 	public void testFindAllUsers() throws Exception {
+		String username = "测试用户-1";
+		String password = "123456";
+		login(username, password);
 		mockMvc.perform(
-				get("/user/findAllUsers").accept(MediaType.APPLICATION_JSON))
+				get("/controller/user/findAllUsers").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andDo(print());
 	}
+	
+//	@Test
+	public void testRolesAuthorization() throws Exception {
+		String username = "测试用户-2";
+		String password = "000000";
+		login(username, password);
+		mockMvc.perform(
+				get("/controller/user/findAllUsers").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isUnauthorized()).andDo(print());
+	}
 
-	@Test
+	// @Test
 	public void testFindRoles() throws Exception {
 		mockMvc.perform(
-				get("/user/findRoles/5ae2baf4f2dd436b9395309a16a40816").accept(
+				get("/controller/user/findRoles/5ae2baf4f2dd436b9395309a16a40816").accept(
 						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(print());
 	}
@@ -57,13 +72,13 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	public void testCreateUser() throws Exception {
 		User user = new User(null, "xiaoxiao654321");
 		mockMvc.perform(
-				post("/user").accept(MediaType.APPLICATION_JSON)
+				post("/controller/user").accept(MediaType.APPLICATION_JSON)
 						.param("username", user.getUsername())
 						.param("password", "").param("email", user.getEmail()))
 				.andExpect(status().isInternalServerError()).andDo(print());
 	}
 
-	@Test
+	// @Test
 	public void testUpdateUser() throws Exception {
 		User user = new User();
 		user.setId("5ae2baf4f2dd436b9395309a16a40816");
@@ -72,7 +87,7 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		user.setEmail("xxhhyy@ww.com");
 		user.setPhone("14536784321");
 		mockMvc.perform(
-				put("/user").accept(MediaType.APPLICATION_JSON)
+				put("/controller/user").accept(MediaType.APPLICATION_JSON)
 						.param("id", user.getId())
 						.param("username", user.getUsername())
 						.param("password", user.getPassword())
@@ -81,10 +96,10 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 				.andExpect(status().isOk()).andDo(print());
 	}
 
-	@Test
+	// @Test
 	public void testDeleteUser() throws Exception {
 		mockMvc.perform(
-				delete("/user/5ae2baf4f2dd436b9395309a16a40816").accept(
+				delete("/controller/user/5ae2baf4f2dd436b9395309a16a40816").accept(
 						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(print());
 	}
@@ -92,15 +107,9 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 	@Test
 	public void testFindUser() throws Exception {
 		mockMvc.perform(
-				get("/user/5ae2baf4f2dd436b9395309a16a40816").accept(
+				get("/controller/user/5ae2baf4f2dd436b9395309a16a40816").accept(
 						MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(print());
-	}
-
-	@Before
-	public void init() {
-		SecurityUtils.setSecurityManager(securityManager);
-		subject = SecurityUtils.getSubject();
 	}
 
 	@Test
@@ -121,12 +130,12 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		Assert.assertTrue(subject.isAuthenticated());
 	}
 
-//	@Test
+	// @Test
 	public void testLogin2() throws Exception {
 		String username = "测试用户-1";
 		String password = "123456";
 		mockMvc.perform(
-				post("/user/admin/login.html").param("username", username)
+				post("/controller/user/admin/login.html").param("username", username)
 						.param("password", password)
 						.accept(MediaType.APPLICATION_JSON))
 				.andExpect(redirectedUrl("/user/admin/index.html"))
@@ -134,7 +143,7 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		Assert.assertTrue(subject.isAuthenticated());
 	}
 
-	@Test
+	// @Test
 	public void testPermissionFilter() {
 		String username = "测试用户-1";
 		String password = "123456";
@@ -155,4 +164,11 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		Assert.assertTrue(subject.isPermitted(testPermission4));
 		Assert.assertTrue(subject.isPermitted(testPermission5));
 	}
+	
+	public void login(String username, String password){
+		UsernamePasswordToken token = new UsernamePasswordToken(username,
+				password);
+		subject.login(token);
+	}
+
 }

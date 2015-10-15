@@ -146,6 +146,13 @@ public class UserServiceImpl implements UserService {
 		List<String> permissions = userMapper.findStringPermissions(userId);
 		return permissions == null ? Collections.<String>emptyList() : permissions;
 	}
+	
+	@Override
+	public List<String> findPermissionUris(String userId) {
+		testValidity(userId);
+		List<String> permissions = userMapper.findPermissionUris(userId);
+		return permissions == null ? Collections.<String>emptyList() : permissions;
+	}
 
 	/* =============================testValidity============================ */
 

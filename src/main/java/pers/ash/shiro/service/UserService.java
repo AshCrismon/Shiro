@@ -95,4 +95,6 @@ public interface UserService {
 	public List<Permission> findPermissions(String userId);
 	
 	public List<String> findStringPermissions(String userId);
+	
+	public List<String> findPermissionUris(String userId);
 }

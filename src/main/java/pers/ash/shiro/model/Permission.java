@@ -3,6 +3,7 @@ package pers.ash.shiro.model;
 public class Permission extends BaseModel{
 	
 	private String name;
+	private String permissionUri;
 	private String description;
 	
 	public Permission(){
@@ -19,6 +20,12 @@ public class Permission extends BaseModel{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getPermissionUri() {
+		return permissionUri;
+	}
+	public void setPermissionUri(String permissionUri) {
+		this.permissionUri = permissionUri;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -27,8 +34,8 @@ public class Permission extends BaseModel{
 	}
 	@Override
 	public String toString() {
-		return "Permission [name=" + name + ", description=" + description
-				+ ", id=" + id + ", state=" + state + "]";
+		return "Permission [name=" + name + ", permissionUri=" + permissionUri
+				+ ", description=" + description + ", state=" + state + "]";
 	}
 	
 }

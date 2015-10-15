@@ -191,6 +191,17 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 			Assert.assertEquals(25, permissions.size());
 		}
 	}
+	
+	@Test
+	public void testFindPermissionUris() {
+		correlationRoles();
+		correlationPermissions();
+		for (int i = 0; i < users.size(); i++) {
+			List<String> permissions = userMapper.findPermissionUris(users
+					.get(i).getId());
+			Assert.assertEquals(25, permissions.size());
+		}
+	}
 
 	@Test
 	public void testFindUserRole() {

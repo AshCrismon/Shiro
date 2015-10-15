@@ -70,7 +70,7 @@
 		ur.userId=#{userId}
 	</select>
 	<select id="findStringRoles" resultType="String">
-		SELECT r.id FROM
+		SELECT r.name FROM
 		shiro_user_role ur LEFT JOIN shiro_role r ON ur.roleId=r.id
 		WHERE
 		ur.userId=#{userId}
@@ -85,7 +85,15 @@
 		WHERE ur.userId=#{userId}
 	</select>
 	<select id="findStringPermissions" resultType="String">
-		SELECT p.id FROM
+		SELECT p.name FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId
+		LEFT JOIN shiro_role r ON r.id=rp.roleId
+		LEFT JOIN shiro_user_role ur ON ur.roleId=r.id
+		WHERE ur.userId=#{userId}
+	</select>
+	<select id="findPermissionUris" resultType="String">
+		SELECT p.permissionUri FROM
 		shiro_permission p
 		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId
 		LEFT JOIN shiro_role r ON r.id=rp.roleId

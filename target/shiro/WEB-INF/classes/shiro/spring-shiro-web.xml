@@ -8,26 +8,10 @@
 	<!-- ========================================【 会话管理器 】========================================== -->
 	<bean id="sessionManager"
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<property name="globalSessionTimeout" value="1800000" />
+		<property name="globalSessionTimeout" value="1800000" />	<!-- 会话有效时间：30分钟 -->
 		<property name="deleteInvalidSessions" value="true" />
-		<property name="sessionDAO" ref="sessionDAO" />
 		<property name="sessionIdCookieEnabled" value="true" />
-		<property name="sessionIdCookie" ref="sessionIdCookie" />
 	</bean>
-	
-	<bean id="sessionDAO"
-		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
-		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
-		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
-	</bean>
-	
-	 <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="sid"/>
-        <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="180000"/>
-    </bean>
-	
-	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 
 	<!-- ======================================【 Shiro安全管理器 】======================================= -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -45,11 +29,10 @@
 
 	<!-- ======================================【 Shiro realm】======================================== -->
 	<bean id="userRealm" class="pers.ash.shiro.realm.UserRealm">
-		<property name="cachingEnabled" value="true" />
-		<property name="authenticationCachingEnabled" value="true" />
-		<property name="authenticationCacheName" value="authenticationCache" />
-		<property name="authorizationCachingEnabled" value="true" />
-		<property name="authorizationCacheName" value="authorizationCache" />
+		<!-- <property name="cachingEnabled" value="true" /> <property name="authenticationCachingEnabled" 
+			value="true" /> <property name="authenticationCacheName" value="authenticationCache" 
+			/> <property name="authorizationCachingEnabled" value="true" /> <property 
+			name="authorizationCacheName" value="authorizationCache" /> -->
 	</bean>
 
 	<!-- =================================【基于Form表单的身份验证过滤器】==================================== -->
@@ -59,9 +42,6 @@
 		<property name="passwordParam" value="password" />
 	</bean>
 
-	<bean id="loginFilter" class="pers.ash.shiro.base.filter.LoginFilter">
-	</bean>
-	
 	<!-- =====================================【 Shiro安全控制入口点 】===================================== -->
 	<!-- ====================shiro filter先于springMvc的dispatcher和handlerMapping执行=================== -->
 
@@ -72,19 +52,44 @@
 		<property name="unauthorizedUrl" value="/unauthorized.html" />
 		<property name="filters">
 			<util:map>
-				<entry key="loginFilter" value-ref="loginFilter" />
+				<entry key="login" value-ref="loginFilter" />
+				<entry key="logout" value-ref="logoutFilter" />
+				<entry key="roles" value-ref="RolesAuthorizationFilter" />
+				<entry key="permissions" value-ref="PermissionsAuthorizationFilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
-				/** = loginFilter
-				/logout = logout
+				/admin/** = login
+				/logout.do = logout
+				/controller/** = login,roles[admin],permissions
 			</value>
 		</property>
+	</bean>
+
+	<bean id="loginFilter" class="pers.ash.shiro.base.filter.LoginFilter">
+	</bean>
+
+	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+		<property name="redirectUrl" value="/admin/login.html" />
+	</bean>
+
+	<bean id="RolesAuthorizationFilter" class="pers.ash.shiro.base.filter.RolesAuthorizationFilter">
+	</bean>
+
+	<bean id="PermissionsAuthorizationFilter"
+		class="pers.ash.shiro.base.filter.PermissionsAuthorizationFilter">
 	</bean>
 
 	<!-- ====================================【 Shiro生命周期处理器】======================================= -->
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- =====================================【 Shiro权限注解支持】======================================== -->
+
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
 
 </beans>

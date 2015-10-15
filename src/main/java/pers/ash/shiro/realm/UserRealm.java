@@ -43,7 +43,7 @@ public class UserRealm extends AuthorizingRealm {
 		Set<String> roles = new HashSet<String>(
 				userService.findStringRoles(userId));
 		Set<String> permissions = new HashSet<String>(
-				userService.findStringPermissions(userId));
+				userService.findPermissionUris(userId));
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.setRoles(roles);
 		authorizationInfo.setStringPermissions(permissions);
@@ -60,18 +60,21 @@ public class UserRealm extends AuthorizingRealm {
 		String password = String.valueOf((char[]) token.getCredentials());
 		User user = userService.findByUsername(username);
 		if (user == null) {
-			logger.error("用户名[" + username + "]没找到");
-			throw new UnknownAccountException();// 没找到帐号
+			String msg = "用户名[" + username + "]没找到";
+			logger.error(msg);
+			throw new UnknownAccountException(msg);// 没找到帐号
 		}
 		String hashedPassword = PasswordHelper
 				.encrypt(password, user.getSalt());
 		if (!user.getPassword().equals(hashedPassword)) {
-			logger.error("用户名和密码不匹配");
-			throw new IncorrectCredentialsException();
+			String msg = "用户名和密码不匹配";
+			logger.error(msg);
+			throw new IncorrectCredentialsException(msg);
 		}
 		if (ModelState.LOCKED.equals(user.getState())) {
-			logger.error("用户[" + username + "]被锁定");
-			throw new LockedAccountException(); // 帐号锁定
+			String msg = "用户[" + username + "]被锁定";
+			logger.error(msg);
+			throw new LockedAccountException(msg); // 帐号锁定
 		}
 
 		// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
