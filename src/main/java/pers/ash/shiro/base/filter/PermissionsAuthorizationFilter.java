@@ -25,16 +25,18 @@ public class PermissionsAuthorizationFilter extends AccessControlFilter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		Subject subject = getSubject(request, response);
 
-		String requestUri = request.getRequestURI();
-		String permissionUri = requestUri.substring(requestUri.indexOf("/", 1));
-		
+		String requestUri = request.getRequestURI();// 形式：/shiro/controller/user/findAllUsers
+		String requestMethod = request.getMethod();
+		String permissionUri = requestUri.substring(request.getContextPath().length());//获取：/controller/user/findAllUsers
+		String permission = permissionUri + ":" + requestMethod;
+
 		boolean isPermitted = true;
 		if (subject.hasRole("admin")) { // 如果是超级管理员,直接通过,否则验证角色权限
 			return true;
 		}
 
 		if (permissionUri != null) {
-			if (!subject.isPermitted(permissionUri)) {
+			if (!subject.isPermitted(permission)) {
 				isPermitted = false;
 			}
 		}
@@ -50,7 +52,7 @@ public class PermissionsAuthorizationFilter extends AccessControlFilter {
 		renderMessage(response, "您不具有访问权限");
 		return false;
 	}
-	
+
 	private void renderMessage(HttpServletResponse response, String msg)
 			throws IOException {
 		response.setHeader("Content-type", "text/html;charset=UTF-8");

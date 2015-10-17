@@ -23,8 +23,8 @@
 
 	<insert id="add" parameterType="Permission">
 		INSERT INTO
-		shiro_permission(id,name,permissionUri,description,state)
-		VALUES(#{id},#{name},#{permissionUri},#{description},#{state})
+		shiro_permission(id,name,permissionUri,requestAction,description,state)
+		VALUES(#{id},#{name},#{permissionUri},#{requestActio},#{description},#{state})
 	</insert>
 
 	<delete id="delete" parameterType="String">
@@ -39,7 +39,7 @@
 
 	<update id="update" parameterType="Permission">
 		UPDATE shiro_permission SET
-		name=#{name},description=#{description},state=#{state}
+		name=#{name},permissionUri=#{permissionUri},requestAction=#{requestAction},description=#{description},state=#{state}
 		WHERE
 		id=#{id}
 	</update>

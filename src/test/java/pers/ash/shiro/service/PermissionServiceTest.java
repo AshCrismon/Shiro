@@ -8,7 +8,7 @@ import org.springframework.test.annotation.Rollback;
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.helper.ModelHelper;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.Permission;
+import pers.ash.shiro.model.system.Permission;
 
 public class PermissionServiceTest extends AbstractTransactionalConfig{
 	

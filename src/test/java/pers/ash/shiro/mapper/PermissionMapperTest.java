@@ -11,7 +11,7 @@ import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.PermissionMapper;
-import pers.ash.shiro.model.Permission;
+import pers.ash.shiro.model.system.Permission;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

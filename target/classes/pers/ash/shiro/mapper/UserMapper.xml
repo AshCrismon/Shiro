@@ -100,7 +100,16 @@
 		LEFT JOIN shiro_user_role ur ON ur.roleId=r.id
 		WHERE ur.userId=#{userId}
 	</select>
-	<!-- ========================= 【 查询用户拥有的角色 】  ========================= -->
+	<select id="findAbsolutePermissions" resultType="String">
+		SELECT
+		CONCAT_WS(':',p.permissionUri,p.requestAction) FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId
+		LEFT JOIN shiro_role r ON r.id=rp.roleId
+		LEFT JOIN shiro_user_role ur ON ur.roleId=r.id
+		WHERE ur.userId=#{userId}
+	</select>
+	<!-- ========================= 【 查询用户拥有的角色 】 ========================= -->
 	<select id="findUserRoles" parameterType="String" resultMap="UserVo">
 		SELECT
 		u.id as user_id,

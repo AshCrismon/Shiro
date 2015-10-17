@@ -1,6 +1,7 @@
 package pers.ash.shiro.realm;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -21,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pers.ash.shiro.helper.PasswordHelper;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.system.User;
 import pers.ash.shiro.service.UserService;
 
 public class UserRealm extends AuthorizingRealm {
@@ -42,11 +43,11 @@ public class UserRealm extends AuthorizingRealm {
 		String userId = user.getId();
 		Set<String> roles = new HashSet<String>(
 				userService.findStringRoles(userId));
-		Set<String> permissions = new HashSet<String>(
-				userService.findPermissionUris(userId));
+		List<String> permissions = userService.findAbsolutePermissions(userId);
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.setRoles(roles);
-		authorizationInfo.setStringPermissions(permissions);
+		
+		authorizationInfo.setStringPermissions(new HashSet<String>(permissions));
 		return authorizationInfo;
 	}
 
@@ -84,14 +85,6 @@ public class UserRealm extends AuthorizingRealm {
 				ByteSource.Util.bytes(user.getSalt()), getName() // realm name
 		);
 		return authenticationInfo;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
 	}
 
 }

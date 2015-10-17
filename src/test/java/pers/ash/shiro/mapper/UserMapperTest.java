@@ -13,9 +13,9 @@ import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.helper.PasswordHelper;
 import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.mapper.UserMapper;
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
-import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
+import pers.ash.shiro.model.system.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.vo.UserVo;
 

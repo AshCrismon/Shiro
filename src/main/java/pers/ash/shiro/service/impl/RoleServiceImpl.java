@@ -13,8 +13,8 @@ import pers.ash.shiro.helper.ModelHelper;
 import pers.ash.shiro.mapper.PermissionMapper;
 import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
 import pers.ash.shiro.service.RoleService;
 import pers.ash.shiro.util.UUIDUtils;
 

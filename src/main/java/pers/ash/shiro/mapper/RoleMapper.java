@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
 
 public interface RoleMapper extends Mapper<Role> {
 

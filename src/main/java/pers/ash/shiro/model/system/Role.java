@@ -1,7 +1,12 @@
-package pers.ash.shiro.model;
+package pers.ash.shiro.model.system;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import pers.ash.shiro.model.BaseModel;
 
 public class Role extends BaseModel{
 	
+	@NotBlank(message = "{error.role.name.blank}")
 	private String name;
 	private String description;
 	

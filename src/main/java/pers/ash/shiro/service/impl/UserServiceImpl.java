@@ -18,9 +18,9 @@ import pers.ash.shiro.helper.PasswordHelper;
 import pers.ash.shiro.mapper.RoleMapper;
 import pers.ash.shiro.mapper.UserMapper;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
-import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
+import pers.ash.shiro.model.system.User;
 import pers.ash.shiro.service.UserService;
 import pers.ash.shiro.util.UUIDUtils;
 import pers.ash.shiro.vo.UserVo;
@@ -151,6 +151,13 @@ public class UserServiceImpl implements UserService {
 	public List<String> findPermissionUris(String userId) {
 		testValidity(userId);
 		List<String> permissions = userMapper.findPermissionUris(userId);
+		return permissions == null ? Collections.<String>emptyList() : permissions;
+	}
+	
+	@Override
+	public List<String> findAbsolutePermissions(String userId) {
+		testValidity(userId);
+		List<String> permissions = userMapper.findAbsolutePermissions(userId);
 		return permissions == null ? Collections.<String>emptyList() : permissions;
 	}
 

@@ -1,10 +1,11 @@
-package pers.ash.shiro.model;
+package pers.ash.shiro.model.system;
 
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import pers.ash.shiro.model.BaseModel;
 import pers.ash.shiro.util.DateUtils;
 
 public class User extends BaseModel {

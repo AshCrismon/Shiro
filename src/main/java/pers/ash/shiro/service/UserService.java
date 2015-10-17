@@ -3,9 +3,9 @@ package pers.ash.shiro.service;
 import java.util.List;
 
 import pers.ash.shiro.exception.DuplicationException;
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
-import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
+import pers.ash.shiro.model.system.User;
 import pers.ash.shiro.vo.UserVo;
 
 public interface UserService {
@@ -97,4 +97,6 @@ public interface UserService {
 	public List<String> findStringPermissions(String userId);
 	
 	public List<String> findPermissionUris(String userId);
+	
+	public List<String> findAbsolutePermissions(String userId);
 }

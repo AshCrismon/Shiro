@@ -2,7 +2,7 @@ package pers.ash.shiro.service;
 
 import java.util.List;
 
-import pers.ash.shiro.model.Role;
+import pers.ash.shiro.model.system.Role;
 
 public interface RoleService {
 	

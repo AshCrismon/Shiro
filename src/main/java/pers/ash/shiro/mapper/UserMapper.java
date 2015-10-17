@@ -5,9 +5,9 @@ import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
-import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
+import pers.ash.shiro.model.system.User;
 import pers.ash.shiro.vo.UserVo;
 
 public interface UserMapper extends Mapper<User> {
@@ -32,6 +32,8 @@ public interface UserMapper extends Mapper<User> {
 	public List<String> findStringPermissions(String userId);
 	
 	public List<String> findPermissionUris(String userId);
+	
+	public List<String> findAbsolutePermissions(String userId);
 	
 	public UserVo findUserRoles(String userId);
 

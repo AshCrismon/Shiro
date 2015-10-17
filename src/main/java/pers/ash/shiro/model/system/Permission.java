@@ -1,9 +1,17 @@
-package pers.ash.shiro.model;
+package pers.ash.shiro.model.system;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import pers.ash.shiro.model.BaseModel;
 
 public class Permission extends BaseModel{
 	
+	@NotBlank(message = "{error.permission.name.blank}")
 	private String name;
+	@NotBlank(message = "{error.permission.permissionUri.blank}")
 	private String permissionUri;
+	private String requestAction;
+	private final String DEFAULT_REQUEST_ACTION = "get";
 	private String description;
 	
 	public Permission(){
@@ -13,6 +21,7 @@ public class Permission extends BaseModel{
 		super();
 		this.name = name;
 		this.permissionUri = permissionUri;
+		this.requestAction = DEFAULT_REQUEST_ACTION;
 		this.description = description;
 	}
 	public String getName() {
@@ -27,6 +36,13 @@ public class Permission extends BaseModel{
 	public void setPermissionUri(String permissionUri) {
 		this.permissionUri = permissionUri;
 	}
+	
+	public String getRequestAction() {
+		return requestAction;
+	}
+	public void setRequestAction(String requestAction) {
+		this.requestAction = requestAction;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -36,7 +52,7 @@ public class Permission extends BaseModel{
 	@Override
 	public String toString() {
 		return "Permission [name=" + name + ", permissionUri=" + permissionUri
-				+ ", description=" + description + ", state=" + state + "]";
+				+ ", requestAction=" + requestAction + ", description="
+				+ description + ", state=" + state + "]";
 	}
-	
 }

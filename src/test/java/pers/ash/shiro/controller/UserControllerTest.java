@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
-import pers.ash.shiro.model.User;
+import pers.ash.shiro.model.system.User;
 
 @WebAppConfiguration
 public class UserControllerTest extends AbstractTransactionalConfig {
@@ -147,7 +147,7 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		Assert.assertTrue(subject.isAuthenticated());
 	}
 
-	// @Test
+	@Test
 	public void testPermissionFilter() {
 		String username = "测试用户-1";
 		String password = "000000";
@@ -156,9 +156,9 @@ public class UserControllerTest extends AbstractTransactionalConfig {
 		subject.login(token);
 		Assert.assertTrue(subject.isAuthenticated());
 
-		Assert.assertTrue(subject.isPermitted("/controller/user/findAllUsers"));
-		Assert.assertTrue(subject
-				.isPermitted("/controller/user/findRoles/4605b7597d4e41a0a6e90b8d6322ebb4"));
+		Assert.assertTrue(subject.isPermitted("/controller/user/findAllUsers:get"));
+//		Assert.assertTrue(subject
+//				.isPermitted("/controller/user/findRoles/4605b7597d4e41a0a6e90b8d6322ebb4"));
 	}
 
 	public void login(String username, String password) {

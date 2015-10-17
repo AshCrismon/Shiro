@@ -2,8 +2,8 @@ package pers.ash.shiro.vo;
 
 import java.util.List;
 
-import pers.ash.shiro.model.Permission;
-import pers.ash.shiro.model.Role;
+import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.system.Role;
 
 
 public class RoleVo extends Role {
