@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="MysqlTables" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/shiro" userId="root"
+			password="xsscd">
+		</jdbcConnection>
+
+		<!-- the default Java type resolver will attempt to make JDBC DECIMAL and 
+			NUMERIC types easier to work with by substituting Integral types if possible -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="pers.ash.shiro.model"
+			targetProject="D:\My Documents\Git\shiro\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="pers.ash.shiro.mapper"
+			targetProject="D:\My Documents\Git\shiro\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="pers.ash.shiro.mapper" targetProject="D:\My Documents\Git\shiro\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table schema="shiro" tableName="shiro_draft" domainObjectName="draft.Draft">
+			<property name="useActualColumnNames" value="true"></property>
+		</table>
+		<table schema="shiro" tableName="shiro_raw_draft"
+			domainObjectName="draft.RawDraft">
+			<property name="useActualColumnNames" value="true"></property>
+		</table>
+		<table schema="shiro" tableName="shiro_attachment"
+			domainObjectName="draft.Attachment">
+			<property name="useActualColumnNames" value="true"></property>
+		</table>
+		<table schema="shiro" tableName="shiro_audit_record"
+			domainObjectName="draft.AuditRecord">
+			<property name="useActualColumnNames" value="true"></property>
+		</table>
+
+	</context>
+</generatorConfiguration>

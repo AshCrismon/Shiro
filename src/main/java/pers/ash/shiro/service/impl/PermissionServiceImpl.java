@@ -10,7 +10,7 @@ import com.alibaba.druid.util.StringUtils;
 import pers.ash.shiro.exception.DuplicationException;
 import pers.ash.shiro.exception.EntityNotFoundException;
 import pers.ash.shiro.helper.ModelHelper;
-import pers.ash.shiro.mapper.PermissionMapper;
+import pers.ash.shiro.mapper.system.PermissionMapper;
 import pers.ash.shiro.model.ModelState;
 import pers.ash.shiro.model.system.Permission;
 import pers.ash.shiro.service.PermissionService;
