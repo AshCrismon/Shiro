@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.mapper.system.UserMapper;
-import pers.ash.shiro.model.DraftState;
 import pers.ash.shiro.model.draft.Draft;
 import pers.ash.shiro.model.draft.DraftExample;
+import pers.ash.shiro.model.draft.state.DraftState;
 import pers.ash.shiro.model.system.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.util.UUIDUtils;
@@ -33,7 +33,7 @@ public class DraftMapperTest extends AbstractTransactionalConfig {
 	@Test //条件查询
 	public void testCountByExample() {
 		DraftExample draftExample = new DraftExample();
-		draftExample.createCriteria().andCurrentStateEqualTo(DraftState.DRAFTING.name());
+		draftExample.createCriteria().andCurrentStateEqualTo(DraftState.Drafting.name());
 		Assert.assertEquals(6, draftMapper.countByExample(draftExample));
 	}
 
@@ -53,7 +53,7 @@ public class DraftMapperTest extends AbstractTransactionalConfig {
 		draft.setId(UUIDUtils.createUUID());
 		draft.setTitle("测试用例-文稿标题一");
 		draft.setAuditorId("b8a3a9c5ed554c7089300afa92e4f90a");
-		draft.setCurrentState(DraftState.DRAFTING.name());
+		draft.setCurrentState(DraftState.Drafting.name());
 		draft.setReadTag(1);
 		draft.setCreateDate(DateUtils.now());
 		draft.setLastUpdateDate(DateUtils.now());
@@ -73,12 +73,15 @@ public class DraftMapperTest extends AbstractTransactionalConfig {
 
 	@Test
 	public void testSelectByExample() {
-		fail("Not yet implemented");
+		DraftExample draftExample = new DraftExample();
+		draftExample.createCriteria().andAuthorIdEqualTo("xxxxx");
+		List<Draft> drafts = draftMapper.selectByExample(draftExample);
 	}
 
 	@Test
 	public void testSelectByPrimaryKey() {
-		fail("Not yet implemented");
+		Draft draft = draftMapper.selectByPrimaryKey(null);
+		Assert.assertNull(draft);
 	}
 
 	@Test
@@ -115,17 +118,17 @@ public class DraftMapperTest extends AbstractTransactionalConfig {
 		List<User> users = userMapper.findAll();
 		for (int i = 0; i < users.size(); i++) {
 			addDraft("测试用例-文稿标题" + i + 1, users.get(i).getId(),
-					DraftState.DRAFTING.name(), 1);
+					DraftState.Drafting.name(), 1);
 		}
 	}
 
-	public void addDraft(String title, String auditorId, String currentState,
+	public void addDraft(String title, String authorId, String currentState,
 			int readTag) {
 		Draft draft = new Draft();
 		draft.setId(UUIDUtils.createUUID());
 		draft.setTitle(title);
-		draft.setAuditorId(auditorId);
-		draft.setCurrentState(DraftState.DRAFTING.name());
+		draft.setAuthorId(authorId);
+		draft.setCurrentState(DraftState.Drafting.name());
 		draft.setReadTag(1);
 		draft.setCreateDate(DateUtils.now());
 		draft.setLastUpdateDate(DateUtils.now());

@@ -314,6 +314,76 @@ public class DraftExample {
             return (Criteria) this;
         }
 
+        public Criteria andAuthorIdIsNull() {
+            addCriterion("authorId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdIsNotNull() {
+            addCriterion("authorId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdEqualTo(String value) {
+            addCriterion("authorId =", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdNotEqualTo(String value) {
+            addCriterion("authorId <>", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdGreaterThan(String value) {
+            addCriterion("authorId >", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdGreaterThanOrEqualTo(String value) {
+            addCriterion("authorId >=", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdLessThan(String value) {
+            addCriterion("authorId <", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdLessThanOrEqualTo(String value) {
+            addCriterion("authorId <=", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdLike(String value) {
+            addCriterion("authorId like", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdNotLike(String value) {
+            addCriterion("authorId not like", value, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdIn(List<String> values) {
+            addCriterion("authorId in", values, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdNotIn(List<String> values) {
+            addCriterion("authorId not in", values, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdBetween(String value1, String value2) {
+            addCriterion("authorId between", value1, value2, "authorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthorIdNotBetween(String value1, String value2) {
+            addCriterion("authorId not between", value1, value2, "authorId");
+            return (Criteria) this;
+        }
+
         public Criteria andAuditorIdIsNull() {
             addCriterion("auditorId is null");
             return (Criteria) this;

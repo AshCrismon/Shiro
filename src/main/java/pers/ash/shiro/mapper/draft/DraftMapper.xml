@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="authorId" property="authorId" jdbcType="VARCHAR" />
     <result column="auditorId" property="auditorId" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="createDate" property="createDate" jdbcType="VARCHAR" />
@@ -74,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, number, auditorId, remark, createDate, lastUpdateDate, currentState, readTag
+    id, title, number, authorId, auditorId, remark, createDate, lastUpdateDate, currentState, 
+    readTag
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -129,13 +131,13 @@
   </delete>
   <insert id="insert" parameterType="pers.ash.shiro.model.draft.Draft" >
     insert into shiro_draft (id, title, number, 
-      auditorId, remark, createDate, 
-      lastUpdateDate, currentState, readTag, 
-      content)
+      authorId, auditorId, remark, 
+      createDate, lastUpdateDate, currentState, 
+      readTag, content)
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
-      #{auditorId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
-      #{lastUpdateDate,jdbcType=VARCHAR}, #{currentState,jdbcType=VARCHAR}, #{readTag,jdbcType=INTEGER}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{authorId,jdbcType=VARCHAR}, #{auditorId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=VARCHAR}, #{currentState,jdbcType=VARCHAR}, 
+      #{readTag,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="pers.ash.shiro.model.draft.Draft" >
     insert into shiro_draft
@@ -148,6 +150,9 @@
       </if>
       <if test="number != null" >
         number,
+      </if>
+      <if test="authorId != null" >
+        authorId,
       </if>
       <if test="auditorId != null" >
         auditorId,
@@ -180,6 +185,9 @@
       </if>
       <if test="number != null" >
         #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=VARCHAR},
       </if>
       <if test="auditorId != null" >
         #{auditorId,jdbcType=VARCHAR},
@@ -222,6 +230,9 @@
       <if test="record.number != null" >
         number = #{record.number,jdbcType=VARCHAR},
       </if>
+      <if test="record.authorId != null" >
+        authorId = #{record.authorId,jdbcType=VARCHAR},
+      </if>
       <if test="record.auditorId != null" >
         auditorId = #{record.auditorId,jdbcType=VARCHAR},
       </if>
@@ -253,6 +264,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
+      authorId = #{record.authorId,jdbcType=VARCHAR},
       auditorId = #{record.auditorId,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       createDate = #{record.createDate,jdbcType=VARCHAR},
@@ -269,6 +281,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
+      authorId = #{record.authorId,jdbcType=VARCHAR},
       auditorId = #{record.auditorId,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       createDate = #{record.createDate,jdbcType=VARCHAR},
@@ -287,6 +300,9 @@
       </if>
       <if test="number != null" >
         number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        authorId = #{authorId,jdbcType=VARCHAR},
       </if>
       <if test="auditorId != null" >
         auditorId = #{auditorId,jdbcType=VARCHAR},
@@ -316,6 +332,7 @@
     update shiro_draft
     set title = #{title,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
+      authorId = #{authorId,jdbcType=VARCHAR},
       auditorId = #{auditorId,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=VARCHAR},
@@ -329,6 +346,7 @@
     update shiro_draft
     set title = #{title,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
+      authorId = #{authorId,jdbcType=VARCHAR},
       auditorId = #{auditorId,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=VARCHAR},

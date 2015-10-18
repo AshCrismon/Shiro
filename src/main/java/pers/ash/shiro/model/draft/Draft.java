@@ -1,11 +1,13 @@
 package pers.ash.shiro.model.draft;
 
-public class Draft {
+public class Draft{
     private String id;
 
     private String title;
 
     private String number;
+
+    private String authorId;
 
     private String auditorId;
 
@@ -43,6 +45,14 @@ public class Draft {
 
     public void setNumber(String number) {
         this.number = number == null ? null : number.trim();
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId == null ? null : authorId.trim();
     }
 
     public String getAuditorId() {

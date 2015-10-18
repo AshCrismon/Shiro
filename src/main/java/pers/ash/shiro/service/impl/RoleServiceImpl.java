@@ -168,12 +168,5 @@ public class RoleServiceImpl implements RoleService {
 		}
 	}
 	/* =======================setters and getters======================= */
-	public RoleMapper getRoleMapper() {
-		return roleMapper;
-	}
-
-	public void setRoleMapper(RoleMapper roleMapper) {
-		this.roleMapper = roleMapper;
-	}
 
 }
