@@ -5,6 +5,10 @@ import java.util.Arrays;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 import pers.ash.shiro.exception.CommitForAuditException;
 import pers.ash.shiro.model.draft.Attachment;
@@ -103,6 +107,7 @@ public abstract class AbstractDraftStateHandler {
 					.setAuditState(getCommittedNextState(draftVo.getCommitType()));
 			auditRecordService.addAuditRecord(auditRecord);
 		}
+
 	}
 
 	public abstract String[] getValidCommitTypes(); // 特定文稿状态所能提交的类型,返回1,2,3,4,5

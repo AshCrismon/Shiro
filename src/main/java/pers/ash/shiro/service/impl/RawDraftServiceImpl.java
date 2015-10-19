@@ -16,11 +16,11 @@ public class RawDraftServiceImpl implements RawDraftService {
 
 	@Autowired
 	private RawDraftMapper rawDraftMapper;
-	
+
 	@Override
 	public void addRawDraft(RawDraft rawDraft) {
 		testValidity(rawDraft);
-		if(null == rawDraft.getId()){
+		if (null == rawDraft.getId()) {
 			rawDraft.setId(UUIDUtils.createUUID());
 		}
 		rawDraftMapper.insert(rawDraft);
@@ -39,10 +39,11 @@ public class RawDraftServiceImpl implements RawDraftService {
 	@Override
 	public void saveOrUpdate(RawDraft rawDraft) {
 		testValidity(rawDraft);
-		if(null == rawDraft.getId() || null == rawDraftMapper.selectByPrimaryKey(rawDraft.getId())){
+		if (null == rawDraft.getId()
+				|| null == rawDraftMapper.selectByPrimaryKey(rawDraft.getId())) {
 			rawDraft.setId(UUIDUtils.createUUID());
 			rawDraftMapper.insert(rawDraft);
-		}else{
+		} else {
 			rawDraftMapper.updateByPrimaryKey(rawDraft);
 		}
 	}
@@ -51,18 +52,18 @@ public class RawDraftServiceImpl implements RawDraftService {
 	public RawDraft findRawDraftByRawDraftId(String rawDraftId) {
 		return rawDraftMapper.selectByPrimaryKey(rawDraftId);
 	}
-	
+
 	@Override
 	public RawDraft findRawDraftByDraftId(String draftId) {
 		RawDraftExample rawDraftExample = new RawDraftExample();
 		rawDraftExample.createCriteria().andDraftIdEqualTo(draftId);
-		List<RawDraft> rawDrafts = rawDraftMapper.selectByExample(rawDraftExample);
+		List<RawDraft> rawDrafts = rawDraftMapper
+				.selectByExample(rawDraftExample);
 		return !rawDrafts.isEmpty() ? rawDrafts.get(0) : null;
 	}
 
-	
-	public void testValidity(RawDraft rawDraft){
-		if(null == rawDraft){
+	public void testValidity(RawDraft rawDraft) {
+		if (null == rawDraft) {
 			return;
 		}
 	}
