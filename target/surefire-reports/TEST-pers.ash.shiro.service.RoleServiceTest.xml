@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.078" errors="0" skipped="0" tests="2" name="pers.ash.shiro.service.RoleServiceTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="D:\softwares\dev\env\java\jdk1.7.0_76\jre\bin"/>
+    <property name="java.vm.version" value="24.76-b04"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\My Documents\Git\shiro"/>
+    <property name="java.runtime.version" value="1.7.0_76-b13"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="basedir" value="D:\My Documents\Git\shiro"/>
+    <property name="java.endorsed.dirs" value="D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="surefire.real.class.path" value="D:\My Documents\Git\shiro\target\surefire\surefirebooter1092047866471755968.jar"/>
+    <property name="java.io.tmpdir" value="C:\Users\IT\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="D:\softwares\dev\env\java\jdk1.7.0_76\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\softwares\dev\env\java\jdk1.7.0_76\bin;D:\softwares\dev\env\scaLa\bin;D:\softwares\dev\env\Apache24\bin;D:\softwares\dev\env\apache-maven-3.2.5\bin;D:\softwares\dev\env\apache-ant-1.9.4\bin;C:\Program Files\MySQL\MySQL Server 5.5\bin;D:\softwares\apps\UltraCompare\;D:\softwares\dev\remote\ssh;C:\Program Files (x86)\DBank\ClickUp;."/>
+    <property name="surefire.test.class.path" value="D:\My Documents\Git\shiro\target\test-classes;D:\My Documents\Git\shiro\target\classes;D:\My Documents\Maven\Repository\junit\junit\4.12\junit-4.12.jar;D:\My Documents\Maven\Repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;D:\My Documents\Maven\Repository\org\apache\shiro\shiro-core\1.2.4\shiro-core-1.2.4.jar;D:\My Documents\Maven\Repository\commons-beanutils\commons-beanutils\1.8.3\commons-beanutils-1.8.3.jar;D:\My Documents\Maven\Repository\org\apache\shiro\shiro-spring\1.2.4\shiro-spring-1.2.4.jar;D:\My Documents\Maven\Repository\org\apache\shiro\shiro-web\1.2.4\shiro-web-1.2.4.jar;D:\My Documents\Maven\Repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;D:\My Documents\Maven\Repository\org\springframework\spring-webmvc\3.2.14.RELEASE\spring-webmvc-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-beans\3.2.14.RELEASE\spring-beans-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-context\3.2.14.RELEASE\spring-context-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-aop\3.2.14.RELEASE\spring-aop-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;D:\My Documents\Maven\Repository\org\springframework\spring-core\3.2.14.RELEASE\spring-core-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-expression\3.2.14.RELEASE\spring-expression-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-web\3.2.14.RELEASE\spring-web-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-jdbc\3.2.14.RELEASE\spring-jdbc-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-tx\3.2.14.RELEASE\spring-tx-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-test\3.2.14.RELEASE\spring-test-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\aspectj\aspectjweaver\1.8.7\aspectjweaver-1.8.7.jar;D:\My Documents\Maven\Repository\org\hibernate\hibernate-validator\4.1.0.Final\hibernate-validator-4.1.0.Final.jar;D:\My Documents\Maven\Repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar;D:\My Documents\Maven\Repository\org\mybatis\mybatis\3.2.8\mybatis-3.2.8.jar;D:\My Documents\Maven\Repository\org\mybatis\mybatis-spring\1.2.3\mybatis-spring-1.2.3.jar;D:\My Documents\Maven\Repository\com\github\pagehelper\pagehelper\4.0.0\pagehelper-4.0.0.jar;D:\My Documents\Maven\Repository\com\github\jsqlparser\jsqlparser\0.9.1\jsqlparser-0.9.1.jar;D:\My Documents\Maven\Repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar;D:\My Documents\Maven\Repository\com\alibaba\druid\1.0.15\druid-1.0.15.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\..\lib\jconsole.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\..\lib\tools.jar;D:\My Documents\Maven\Repository\org\slf4j\slf4j-api\1.7.7\slf4j-api-1.7.7.jar;D:\My Documents\Maven\Repository\org\slf4j\slf4j-log4j12\1.7.7\slf4j-log4j12-1.7.7.jar;D:\My Documents\Maven\Repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;D:\My Documents\Maven\Repository\org\apache\commons\commons-lang3\3.1\commons-lang3-3.1.jar;D:\My Documents\Maven\Repository\org\codehaus\jackson\jackson-core-asl\1.9.13\jackson-core-asl-1.9.13.jar;D:\My Documents\Maven\Repository\org\codehaus\jackson\jackson-mapper-asl\1.9.13\jackson-mapper-asl-1.9.13.jar;D:\My Documents\Maven\Repository\org\json\json\20140107\json-20140107.jar;D:\My Documents\Maven\Repository\javax\persistence\persistence-api\1.0.2\persistence-api-1.0.2.jar;D:\My Documents\Maven\Repository\org\springframework\spring-oxm\4.2.1.RELEASE\spring-oxm-4.2.1.RELEASE.jar;D:\My Documents\Git\shiro\WebContent\WEB-INF\lib\servlet-api.jar;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\IT"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="user.name" value="hadoop"/>
+    <property name="java.class.path" value="D:\My Documents\Git\shiro\target\test-classes;D:\My Documents\Git\shiro\target\classes;D:\My Documents\Maven\Repository\junit\junit\4.12\junit-4.12.jar;D:\My Documents\Maven\Repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;D:\My Documents\Maven\Repository\org\apache\shiro\shiro-core\1.2.4\shiro-core-1.2.4.jar;D:\My Documents\Maven\Repository\commons-beanutils\commons-beanutils\1.8.3\commons-beanutils-1.8.3.jar;D:\My Documents\Maven\Repository\org\apache\shiro\shiro-spring\1.2.4\shiro-spring-1.2.4.jar;D:\My Documents\Maven\Repository\org\apache\shiro\shiro-web\1.2.4\shiro-web-1.2.4.jar;D:\My Documents\Maven\Repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;D:\My Documents\Maven\Repository\org\springframework\spring-webmvc\3.2.14.RELEASE\spring-webmvc-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-beans\3.2.14.RELEASE\spring-beans-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-context\3.2.14.RELEASE\spring-context-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-aop\3.2.14.RELEASE\spring-aop-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;D:\My Documents\Maven\Repository\org\springframework\spring-core\3.2.14.RELEASE\spring-core-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-expression\3.2.14.RELEASE\spring-expression-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-web\3.2.14.RELEASE\spring-web-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-jdbc\3.2.14.RELEASE\spring-jdbc-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-tx\3.2.14.RELEASE\spring-tx-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\springframework\spring-test\3.2.14.RELEASE\spring-test-3.2.14.RELEASE.jar;D:\My Documents\Maven\Repository\org\aspectj\aspectjweaver\1.8.7\aspectjweaver-1.8.7.jar;D:\My Documents\Maven\Repository\org\hibernate\hibernate-validator\4.1.0.Final\hibernate-validator-4.1.0.Final.jar;D:\My Documents\Maven\Repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar;D:\My Documents\Maven\Repository\org\mybatis\mybatis\3.2.8\mybatis-3.2.8.jar;D:\My Documents\Maven\Repository\org\mybatis\mybatis-spring\1.2.3\mybatis-spring-1.2.3.jar;D:\My Documents\Maven\Repository\com\github\pagehelper\pagehelper\4.0.0\pagehelper-4.0.0.jar;D:\My Documents\Maven\Repository\com\github\jsqlparser\jsqlparser\0.9.1\jsqlparser-0.9.1.jar;D:\My Documents\Maven\Repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar;D:\My Documents\Maven\Repository\com\alibaba\druid\1.0.15\druid-1.0.15.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\..\lib\jconsole.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\..\lib\tools.jar;D:\My Documents\Maven\Repository\org\slf4j\slf4j-api\1.7.7\slf4j-api-1.7.7.jar;D:\My Documents\Maven\Repository\org\slf4j\slf4j-log4j12\1.7.7\slf4j-log4j12-1.7.7.jar;D:\My Documents\Maven\Repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;D:\My Documents\Maven\Repository\org\apache\commons\commons-lang3\3.1\commons-lang3-3.1.jar;D:\My Documents\Maven\Repository\org\codehaus\jackson\jackson-core-asl\1.9.13\jackson-core-asl-1.9.13.jar;D:\My Documents\Maven\Repository\org\codehaus\jackson\jackson-mapper-asl\1.9.13\jackson-mapper-asl-1.9.13.jar;D:\My Documents\Maven\Repository\org\json\json\20140107\json-20140107.jar;D:\My Documents\Maven\Repository\javax\persistence\persistence-api\1.0.2\persistence-api-1.0.2.jar;D:\My Documents\Maven\Repository\org\springframework\spring-oxm\4.2.1.RELEASE\spring-oxm-4.2.1.RELEASE.jar;D:\My Documents\Git\shiro\WebContent\WEB-INF\lib\servlet-api.jar;"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="D:\softwares\dev\env\java\jdk1.7.0_76\jre"/>
+    <property name="sun.java.command" value="D:\My Documents\Git\shiro\target\surefire\surefirebooter1092047866471755968.jar D:\My Documents\Git\shiro\target\surefire\surefire3267530685667748330tmp D:\My Documents\Git\shiro\target\surefire\surefire1763145294580746458tmp"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_76"/>
+    <property name="java.ext.dirs" value="D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\resources.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\rt.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\sunrsasign.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\jsse.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\jce.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\charsets.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\lib\jfr.jar;D:\softwares\dev\env\java\jdk1.7.0_76\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="localRepository" value="D:\My Documents\Maven\Repository"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase time="0.047" classname="pers.ash.shiro.service.RoleServiceTest" name="testCreateRole2"/>
+  <testcase time="0.031" classname="pers.ash.shiro.service.RoleServiceTest" name="testCreateRole"/>
+</testsuite>
