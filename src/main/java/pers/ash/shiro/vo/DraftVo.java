@@ -1,7 +1,7 @@
 package pers.ash.shiro.vo;
 
-import pers.ash.shiro.model.draft.Attachment;
-import pers.ash.shiro.model.draft.Draft;
+import pers.ash.shiro.model.draftaudit.Attachment;
+import pers.ash.shiro.model.draftaudit.Draft;
 
 public class DraftVo extends Draft {
 

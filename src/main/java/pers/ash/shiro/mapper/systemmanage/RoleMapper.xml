@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.ash.shiro.mapper.systemmanage.RoleMapper">
+
+	<!-- ========================== 【 基本增删改查 】  =========================== -->
+	<select id="findById" parameterType="String"
+		resultType="Role">
+		SELECT * FROM shiro_role WHERE id=#{id}
+	</select>
+	
+	<select id="findByRoleName" parameterType="String"
+		resultType="Role">
+		SELECT * FROM shiro_role r WHERE r.name=#{roleName}	
+	</select>
+
+	<select id="findAll" parameterType="String"
+		resultType="Role">
+		SELECT * FROM shiro_role
+	</select>
+
+	<insert id="add" parameterType="Role">
+		INSERT INTO
+		shiro_role(id,name,description,state)
+		VALUES(#{id},#{name},#{description},#{state})
+	</insert>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM shiro_role WHERE
+		id=#{id}
+	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM shiro_role
+	</delete>
+
+	<update id="update" parameterType="Role">
+		UPDATE shiro_role SET
+		name=#{name},description=#{description},state=#{state}
+		WHERE id=#{id}
+	</update>
+	<!-- ================================================================== -->
+
+	<!-- ========================= 【 给一个角色分配权限 】 ======================== -->
+	<insert id="correlationPermission">
+		INSERT INTO
+		shiro_role_permission(roleId,permissionId)
+		VALUES(#{roleId},#{permissionId})
+	</insert>
+	<!-- ========================= 【 给一个角色取消权限 】 ======================== -->
+	<delete id="uncorrelationPermission">
+		DELETE FROM
+		shiro_role_permission
+		WHERE
+		roleId=#{roleId} AND permissionId=#{permissionId}
+	</delete>
+	<!-- ======================== 【 查询一个角色的某个权限 】 ======================= -->
+	<select id="findRolePermission" resultType="Permission">
+		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
+		rp.roleId=#{roleId} AND p.id=#{permissionId}
+	</select>
+	<!-- ======================== 【 查询一个角色的所有权限 】 ======================= -->
+	<select id="findPermissions" resultType="Permission">
+		SELECT p.* FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
+		rp.roleId=#{roleId}
+	</select>
+	<select id="findStringPermissions" resultType="String">
+		SELECT p.id FROM
+		shiro_permission p
+		LEFT JOIN shiro_role_permission rp ON p.id=rp.permissionId WHERE
+		rp.roleId=#{roleId}
+	</select>
+</mapper>

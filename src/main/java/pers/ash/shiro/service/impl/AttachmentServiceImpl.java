@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pers.ash.shiro.mapper.draft.AttachmentMapper;
-import pers.ash.shiro.model.draft.Attachment;
-import pers.ash.shiro.model.draft.AttachmentExample;
+import pers.ash.shiro.mapper.draftaudit.AttachmentMapper;
+import pers.ash.shiro.model.draftaudit.Attachment;
+import pers.ash.shiro.model.draftaudit.AttachmentExample;
 import pers.ash.shiro.service.AttachmentService;
 import pers.ash.shiro.util.UUIDUtils;
 

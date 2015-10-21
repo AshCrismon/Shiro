@@ -2,8 +2,8 @@ package pers.ash.shiro.vo;
 
 import java.util.List;
 
-import pers.ash.shiro.model.system.Role;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.Role;
+import pers.ash.shiro.model.systemmanage.User;
 
 
 public class UserVo extends User {

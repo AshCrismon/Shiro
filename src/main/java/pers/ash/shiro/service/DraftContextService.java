@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pers.ash.shiro.model.draft.Draft;
-import pers.ash.shiro.model.draft.state.AbstractDraftStateHandler;
-import pers.ash.shiro.model.draft.state.DraftState;
+import pers.ash.shiro.handler.draftstate.AbstractDraftStateHandler;
+import pers.ash.shiro.model.draftaudit.Draft;
+import pers.ash.shiro.model.draftaudit.DraftState;
 import pers.ash.shiro.service.AttachmentService;
 import pers.ash.shiro.service.AuditRecordService;
 import pers.ash.shiro.service.DraftService;
@@ -44,7 +44,7 @@ public class DraftContextService {
 	}
 	
 	private void initStateMapHandler() {
-		String packagePath = "pers.ash.shiro.model.draft.state.";
+		String packagePath = "pers.ash.shiro.handler.draftstate."; //stateHandler所在的包
 		String suffix = "StateHandler";
 		for(DraftState state : DraftState.values()){
 			if(!state.name().contains("Stage") && !state.equals(DraftState.UnknowState)){

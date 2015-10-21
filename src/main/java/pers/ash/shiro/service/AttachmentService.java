@@ -2,7 +2,7 @@ package pers.ash.shiro.service;
 
 import java.util.List;
 
-import pers.ash.shiro.model.draft.Attachment;
+import pers.ash.shiro.model.draftaudit.Attachment;
 
 public interface AttachmentService {
 

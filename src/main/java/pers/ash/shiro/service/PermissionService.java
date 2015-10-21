@@ -2,7 +2,7 @@ package pers.ash.shiro.service;
 
 import java.util.List;
 
-import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.model.systemmanage.Permission;
 
 public interface PermissionService {
 	

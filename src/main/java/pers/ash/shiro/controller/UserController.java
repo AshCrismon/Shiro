@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import pers.ash.shiro.model.system.Role;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.Role;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.service.UserService;
 
 @Controller

@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pers.ash.shiro.helper.PasswordHelper;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.service.UserService;
 
 public class UserRealm extends AuthorizingRealm {

@@ -10,6 +10,7 @@
 		<param-value>
 			classpath:shiro/spring-shiro-web.xml
 			classpath:spring/spring-mvc.xml
+			classpath:activiti/activiti-context.xml
 		</param-value>
 	</context-param>
 

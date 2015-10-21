@@ -3,9 +3,9 @@ package pers.ash.shiro.service;
 import java.util.List;
 
 import pers.ash.shiro.exception.DuplicationException;
-import pers.ash.shiro.model.system.Permission;
-import pers.ash.shiro.model.system.Role;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.Permission;
+import pers.ash.shiro.model.systemmanage.Role;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.vo.UserVo;
 
 public interface UserService {

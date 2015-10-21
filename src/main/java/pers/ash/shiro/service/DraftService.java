@@ -2,8 +2,8 @@ package pers.ash.shiro.service;
 
 import java.util.List;
 
-import pers.ash.shiro.model.draft.Draft;
-import pers.ash.shiro.model.draft.state.DraftState;
+import pers.ash.shiro.model.draftaudit.Draft;
+import pers.ash.shiro.model.draftaudit.DraftState;
 
 public interface DraftService {
 	

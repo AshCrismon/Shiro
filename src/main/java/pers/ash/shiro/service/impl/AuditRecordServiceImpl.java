@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pers.ash.shiro.mapper.draft.AuditRecordMapper;
-import pers.ash.shiro.model.draft.AuditRecord;
-import pers.ash.shiro.model.draft.AuditRecordExample;
+import pers.ash.shiro.mapper.draftaudit.AuditRecordMapper;
+import pers.ash.shiro.model.draftaudit.AuditRecord;
+import pers.ash.shiro.model.draftaudit.AuditRecordExample;
 import pers.ash.shiro.service.AuditRecordService;
 import pers.ash.shiro.util.UUIDUtils;
 

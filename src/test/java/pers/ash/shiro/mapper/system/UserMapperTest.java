@@ -11,12 +11,12 @@ import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.helper.PasswordHelper;
-import pers.ash.shiro.mapper.system.PermissionMapper;
-import pers.ash.shiro.mapper.system.RoleMapper;
-import pers.ash.shiro.mapper.system.UserMapper;
-import pers.ash.shiro.model.system.Permission;
-import pers.ash.shiro.model.system.Role;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.mapper.systemmanage.PermissionMapper;
+import pers.ash.shiro.mapper.systemmanage.RoleMapper;
+import pers.ash.shiro.mapper.systemmanage.UserMapper;
+import pers.ash.shiro.model.systemmanage.Permission;
+import pers.ash.shiro.model.systemmanage.Role;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.vo.UserVo;
 

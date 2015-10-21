@@ -10,11 +10,12 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
-import pers.ash.shiro.mapper.system.UserMapper;
-import pers.ash.shiro.model.draft.Draft;
-import pers.ash.shiro.model.draft.DraftExample;
-import pers.ash.shiro.model.draft.state.DraftState;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.mapper.draftaudit.DraftMapper;
+import pers.ash.shiro.mapper.systemmanage.UserMapper;
+import pers.ash.shiro.model.draftaudit.Draft;
+import pers.ash.shiro.model.draftaudit.DraftExample;
+import pers.ash.shiro.model.draftaudit.DraftState;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.util.UUIDUtils;
 

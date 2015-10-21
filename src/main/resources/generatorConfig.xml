@@ -5,8 +5,8 @@
 
 <generatorConfiguration>
 
-	<classPathEntry
-		location="D:\My Documents\Maven\Repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar" />
+	<!-- <classPathEntry
+		location="D:\My Documents\Maven\Repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar" /> -->
 
 	<context id="MysqlTables" targetRuntime="MyBatis3">
 
@@ -26,34 +26,34 @@
 		</javaTypeResolver>
 
 		<javaModelGenerator targetPackage="pers.ash.shiro.model"
-			targetProject="D:\My Documents\Git\shiro\src\main\java">
+			targetProject="D:\Documents\Git\shiro\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="pers.ash.shiro.mapper"
-			targetProject="D:\My Documents\Git\shiro\src\main\java">
+			targetProject="D:\Documents\Git\shiro\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="pers.ash.shiro.mapper" targetProject="D:\My Documents\Git\shiro\src\main\java">
+			targetPackage="pers.ash.shiro.mapper" targetProject="D:\Documents\Git\shiro\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="shiro" tableName="shiro_draft" domainObjectName="draft.Draft">
+		<table schema="shiro" tableName="shiro_draft" domainObjectName="draftaudit.Draft">
 			<property name="useActualColumnNames" value="true"></property>
 		</table>
 		<table schema="shiro" tableName="shiro_raw_draft"
-			domainObjectName="draft.RawDraft">
+			domainObjectName="draftaudit.RawDraft">
 			<property name="useActualColumnNames" value="true"></property>
 		</table>
 		<table schema="shiro" tableName="shiro_attachment"
-			domainObjectName="draft.Attachment">
+			domainObjectName="draftaudit.Attachment">
 			<property name="useActualColumnNames" value="true"></property>
 		</table>
 		<table schema="shiro" tableName="shiro_audit_record"
-			domainObjectName="draft.AuditRecord">
+			domainObjectName="draftaudit.AuditRecord">
 			<property name="useActualColumnNames" value="true"></property>
 		</table>
 

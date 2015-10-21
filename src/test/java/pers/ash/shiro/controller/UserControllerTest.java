@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.User;
 
 @WebAppConfiguration
 public class UserControllerTest extends AbstractTransactionalConfig {

@@ -9,8 +9,8 @@ import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.system.Role;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.Role;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.exception.*;
 import pers.ash.shiro.helper.ModelHelper;

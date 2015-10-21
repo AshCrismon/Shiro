@@ -4,7 +4,7 @@ import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.User;
 
 public class PasswordHelper {
 	

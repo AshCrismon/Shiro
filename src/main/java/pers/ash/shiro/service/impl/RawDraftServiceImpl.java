@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pers.ash.shiro.mapper.draft.RawDraftMapper;
-import pers.ash.shiro.model.draft.RawDraft;
-import pers.ash.shiro.model.draft.RawDraftExample;
+import pers.ash.shiro.mapper.draftaudit.RawDraftMapper;
+import pers.ash.shiro.model.draftaudit.RawDraft;
+import pers.ash.shiro.model.draftaudit.RawDraftExample;
 import pers.ash.shiro.service.RawDraftService;
 import pers.ash.shiro.util.UUIDUtils;
 

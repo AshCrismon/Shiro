@@ -7,7 +7,7 @@ import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
 import pers.ash.shiro.exception.DuplicationException;
-import pers.ash.shiro.model.system.Role;
+import pers.ash.shiro.model.systemmanage.Role;
 
 public class RoleServiceTest extends AbstractTransactionalConfig{
 	

@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.model.systemmanage.User;
 
 public class PasswordHelperTest extends AbstractTransactionalConfig{
 	

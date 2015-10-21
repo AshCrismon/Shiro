@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pers.ash.shiro.mapper.draft.DraftMapper;
-import pers.ash.shiro.model.draft.Draft;
-import pers.ash.shiro.model.draft.DraftExample;
-import pers.ash.shiro.model.draft.state.DraftState;
+import pers.ash.shiro.mapper.draftaudit.DraftMapper;
+import pers.ash.shiro.model.draftaudit.Draft;
+import pers.ash.shiro.model.draftaudit.DraftExample;
+import pers.ash.shiro.model.draftaudit.DraftState;
 import pers.ash.shiro.service.DraftService;
 import pers.ash.shiro.util.UUIDUtils;
 

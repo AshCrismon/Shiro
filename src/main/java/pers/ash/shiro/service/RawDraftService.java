@@ -1,6 +1,6 @@
 package pers.ash.shiro.service;
 
-import pers.ash.shiro.model.draft.RawDraft;
+import pers.ash.shiro.model.draftaudit.RawDraft;
 
 public interface RawDraftService {
 

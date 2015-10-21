@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
-import pers.ash.shiro.mapper.system.PermissionMapper;
-import pers.ash.shiro.model.system.Permission;
+import pers.ash.shiro.mapper.systemmanage.PermissionMapper;
+import pers.ash.shiro.model.systemmanage.Permission;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

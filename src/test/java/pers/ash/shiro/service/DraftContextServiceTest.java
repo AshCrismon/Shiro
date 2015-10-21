@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 import pers.ash.shiro.config.AbstractTransactionalConfig;
-import pers.ash.shiro.model.draft.Attachment;
-import pers.ash.shiro.model.draft.Draft;
-import pers.ash.shiro.model.draft.state.DraftState;
+import pers.ash.shiro.model.draftaudit.Attachment;
+import pers.ash.shiro.model.draftaudit.Draft;
+import pers.ash.shiro.model.draftaudit.DraftState;
 import pers.ash.shiro.util.DateUtils;
 import pers.ash.shiro.vo.DraftVo;
 

@@ -10,11 +10,11 @@ import pers.ash.shiro.exception.DuplicationException;
 import pers.ash.shiro.exception.EntityNotAvailableException;
 import pers.ash.shiro.exception.EntityNotFoundException;
 import pers.ash.shiro.helper.ModelHelper;
-import pers.ash.shiro.mapper.system.PermissionMapper;
-import pers.ash.shiro.mapper.system.RoleMapper;
+import pers.ash.shiro.mapper.systemmanage.PermissionMapper;
+import pers.ash.shiro.mapper.systemmanage.RoleMapper;
 import pers.ash.shiro.model.ModelState;
-import pers.ash.shiro.model.system.Permission;
-import pers.ash.shiro.model.system.Role;
+import pers.ash.shiro.model.systemmanage.Permission;
+import pers.ash.shiro.model.systemmanage.Role;
 import pers.ash.shiro.service.RoleService;
 import pers.ash.shiro.util.UUIDUtils;
 

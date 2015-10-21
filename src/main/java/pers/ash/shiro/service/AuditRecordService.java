@@ -2,7 +2,7 @@ package pers.ash.shiro.service;
 
 import java.util.List;
 
-import pers.ash.shiro.model.draft.AuditRecord;
+import pers.ash.shiro.model.draftaudit.AuditRecord;
 
 public interface AuditRecordService {
 

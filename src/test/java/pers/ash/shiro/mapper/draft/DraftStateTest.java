@@ -8,10 +8,10 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import pers.ash.shiro.model.draft.Draft;
-import pers.ash.shiro.model.draft.state.AbstractDraftStateHandler;
-import pers.ash.shiro.model.draft.state.DraftState;
-import pers.ash.shiro.model.system.User;
+import pers.ash.shiro.handler.draftstate.AbstractDraftStateHandler;
+import pers.ash.shiro.model.draftaudit.Draft;
+import pers.ash.shiro.model.draftaudit.DraftState;
+import pers.ash.shiro.model.systemmanage.User;
 import pers.ash.shiro.service.DraftContextService;
 import pers.ash.shiro.vo.DraftVo;
 
