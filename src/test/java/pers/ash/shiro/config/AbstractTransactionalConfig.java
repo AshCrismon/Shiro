@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations={"classpath:spring/spring-mvc.xml","classpath:shiro/spring-shiro-web.xml","classpath:activiti/activiti-context.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback=true, transactionManager="transactionManager")
-public class AbstractTransactionalConfig {
+public class AbstractTransactionalConfig{
 
 }

@@ -79,7 +79,7 @@ public abstract class AbstractDraftStateHandler {
 	
 	private void saveOrUpdateAttachment() {
 		Attachment[] attachments = draftVo.getAttachments();
-		for(int i = 0; i < attachments.length; i++){
+		for(int i = 0; attachments != null && i < attachments.length; i++){
 			if(!attachmentAlreadyExists(attachments[i].getId())){
 				attachments[i].setDraftId(draftVo.getId());
 				attachmentService.addAttachment(attachments[i]);

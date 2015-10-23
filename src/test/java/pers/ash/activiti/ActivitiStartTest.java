@@ -40,16 +40,16 @@ public class ActivitiStartTest extends AbstractTransactionalConfig {
 
 	private org.activiti.engine.repository.Deployment deployment;
 	private DraftVo draftVo = new DraftVo();
+	private String authorId = "zhangsan";
+	private String[] commitPersonIds = new String[]{"lisi", "wangwu", "zhaoliu"};
 
 	@Before
 	public void deploy(){
 		deploy(new String[] { "workflow/auditAndApprove.bpmn", "workflow/auditAndApprove.png" }, "审批流转");
-		draftVo.setCommitType("1");
 		draftVo.setAuthorId("zhangsan");
 	}
 	
 	@Test
-	// @Rollback(false)
 	public void testDeploy() {
 		System.out.println("部署工作流ID：------------>" + deployment.getId());
 		System.out.println("部署工作流名称：------------>" + deployment.getName());
@@ -57,25 +57,76 @@ public class ActivitiStartTest extends AbstractTransactionalConfig {
 
 	@Test
 	public void testStartProcess() {
-		ProcessInstance processInstance = startProcess("auditAndApprove");
+		ProcessInstance processInstance = startProcess("auditAndApprove", draftVo.getAuthorId());
 		System.out.println("工作流实例ID：------------>" + processInstance.getId());
 		System.out.println("工作流定义ID：------------>" + processInstance.getProcessDefinitionId());
 	}
 	
 	@Test
-	public void testExecuteTask(){
-		deploy(new String[] { "workflow/auditAndApprove.bpmn", "workflow/auditAndApprove.png" }, "审批流转");
-		startProcess("auditAndApprove");
-//		completeTask();
+	public void testQueryTasks(){
+		startProcess("auditAndApprove", draftVo.getAuthorId());	//----->启动流程实例并为开始任务分派代理人
+		printTasksOfAssignee("zhangsan");						//----->查找指定用户的任务列表
 	}
-
-	public void test() {
+	
+	@Test
+	public void testQueryTasks2(){
+		startProcess("auditAndApprove", draftVo.getAuthorId());	//----->启动流程实例并为开始任务分派代理人
+		startProcess("auditAndApprove", draftVo.getAuthorId());	//----->启动流程实例并为开始任务分派代理人
+		startProcess("auditAndApprove", draftVo.getAuthorId());	//----->启动流程实例并为开始任务分派代理人
+		printTasksOfAssignee("zhangsan");						//----->查找指定用户的任务列表
+	}
+	
+	@Test
+	public void testAuditAndApprove(){
+		Map<String, Object> variables = new HashMap<String, Object>();
 		
-		Task task = taskService.createTaskQuery().singleResult();
-		// assertEquals("auditAndApprove", task.getName());
-
-		taskService.complete(task.getId());
-		assertEquals(0, runtimeService.createProcessInstanceQuery().count());
+		//1.启动流程实例，为开始任务【提交审核】分配代理人，代理人是【zhangsan】
+		startProcess("auditAndApprove", authorId);
+		Task taskOfAuthor = queryTaskOf(authorId);
+		assertEquals("提交文稿", taskOfAuthor.getName());
+		
+		//2.完成任务【提交审核】，审核人是【lisi】
+		variables.put("auditorId", commitPersonIds[0]);
+		variables.put("commitType", "1");
+		taskService.complete(taskOfAuthor.getId(), variables);
+		Task taskOfAuditor = queryTaskOf(commitPersonIds[0]);
+		assertNull(queryTaskOf(authorId));
+		assertEquals("文稿审核", taskOfAuditor.getName());
+		
+		//3.提交审核结果，回到开始任务【提交审核】
+		taskService.complete(taskOfAuditor.getId());
+		assertEquals("提交文稿", queryTaskOf(authorId).getName());
+	}
+	
+	@Test
+	public void testAuditAndApprove2(){
+		Map<String, Object> variables = new HashMap<String, Object>();
+		
+		//1.启动流程实例，为开始任务【提交审核】分配代理人，代理人是【zhangsan】
+		startProcess("auditAndApprove", authorId);
+		Task taskOfAuthor = queryTaskOf(authorId);
+		assertEquals("提交文稿", taskOfAuthor.getName());
+		
+		//2.完成任务【提交审核】，审核人是【lisi】
+		variables.put("auditorId", commitPersonIds[0]);
+		variables.put("commitType", "1");
+	
+		draftVo.setCommitType("1");
+		draftVo.setTitle("测试用例-标题一");
+		draftVo.setAuthorId("zhangsan");
+		draftVo.setContent("文稿内容");
+		draftVo.setRemark("备注");
+		draftVo.setCommitPersonIds(commitPersonIds);
+		taskService.setVariable(taskOfAuthor.getId(), "draftVo", draftVo);
+		
+		taskService.complete(taskOfAuthor.getId(), variables);
+		Task taskOfAuditor = queryTaskOf(commitPersonIds[0]);
+		assertNull(queryTaskOf(authorId));
+		assertEquals("文稿审核", taskOfAuditor.getName());
+		
+		//3.提交审核结果，回到开始任务【提交审核】
+		taskService.complete(taskOfAuditor.getId());
+		assertEquals("提交文稿", queryTaskOf(authorId).getName());
 	}
 
 	public void deploy(String[] resources, String deployName) {
@@ -85,41 +136,38 @@ public class ActivitiStartTest extends AbstractTransactionalConfig {
 				.name(deployName).deploy();
 	}
 	
-	public ProcessInstance startProcess(String processDefinitionKey) {
+	public ProcessInstance startProcess(String processDefinitionKey, String authorId) {
 		Map<String, Object> variables = new HashMap<String, Object>();
-		variables.put("authorId", draftVo.getAuthorId());
+		variables.put("authorId", authorId);
 		return runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
 	}
 	
-	public void assignTask(String taskId, String userId){
-		
-		taskService.setAssignee(taskId, userId);
+	public Task queryTaskOf(String userId){
+		return taskService.createTaskQuery().taskAssignee(userId).singleResult();
 	}
 	
-	public void findTasksOfAssignee(String userId){
+	public void printTasksOfAssignee(String userId){
 		List<Task> tasks = taskService.createTaskQuery().taskAssignee(userId).list();
-		for(Task task : tasks){
-			System.out.println("  ProcessInstanceId	-------->" + task.getProcessInstanceId());
-			System.out.println("ProcessDefinitionId	-------->" + task.getProcessDefinitionId());
-			System.out.println("				 Id	-------->" + task.getId());
-			System.out.println("	  	ExecutionId	-------->" + task.getExecutionId());
-			System.out.println("			   Name	-------->" + task.getName());
-			System.out.println("			  Owner	-------->" + task.getOwner());
-			System.out.println("	    Description	-------->" + task.getDescription());
-			System.out.println("	     CreateTime	-------->" + task.getCreateTime());
+		if(null == tasks || tasks.isEmpty()){
+			System.out.println("/////////////////////////////////result////////////////////////////////////");
+			System.out.println("there not not tasks assigned to user " + userId);
+			System.out.println("///////////////////////////////////////////////////////////////////////////");
+			return;
 		}
-	}
-
-	public void completeCommitTask(String taskId, DraftVo draftVo){
-		taskService.createTaskQuery();
-//		taskService.complete(taskId);
-	}
-	
-	@Test
-	public void testAuditAndApprove(){
-		ProcessInstance processInstance = startProcess("auditAndApprove");
-		assignTask(processInstance.getActivityId(), "zhangsan");
-		findTasksOfAssignee("zhangsan");
+		for(Task task : tasks){
+			System.out.println("/////////////////////////////////result////////////////////////////////////");
+			System.out.println("the tasks assigned to user " + userId + " are as follows : ");
+			System.out.println("\tAssignee\t\t	-------->" + task.getAssignee());
+			System.out.println("\tProcessInstanceId\t	-------->" + task.getProcessInstanceId());
+			System.out.println("\tProcessDefinitionId\t	-------->" + task.getProcessDefinitionId());
+			System.out.println("\tId\t\t\t	-------->" + task.getId());
+			System.out.println("\tExecutionId\t\t	-------->" + task.getExecutionId());
+			System.out.println("\tName\t\t\t	-------->" + task.getName());
+			System.out.println("\tOwner\t\t\t	-------->" + task.getOwner());
+			System.out.println("\tDescription\t\t	-------->" + task.getDescription());
+			System.out.println("\tCreateTime\t\t	-------->" + task.getCreateTime());
+			System.out.println("///////////////////////////////////////////////////////////////////////////");
+		}
 	}
 
 	@Test
