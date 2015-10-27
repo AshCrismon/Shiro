@@ -21,10 +21,6 @@
 	<context:component-scan
 		base-package="pers.ash.shiro.service,pers.ash.shiro.controller,pers.ash.shiro.base" />
 
-	<!-- ============================【shiro权限注解的支持 】========================== -->
-	
-	<aop:config proxy-target-class="true"></aop:config>
-
 	<!-- =============================【 引入数据库配置文件 】=========================== -->
 
 	<context:property-placeholder location="classpath:db.properties" />
@@ -47,6 +43,37 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<!-- =============================【 配置事务的注解驱动 】=========================== -->
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 使用 tx:advice 和 aop:config 来配置事务,如果使用了@Transactional这个配置不起作用 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- 配置事务的传播特性 -->
+		<tx:attributes>
+			<tx:method name="create*" propagation="REQUIRED" /> <!-- REQUIRED：事务传递性，解决事务嵌套，如果当前已经在事务中，就不再开启事务，否则开启新的事务 -->
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="find*" read-only="true" />	<!-- 事务的优化配置 -->
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- true:使用cglib动态代理 -->
+	<aop:config proxy-target-class="true">
+		<!-- 第一个 *  —— 通配 任意返回值类型 -->
+		<!-- 第二个 *  —— 通配 包pers.ash.shiro.service及其子包下的任意class -->
+		<!-- 第三个 *  —— 通配 包pers.ash.shiro.service及其子包下的任意class的任意方法 -->
+		<!-- 第四个 .. —— 通配 方法可以有0个或多个参数 -->
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* pers.ash.shiro.service..*.*(..))" />
+	</aop:config>
+	
+	<!-- ==============================【 配置日志拦截器 】============================ -->
+	
+	<aop:aspectj-autoproxy/>
+	
+	<bean id="logAspect" class="pers.ash.shiro.base.LoggingInterceptor" />
+
 	<!-- ==========================【 配置sessionFactory 】======================== -->
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -65,10 +92,6 @@
 			</array>
 		</property>
 	</bean>
-
-	<!-- =============================【 配置事务的注解驱动 】=========================== -->
-
-	<tx:annotation-driven />
 
 	<!-- ============================【 配置mapper的扫描路径 】========================= -->
 

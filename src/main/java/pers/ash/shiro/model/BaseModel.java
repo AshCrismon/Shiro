@@ -1,5 +1,7 @@
 package pers.ash.shiro.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,7 +10,9 @@ import pers.ash.shiro.util.UUIDUtils;
 
 @Entity
 @XmlRootElement
-public class BaseModel {
+public class BaseModel implements Serializable{
+	
+	private static final long serialVersionUID = 7643309597111822893L;
 	
 	protected String id;
 	protected ModelState state;

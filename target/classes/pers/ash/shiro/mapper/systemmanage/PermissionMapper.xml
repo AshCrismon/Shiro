@@ -5,6 +5,9 @@
 
 <mapper namespace="pers.ash.shiro.mapper.systemmanage.PermissionMapper">
 
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" /> 
+
 	<!-- ========================== 【 基本增删改查 】 =========================== -->
 	<select id="findById" parameterType="String" resultType="Permission">
 		SELECT *

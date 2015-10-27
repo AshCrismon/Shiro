@@ -3,6 +3,8 @@ package pers.ash.shiro.mapper.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +34,8 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 	private RoleMapper roleMapper;
 	@Autowired
 	private PermissionMapper permissionMapper;
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
 
 	private List<User> users = new ArrayList<User>();
 	private List<Role> roles = new ArrayList<Role>();
@@ -223,6 +227,19 @@ public class UserMapperTest extends AbstractTransactionalConfig {
 			UserVo userVo = userMapper.findUserRoles(users.get(i).getId());
 			Assert.assertEquals(5, userVo.getRoles().size());
 		}
+	}
+	
+	@Test
+	public void testCache2(){
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		userMapper.findByUsername("admin");
+		sqlSession.close();//关闭session，写入二级缓存，查看cache hit ratio命中率
+		
+		SqlSession sqlSession2 = sqlSessionFactory.openSession();
+		UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+		userMapper2.findByUsername("admin");
+		sqlSession2.close();
 	}
 
 	public void print(List<User> users) {

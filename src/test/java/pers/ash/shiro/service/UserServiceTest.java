@@ -102,6 +102,14 @@ public class UserServiceTest extends AbstractTransactionalConfig{
 		Assert.assertEquals(3, userService.findRoles(user.getId()).size());
 	}
 	
+	@Test
+//	@Rollback(false)
+	public void testCache1(){
+		User user = userService.findByUsername("admin");
+		userService.findByUsername("admin");
+		Assert.assertNotNull(user);
+	}
+	
 	public User createUser(String username, String password, int age,
 			String gender, String phone, String email){
 		User user = new User();
